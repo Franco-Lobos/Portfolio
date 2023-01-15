@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Sketch from "react-p5";
 
-const Canvas = ()=>{
+const Canvas = ({loading,setLoad})=>{
     var w = window.innerWidth;
     var h = window.innerHeight;
 
@@ -12,7 +12,12 @@ const Canvas = ()=>{
     let originH = h/2;
     let line = 12;
     let pixel = 10;
-    let ready = 0;
+    let ready= 0;
+
+    //color lines
+    let lineAmount =  7;
+    let lineWeigth = Math.floor(w/lineAmount);
+    let colors = ['grey', 'yellow', 'cyan', 'green','magenta', 'red', 'blue']
 
 	const setup = (p5, canvasParentRef) => {
 		p5.createCanvas(w, h).parent(canvasParentRef);
@@ -35,7 +40,7 @@ const Canvas = ()=>{
                     y+= y*2;
                 }
                 else{
-                    ready= 1;
+                    ready = 1;
                 }
             }
     
@@ -63,7 +68,22 @@ const Canvas = ()=>{
                     }
                 }
             }
-            else{
+
+            if(p5.frameCount>60 &&p5.frameCount<=150){
+                for(let i = 0; i<lineAmount; i++){
+
+                    ob1 = [i*lineWeigth, 0];
+                    ob2 = [(i+1) * lineWeigth, 0];
+                    ob3 = [(i+1) * lineWeigth, h];
+                    ob4 = [i*lineWeigth, h];
+
+                    p5.fill(colors[i]);
+                    p5.noStroke();
+                    p5.quad(ob1[0],ob1[1],ob2[0],ob2[1],ob3[0],ob3[1],ob4[0],ob4[1]);
+                }
+            }
+
+            else if(p5.frameCount>120){
                 y-=p5.frameCount*1.6;
                 if(y>=0){
                     p5.fill('#fff');
@@ -74,15 +94,13 @@ const Canvas = ()=>{
                     p5.noFill();
                     p5.noStroke();
                     p5.frameRate(0);
+                    setLoad(1);
                 }
          
                 p5.quad(ob1[0],ob1[1],ob2[0],ob2[1],ob3[0],ob3[1],ob4[0],ob4[1]);
             }
 
-           
         }
-
-
 	};
 
 	return <Sketch setup={setup} draw={draw}/>;

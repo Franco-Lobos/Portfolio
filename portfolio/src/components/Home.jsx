@@ -1,24 +1,35 @@
-import { useEffect, useState } from "react";
+import '../styles/home.css'
+import { useEffect, useState } from 'react';
 
 import { ProfileConst } from "../constants/ProfileConst";
-import Canvas from "./Canvas";
 
+import checkForSpan from '../library/checkForSpan';
 
-const Home =()=>{
+const Home = ()=>{
     const [Profile, setProfile] =  useState(0);
 
     useEffect(()=>{
         setProfile(ProfileConst);
     },[]);
 
+
     return(
-        <div>
-            <div>
-                {Profile.name + ' ' + Profile.lastName}
+        <div id='main-home'>
+            <div className='home-text'>
+                <div className='home-title'>
+                    Hi!
+                </div>
+                <div className='home-text-description'>
+                    {ProfileConst ?
+                        ProfileConst.intro.map((fr,indx)=>
+                        checkForSpan(fr,ProfileConst.specialWords, indx)
+                        )
+                        :""
+                    }
+                </div>
             </div>
-            <Canvas></Canvas>
         </div>
-    );
+    )
 }
 
 export default Home;

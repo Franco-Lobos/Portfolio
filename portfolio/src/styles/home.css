@@ -1,0 +1,34 @@
+#main-home{
+    color:var(--purpule);
+    font-weight: 500;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    animation: ease-in-out 0.4s;
+}
+
+.home-text{
+    width: 50%;
+    font-size: 1.2rem;
+    color: var(--grey);
+}
+
+.home-title{
+    font-size: 2rem;
+    color: var(--purpule);
+}
+
+.home-text-description p:first-child{
+    font-size: 1.5rem;
+    color: var(--blue);
+}
+
+span{
+    color: var(--green);
+    font-size: 1.3rem;
+    font-weight: 500;
+}
