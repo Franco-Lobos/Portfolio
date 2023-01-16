@@ -51,18 +51,18 @@ const Intro =()=>{
     return(
         <div id='main'>
             {
-                !loading
-                ?
-                <Canvas loading={loading} setLoad={setLoad}></Canvas>
-                :
+                // !loading
+                // ?
+                // <Canvas loading={loading} setLoad={setLoad}></Canvas>
+                // :
                 
   
-                !intro
-                ?
-                <div id='video-1'>
-                    VIDEO 1
-                </div>
-                :
+                // !intro
+                // ?
+                // <div id='video-1'>
+                //     VIDEO 1
+                // </div>
+                // :
                 <Home></Home>
                 
             }

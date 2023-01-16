@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 
 import { ProfileConst } from "../constants/ProfileConst";
 
-import checkForSpan from '../library/checkForSpan';
+import writeWithForSpan from '../library/writeWithForSpan';
 
 const Home = ()=>{
     const [Profile, setProfile] =  useState(0);
+
+    const[writed, setWrited] = useState(0);
 
     useEffect(()=>{
         setProfile(ProfileConst);
@@ -21,8 +23,10 @@ const Home = ()=>{
                 </div>
                 <div className='home-text-description'>
                     {ProfileConst ?
+                        // writeWithForSpan(ProfileConst.intro2,ProfileConst.specialWords)
+
                         ProfileConst.intro.map((fr,indx)=>
-                        checkForSpan(fr,ProfileConst.specialWords, indx)
+                            writeWithForSpan(fr,ProfileConst.specialWords, indx, writed, setWrited)
                         )
                         :""
                     }
