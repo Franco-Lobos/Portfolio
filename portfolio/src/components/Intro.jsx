@@ -55,7 +55,6 @@ const Intro =()=>{
                 // ?
                 // <Canvas loading={loading} setLoad={setLoad}></Canvas>
                 // :
-                
   
                 // !intro
                 // ?
