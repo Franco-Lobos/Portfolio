@@ -11,5 +11,6 @@
     top: 0;
     right: 0;
     text-transform: uppercase;
+    transition: all ease-in-out 0.3s;
 }
 

@@ -19,14 +19,16 @@ const Home = ()=>{
         <div id='main-home'>
             <div className='home-text'>
                 <div className='home-title'>
-                    Hi!
+                    {writeWithForSpan("Hi!",[], 0,writed, setWrited, 10, 100)}
                 </div>
                 <div className='home-text-description'>
-                    {ProfileConst ?
-                        // writeWithForSpan(ProfileConst.intro2,ProfileConst.specialWords)
+                    {
+                    ProfileConst
+                        ?
+                        // writeWithForSpan(ProfileConst.intro2,ProfileConst.specialWords, 0, writed, setWrited)
 
                         ProfileConst.intro.map((fr,indx)=>
-                            writeWithForSpan(fr,ProfileConst.specialWords, indx, writed, setWrited)
+                            writeWithForSpan(fr,ProfileConst.specialWords, indx+1, writed, setWrited, 40)
                         )
                         :""
                     }
