@@ -6,6 +6,8 @@ import { ProfileConst } from "../constants/ProfileConst";
 import Canvas from "./Canvas";
 import Home from "./Home";
 
+
+
 const Intro =()=>{
     const [Profile, setProfile] =  useState(0);
 
@@ -16,12 +18,12 @@ const Intro =()=>{
         const title = document.getElementById('video-1');
         if(!title) return;
         const main = document.getElementById('main');
-        let oldColor =title.style.backgroundColor ;
-        main.style.backgroundColor = '#000';
+        // let oldColor =title.style.backgroundColor ;
+        // main.style.backgroundColor = '#000';
         title.textContent = "";
 
         setTimeout(()=>{
-            main.style.backgroundColor = oldColor;
+            // main.style.backgroundColor = oldColor;
             title.textContent = name;
         }
         ,200)
@@ -39,32 +41,39 @@ const Intro =()=>{
         },time);
         setTimeout(()=>{
             changeChanel(Profile.name + ' ' + Profile.lastName);
+            setIntro(1);
         },time*2);
         setTimeout(()=>{
             document.getElementById('video-1').textContent =  "";
-            setIntro(1);
         }
         ,time*4);
 
     },[loading]);
 
+
     return(
         <div id='main'>
-            {
-                // !loading
-                // ?
-                // <Canvas loading={loading} setLoad={setLoad}></Canvas>
-                // :
-  
-                // !intro
-                // ?
-                // <div id='video-1'>
-                //     VIDEO 1
-                // </div>
-                // :
+            {/* {
+                !loading
+                ?
+                <Canvas loading={loading} setLoad={setLoad}></Canvas>
+                :
+                <>
+                <div id='video-1'>
+                    VIDEO 1
+                </div>
+
+                {
+                intro
+                ? 
                 <Home></Home>
-                
-            }
+                : ""
+                }
+                </>
+
+            } */}
+                            <Home></Home>
+
         </div>
     );
 }

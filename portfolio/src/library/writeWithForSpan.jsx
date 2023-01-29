@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ProfileConst } from "../constants/ProfileConst";
 
-const writeWithForSpan = (inptString, specialWords, indx = 1, writed, setWrited, delay = 100, veloc = 30)=>{
+const writeWithForSpan = (inptString, specialWords, indx = 1, writed , setWrited, delay = 100, veloc = 30)=>{
 
     let allWords = inptString.split(" ");
     allWords= allWords.filter(word=> word!=='');
@@ -121,15 +121,6 @@ const writeWithForSpan = (inptString, specialWords, indx = 1, writed, setWrited,
     
     return(
         <p key={indx} id={`text-box-${indx}`} className={"write-span"}>
-            {/* {
-                allWords.map((word,wordIndx)=>
-                    specialWords.includes(word.toLowerCase())
-                    ? 
-                        <span>{word} </span>
-                    : 
-                        word + " "
-                )
-            } */}
         </p>
     )
 }
