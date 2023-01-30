@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ProfileConst } from "../constants/ProfileConst";
 
-const writeWithForSpan = (inptString, specialWords, indx = 1, writed , setWrited, delay = 100, veloc = 30)=>{
-
+const WriteWithForSpan = ({inptString, specialWords=[], indx, writed , setWrited, delay = 100, veloc = 30})=>{
     let allWords = inptString.split(" ");
     allWords= allWords.filter(word=> word!=='');
 
@@ -40,7 +39,6 @@ const writeWithForSpan = (inptString, specialWords, indx = 1, writed , setWrited
         globalIndex+=splitedWord.length;
     }
 
-
     const writing =(word, wordIndx, last)=>{
         const box = document.getElementById(`text-box-${indx}`);
         if(!box) return;
@@ -59,7 +57,7 @@ const writeWithForSpan = (inptString, specialWords, indx = 1, writed , setWrited
 
         splitedWord.forEach((letter, letIndx) => {
             setTimeout(()=>{
-                if(last){
+                if(last && letIndx+1===splitedWord.length){
                     setTimeout(()=>{
                         box.setAttribute('dataReady', 1);
                         setWrited(writed+1);
@@ -110,18 +108,14 @@ const writeWithForSpan = (inptString, specialWords, indx = 1, writed , setWrited
         let prevFlag = parseInt(prevParagraph?.getAttribute('dataReady'));
 
         if(thisFlag) return;
-
         if( indx===0 || prevFlag ){
             startWriting();
         };
-
-        return;
-
     },[writed]);
-    
+
     return(
         <p key={indx} id={`text-box-${indx}`} className={"write-span"}>
         </p>
     )
 }
-export default writeWithForSpan;
+export default WriteWithForSpan;

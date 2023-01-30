@@ -1,3 +1,7 @@
+#main{
+    background-color: var(--dark-bg);
+}
+
 #main-home{
     color:var(--purpule);
     font-weight: 500;
@@ -27,6 +31,7 @@
 .home-title{
     font-size: 2rem;
     color: var(--purpule);
+    transition: all ease-in-out 1s;
 }
 
 .home-text-description p:first-child{

@@ -4,7 +4,7 @@ import '../styles/intro.css'
 
 import { ProfileConst } from "../constants/ProfileConst";
 import Canvas from "./Canvas";
-import Home from "./Home";
+import Home from "./home/Home";
 
 
 
@@ -17,13 +17,9 @@ const Intro =()=>{
     const changeChanel = (name)=>{
         const title = document.getElementById('video-1');
         if(!title) return;
-        const main = document.getElementById('main');
-        // let oldColor =title.style.backgroundColor ;
-        // main.style.backgroundColor = '#000';
         title.textContent = "";
 
         setTimeout(()=>{
-            // main.style.backgroundColor = oldColor;
             title.textContent = name;
         }
         ,200)
@@ -72,7 +68,8 @@ const Intro =()=>{
                 </>
 
             } */}
-                            <Home></Home>
+            
+            <Home></Home>
 
         </div>
     );

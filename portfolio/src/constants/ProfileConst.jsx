@@ -12,7 +12,7 @@ export const ProfileConst = {
         // for a local company.`,
         // ` Nowadays, I am studding an online <aid="link-0"/> at UOC,
         // meanhwile collaborating on different projects as a freelancer.`,
-        // `My goal is to make coding a full-time job in a consolidated company`.
+        // `My goal is to make coding a full-time job in a consolidated company`
     ],
 
     intro2:`
