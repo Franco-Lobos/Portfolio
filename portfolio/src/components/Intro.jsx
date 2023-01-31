@@ -6,8 +6,6 @@ import { ProfileConst } from "../constants/ProfileConst";
 import Canvas from "./Canvas";
 import Home from "./home/Home";
 
-
-
 const Intro =()=>{
     const [Profile, setProfile] =  useState(0);
 

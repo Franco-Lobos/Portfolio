@@ -1,6 +1,7 @@
 
 import HeaderMain from "../header/HeaderMain";
 
+
 const StaticHome = ()=>{
 
     return(

@@ -6,7 +6,44 @@
     margin: 0 auto;
     width: 80vw;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     text-align: center;
+    padding: 1rem;
+}
+
+.header-link{
+    padding: 1rem;
+    border-radius: 1rem;
+    color: var(--gray);
+
+    width: 10rem;
+    height: 4rem;
+
+    transition: all ease-in-out 2s;
+    filter: blur(0.01rem);
+    opacity: 0;
+}
+
+
+@keyframes spawn {
+    0%{
+        opacity: 0;
+        filter: blur(0.6px);
+    }
+
+    10%{
+        filter: blur(0.2px);
+    }
+    30%{
+        opacity: 1;
+    }
+
+    60%{
+        filter: blur(0.4rem);
+    }
+
+    100%{
+        filter: blur(0.01rem);
+    }
 }
