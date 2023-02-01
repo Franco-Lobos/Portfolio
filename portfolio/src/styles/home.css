@@ -1,46 +1,14 @@
-#main{
+#home-main{
+    height: 100vh;
+    width: 100vw;
     background-color: var(--dark-bg);
 }
 
-#main-home{
-    color:var(--purpule);
-    font-weight: 500;
-    font-family: 'Courier New', Courier, monospace;
+
+#home-body{
+    position: absolute;
+    top: 20vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
-    animation: ease-in-out 0.4s;
-    word-break: keep-all;
-    background-color: var(--dark-bg);
-    transition: all ease-in-out 1s;
 }
-
-.home-text{
-    width: 50%;
-    font-size: 1.2rem;
-    color: var(--grey);
-    transition: inherit;
-}
-
-.home-text span{
-    transition: all ease-in-out 1s;
-}
-
-.home-title{
-    font-size: 2rem;
-    color: var(--purpule);
-    transition: all ease-in-out 1s;
-}
-
-.home-text-description p:first-child{
-    font-size: 1.5rem;
-    color: var(--blue);
-}
-
-span{
-    color: var(--orange);
-    font-weight: 500;
-}
-

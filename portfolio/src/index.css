@@ -15,15 +15,17 @@
 
   --purpule:#c586c0;
   --orange:#ce9178;
-  --grey: #d4d4d4;
-  --dark-grey:#808080;
   --blue: #569cd6;
   --light-blue:#9cdcfe;
   --green:#dcdcaa;
   --dark-bg: #1e1e1e;
+  --dark-grey:#808080;
+  --grey: #d4d4d4;
 }
 *{
+  -webkit-transition: inherit;
   transition: inherit;
+  box-sizing: border-box;
 }
 
 a {

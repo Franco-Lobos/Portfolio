@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-const HeaderLink =({indx})=>{
+import MaterialIcon from 'material-icons-react';
+
+
+const HeaderLink =({indx, icon, setLoad})=>{
     
     const [breathing, setBreathing] = useState(0);
-    const colors = ['purpule', 'orange', 'green' ,'light-blue','blue',];
 
+    const colors = ['purpule', 'orange' ,'light-blue','blue', 'green'];
+
+    let time = 4000 // miliseconds
+    let hoverBrightness = 1 // scale 
 
     let root = document.querySelector(':root');
 
@@ -22,15 +28,42 @@ const HeaderLink =({indx})=>{
         return [colorR,colorG,colorB]
     }
 
-    const spawnLink = (link) =>{
+    const spawnLink = (link, links, card) =>{
+        let otherLinks = links.filter(ln=>ln.id !== link.id)
+
+        let specialTime = time /2;
+        card.addEventListener('mouseenter', ()=>{
+        })
+
+        card.addEventListener('mouseover', ()=>{
+            time = specialTime;
+            hoverBrightness = 1.5;
+            otherLinks.map(lin=>
+                lin.style.filter= 'blur(0.2rem)'
+            )
+        })
+
+        card.addEventListener('mouseout', ()=>{
+            time = 4000;
+            otherLinks.map(lin=>
+                lin.style.filter= 'blur(0rem)'
+            )
+            hoverBrightness = 1;
+        })
+
+        let timeAnim = '1.5s'
+
+
+
         setTimeout(()=>{
-            link.style.animation = "spawn 2s";
-            link.style.opacity = '1';
-        },200*indx);
+            card.style.animation = `spawn ${timeAnim}`;
+            card.style.opacity = '1';
+            card.addEventListener('animationend',setLoad(indx));
+        },300+200*indx);
     }
 
 
-    const breath = (link) =>{
+    const breath = (link, card) =>{
         let color0 = getRGB(colors[indx === 0 ? colors.length-1 : indx-1 ]);
         let color1 = getRGB(colors[indx]);
         let color2 = getRGB(colors[indx+1 >= colors.length ? 0 : indx+1]);
@@ -44,7 +77,6 @@ const HeaderLink =({indx})=>{
         let bDifNext = color1[2]-color2[2];
 
         let start = Date.now();
-        let time = 4000; // Miliseconds
 
         setBreathing(1);
         setInterval(()=> {
@@ -55,25 +87,21 @@ const HeaderLink =({indx})=>{
             let percent = Math.abs(timePassed/time)
 
             let breathingColor1 = [
-                Math.ceil(color1[0] - rDifPrev*percent),
-                Math.ceil(color1[1] - gDifPrev*percent),
-                Math.ceil(color1[2] - bDifPrev*percent)
+                Math.ceil(color1[0] - rDifPrev*percent)* hoverBrightness,
+                Math.ceil(color1[1] - gDifPrev*percent)* hoverBrightness,
+                Math.ceil(color1[2] - bDifPrev*percent)* hoverBrightness
             ];
 
-            // let breathingColor1 = [
-            //     Math.ceil(color1[0] + rDifNext*percent),
-            //     Math.ceil(color1[1] + rDifNext*percent),
-            //     Math.ceil(color1[2] + rDifNext*percent)
-            // ];
             let breathingColor2 = [
-                Math.ceil(color1[0] - rDifNext*percent),
-                Math.ceil(color1[1] - gDifNext*percent),
-                Math.ceil(color1[2] - bDifNext*percent)
+                Math.ceil(color1[0] - rDifNext*percent)* hoverBrightness,
+                Math.ceil(color1[1] - gDifNext*percent)* hoverBrightness,
+                Math.ceil(color1[2] - bDifNext*percent)* hoverBrightness
             ];
 
-            let gradient = `linear-gradient(0.125turn, rgb(${breathingColor1}), ${percent*100}%,  rgb(${breathingColor2})`;
+            let gradient = `-webkit-linear-gradient(0.25turn, rgb(${breathingColor1}),   rgb(${breathingColor2})`;
 
-            link.style.background = gradient;
+            link.style.backgroundImage = gradient;
+
 
         }, 10);
 
@@ -82,18 +110,24 @@ const HeaderLink =({indx})=>{
 
     useEffect(()=>{
         const link = document.getElementById(`header-link-${indx}`);
+        const card = document.getElementById(`header-card-${indx}`);
 
-        if(!link) return;
-        spawnLink(link);
+        const links = [...document.querySelectorAll(`.header-link`)];
+
+        if(!link ||!links) return;
+
+        spawnLink(link, links, card);
         if(!breathing){
-            breath(link);
+            breath(link, card);
         }
 
     },[])
 
         return(
-            <div className="header-link" id={`header-link-${indx}`}>
-            
+            <div className="header-link-card" id={`header-card-${indx}`} >
+                <div className="header-link" id={`header-link-${indx}`}>
+                    <MaterialIcon icon={`${icon}`}  size="large" color='#f0f0f0'/>
+                </div>
             </div>
         )
 }

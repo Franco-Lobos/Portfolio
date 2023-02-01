@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
-import '../styles/intro.css'
 
-import { ProfileConst } from "../constants/ProfileConst";
-import Canvas from "./Canvas";
-import Home from "./home/Home";
+import '../../styles/animation.css'
 
-const Intro =()=>{
+import { ProfileConst } from "../../constants/ProfileConst";
+import Canvas from "../Canvas";
+import Intro from "./Intro";
+
+const Animation =()=>{
     const [Profile, setProfile] =  useState(0);
 
     const [loading, setLoad] = useState(0);
@@ -47,7 +48,7 @@ const Intro =()=>{
 
     return(
         <div id='main'>
-            {/* {
+            {
                 !loading
                 ?
                 <Canvas loading={loading} setLoad={setLoad}></Canvas>
@@ -60,17 +61,17 @@ const Intro =()=>{
                 {
                 intro
                 ? 
-                <Home></Home>
+                <Intro></Intro>
                 : ""
                 }
                 </>
 
-            } */}
+            }
             
-            <Home></Home>
+            {/* <Intro></Intro> */}
 
         </div>
     );
 }
 
-export default Intro;
+export default Animation;
