@@ -69,6 +69,22 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+
+p{
+  font-weight: 700;
+  line-height: 2.5rem;
+  margin: 0rem;
+}
+
+span.color-blue{ color: var(--blue)}
+span.color-purple{ color: var(--purpule)}
+span.color-light-blue{ color: var(--light-blue)}
+span.color-orange{ color: var(--orange)}
+span.color-green{ color: var(--green)}
+span.color-dark-grey{ color: var(--dark-grey)}
+span.color-grey{ color: var(--grey)}
+
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

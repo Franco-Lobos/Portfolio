@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import MaterialIcon from 'material-icons-react';
 
 
-const HeaderLink =({indx, icon, setLoad})=>{
+const HeaderLink =({indx, route, setLoad, setPath})=>{
     
     const [breathing, setBreathing] = useState(0);
 
@@ -53,12 +53,12 @@ const HeaderLink =({indx, icon, setLoad})=>{
 
         let timeAnim = '1.5s'
 
-
-
         setTimeout(()=>{
             card.style.animation = `spawn ${timeAnim}`;
             card.style.opacity = '1';
-            card.addEventListener('animationend',setLoad(indx));
+            card.addEventListener('animationend',()=>{
+                setLoad(indx)
+            });
         },300+200*indx);
     }
 
@@ -125,8 +125,8 @@ const HeaderLink =({indx, icon, setLoad})=>{
 
         return(
             <div className="header-link-card" id={`header-card-${indx}`} >
-                <div className="header-link" id={`header-link-${indx}`}>
-                    <MaterialIcon icon={`${icon}`}  size="large" color='#f0f0f0'/>
+                <div className="header-link" id={`header-link-${indx}`} onClick={()=>setPath(route.path)}>
+                    <MaterialIcon icon={`${route.icon}`}  size="large" color='#f0f0f0'/>
                 </div>
             </div>
         )

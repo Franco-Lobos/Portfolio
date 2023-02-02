@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Sketch from "react-p5";
 
 const Canvas = ({loading,setLoad})=>{

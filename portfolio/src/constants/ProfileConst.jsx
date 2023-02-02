@@ -1,6 +1,26 @@
 export const ProfileConst = {
-    name:"Franco",
-    lastName: "Lobos",
+    personals:{
+        name:"Franco",
+        lastName: "Lobos",
+        nationality: "Argentino",
+        livesIn: "Andorra",
+        birth: "1996-01-19T09:05:00.000Z"
+    },
+
+    languages:[
+        {name: "español", level: "Native"},
+        {name: "english", level: "B2"},
+        {name: "català", level: "A1"}
+    ],
+
+    job:{
+        openToWork :1,
+        salary : ["€30.000 - €36.000 ", "£30.000 - £36.000"]
+    },
+
+    hobbies: ["Chess", "Guitar", "RPG games", "Wine tasting", "Cooking"],
+
+
     intro:[`
         About me?`, 
         'Generic example creative example lorem ispun consolidated',
@@ -15,15 +35,11 @@ export const ProfileConst = {
         // `My goal is to make coding a full-time job in a consolidated company`
     ],
 
-    intro2:`
-    Nowadays, I am studding an online <aid="link-0"/> at UOC,
-    meanhwile collaborating on different projects as a freelancer
-    My goal is to make coding a full-time job in a consolidated company.`,
-
     specialWords:[
         `creative`, `adaptation`, `python`, `wordpress`, `Bachelor's degree`, `consolidated`,
         `bachelor's degree`, `Univesity`
     ],
+
 
     links:[
         {

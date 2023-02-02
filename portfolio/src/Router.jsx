@@ -1,21 +1,18 @@
 import {createBrowserRouter} from "react-router-dom";
 
 import Animation from "./components/intro/Animation";
-import Home from "./components/home/Home";
+import Template from "./components/Template/Template";
 
 const Router = createBrowserRouter([
   {
-    path: "/animation",
-    element: <Animation></Animation>,
+    path: "/*",
+    element: <Template></Template>,
   },
   {
-    path: "/",
-    element: <Home></Home>,
-  },
-  // {
-  //   path: "about",
-  //   element: <div>About</div>,
-  // },
+    path: "/animation",
+    element: <Animation></Animation>,
+  }
+
 ]);
 
 export default Router

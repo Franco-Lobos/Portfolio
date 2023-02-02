@@ -9,7 +9,7 @@
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    padding: 1rem;
+    padding: 2rem;
 }
 
 .header-link-card{
@@ -36,7 +36,7 @@
     align-items: center;
 
     width: fit-content;
-    height: 6rem;
+    min-height: 8rem;
 
     padding: 1rem;
     border-radius: 1rem;

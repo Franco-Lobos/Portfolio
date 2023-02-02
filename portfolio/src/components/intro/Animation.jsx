@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import '../../styles/animation.css'
 
 import { ProfileConst } from "../../constants/ProfileConst";
-import Canvas from "../Canvas";
+import Canvas from "./Canvas";
 import Intro from "./Intro";
 
 const Animation =()=>{

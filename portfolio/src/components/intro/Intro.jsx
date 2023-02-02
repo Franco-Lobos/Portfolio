@@ -6,7 +6,6 @@ import { ProfileConst } from "../../constants/ProfileConst";
 
 import WriteWithForSpan from '../../library/WriteWithForSpan';
 
-import Home from '../home/Home';
 
 const Intro = ()=>{
 
