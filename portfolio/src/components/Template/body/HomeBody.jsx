@@ -61,7 +61,7 @@ const HomeBody = ()=>{
                     <span className="color-purple">{`]`}</span>,<br/>
         
                     <span className="color-light-blue"> openToWork : </span> <span className="color-blue">{`${job.openToWork ? "true" :" false"}`}</span>, <br/>
-                    <span className="color-light-blue"> openReloacate : </span> <span className="color-light-blue"> visaSponsorshipExist </span> <br/>
+                    <span className="color-light-blue"> openReloacate : </span> <span className="color-light-blue"> visaSponsorshipExist </span>, <br/>
                     <span className="color-light-blue"> salaryExpectation : </span> <span className="color-orange"> "{job.salary[0]}" </span> || <span className="color-orange"> "{job.salary[1]}" </span><br/>
 
 

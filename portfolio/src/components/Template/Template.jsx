@@ -13,9 +13,9 @@ const Template = ()=>{
 
     const routes = [
         { path: '/', icon: 'home'},
-        { path: 'portfolio', icon: 'work'},
+        { path: '/portfolio', icon: 'work'},
         { path: '/', icon: 'science'},
-        { path: '/', icon: 'local_bar'},
+        { path: '/sommelier', icon: 'local_bar'},
         { path: '/', icon: 'school'},
     ]
 
