@@ -1,3 +1,4 @@
+import { ParkSharp } from "@mui/icons-material";
 import Sketch from "react-p5";
 
 import { getRGB } from "../../../library/library";
@@ -16,7 +17,54 @@ const Sommelier = () =>{
 
     let frameRate = 100;
 
-    const Water =(p5, path)=>{
+    let scale = 0.2
+    let waterPaths = [];
+    let water = {
+        waterAmount : 100,
+        oxigen : 40* scale,
+        hidrogen : 20* scale,
+        distanceR : 95.84* scale,
+        angle : 52.225*Math.PI/180,
+    }
+
+    let setWater=()=>{
+        water['cosen'] =  Math.cos(water.angle);
+        water['sinus'] =  Math.sin(water.angle);
+        water['xDif'] =   water.sinus * water.distanceR;
+        water['yDif'] =   water.cosen * water.distanceR;
+        water['centerY'] = water.yDif*0.7;
+        water['colitionDistance'] = water.distanceR*2;
+    
+        for(let i=1; i<=water.waterAmount; i++){
+            let randomXStart = Math.random(); // from 0 to 1
+            let randomYStart =  h*(0.6 + Math.random()*10/40);
+            let randomOscilation = Math.floor(Math.random()*300)+300 // from 0 to 1
+            let randomOrientation = Math.floor(Math.random()*10)%2===0 ? 1 : -1;
+            let randomYVelocity = Math.floor(Math.random()*10)/50;
+            let randomXVelocity = Math.floor(Math.random()*10)/50;
+
+            let props = {
+                id: 'water-'+i,
+                oscilations: randomOscilation ,
+                xOrientation : (0.2 + randomXVelocity) * randomOrientation ,
+                yOrientation : -0.4 + randomYVelocity,
+                originXOrientation :  (0.2 + randomXVelocity) * randomOrientation ,
+                originYOrientation : -0.4 + randomYVelocity,
+
+                x : randomXStart * w,
+                y : randomYStart,
+                colitionable : 0,// set default 1
+                focused:0, 
+                colitionDistance :water.colitionDistance
+            }
+
+            // props['centerY'] = props.y + water.centerY;
+            waterPaths.push(props);
+        }
+    }
+
+
+    const waterDraw =(p5, path)=>{
 
         let x = path.x;
         let y = path.y;
@@ -34,8 +82,9 @@ const Sommelier = () =>{
 
         if(colitionable){
             p5.fill('red')
-        }
-        p5.circle(x,y + water.centerY, water.colitionDistance);
+        } 
+
+        p5.circle(x,y + water.centerY, path.colitionDistance);
         
         // let triangleCoord = [
         //     x,
@@ -49,46 +98,21 @@ const Sommelier = () =>{
 
     }
 
-    let scale = 0.2
-    let waterPaths = [];
-    let water = {
-        waterAmount : 100,
-        oxigen : 40* scale,
-        hidrogen : 20* scale,
-        distanceR : 95.84* scale,
-        angle : 52.225*Math.PI/180,
-    }
+    const getFocusMoleculeId =(p5)=>{
+        let mouseX = p5.mouseX;
+        let mouseY =  p5.mouseY;
 
-    water['cosen'] =  Math.cos(water.angle);
-    water['sinus'] =  Math.sin(water.angle);
-    water['xDif'] =   water.sinus * water.distanceR;
-    water['yDif'] =   water.cosen * water.distanceR;
-    water['centerY'] = water.yDif*0.7;
-    water['colitionDistance'] = water.distanceR*2;
-
-
-    
-    for(let i=0; i<water.waterAmount; i++){
-        let randomXStart = Math.random(); // from 0 to 1
-        let randomYStart =  h*(0.6 + Math.random()*10/40);
-        let randomOscilation = Math.floor(Math.random()*300)+300 // from 0 to 1
-        let randomOrientation = Math.floor(Math.random()*10)%2===0 ? 1 : -1;
-        let randomYVelocity = Math.floor(Math.random()*10)/50;
-        let randomXVelocity = Math.floor(Math.random()*10)/50;
-
-        let props = {
-            id: 'water-'+i,
-            oscilations: randomOscilation ,
-            xOrientation : (0.2 + randomXVelocity) * randomOrientation ,
-            yOrientation : -0.4 + randomYVelocity,
-            originXOrientation :  (0.2 + randomXVelocity) * randomOrientation ,
-            originYOrientation : -0.4 + randomYVelocity,
-
-            x : randomXStart * w,
-            y : randomYStart,
-            colitionable : 0,// set default 1
+        let focusedMolceule = waterPaths.find(molecule=>{
+            let a = molecule.x-mouseX;
+            let b = molecule.y+water.centerY-mouseY;
+            let hipotenuse = Math.sqrt((a)**2+(b)**2);
+            return water.colitionDistance>hipotenuse;
+        })
+        if(focusedMolceule){
+            return focusedMolceule.id.split('-');
+        }else{
+            return [false, false];
         }
-        waterPaths.push(props);
     }
 
     const setup = (p5, canvasParentRef) => {
@@ -100,8 +124,13 @@ const Sommelier = () =>{
         p5.background(bg);
         let count = p5.frameCount;
 
-        for (let i = 0; i<water.waterAmount; i++){
-            let path = waterPaths[i];
+        //MOUSE TRACK
+        let [focusedMoleculeType,focusedMoleculeId] = getFocusMoleculeId(p5);
+        let fullId  = focusedMoleculeType+ '-' + focusedMoleculeId;
+        
+        //H20 DRAWING
+        for (let i = 1; i<=water.waterAmount; i++){
+            let path = waterPaths[i-1];
             let cicle = count%path.oscilations;
             if (cicle === 0){
                 path.xOrientation*=-1;
@@ -111,8 +140,6 @@ const Sommelier = () =>{
             path.x+= path.xOrientation;
             let randomUp =  Math.floor(Math.random()*1000)%2;
             path.y+= path.yOrientation*randomUp;
-            // path.y+= path.yOrientation;
-
 
             //H20 Colition
             let flag = 0;
@@ -121,14 +148,29 @@ const Sommelier = () =>{
                 let a = wat.x-path.x;
                 let b = wat.y-path.y
                 let hipotenuse = Math.sqrt((a)**2+(b)**2);
-                if(hipotenuse <= water.colitionDistance &&  !wat.colitionable){
+                // if(hipotenuse <= path.colitionDistance &&  !wat.colitionable){
+                //     flag =1;
+                //     path.colitionable = 1;
+
+                //     path.xOrientation *= -1;
+                //     wat.xOrientation *= -1;
+
+                //     if(b<0){
+                //         path.yOrientation*=-1.2;
+                //     }else{
+                //         path.yOrientation*=1.2;
+                //     }
+                // }
+
+                if(hipotenuse <= path.colitionDistance &&  !wat.colitionable){
                     flag =1;
+                    wat.colitionable = 1;
                     path.colitionable = 1;
 
                     path.xOrientation *= -1;
-                    wat.xOrientation *= -1;
+                    // wat.xOrientation *= -1;
 
-                    if(b<0){
+                    if(b<=0){
                         path.yOrientation*=-1.2;
                     }else{
                         path.yOrientation*=1.2;
@@ -141,13 +183,26 @@ const Sommelier = () =>{
                 path.yOrientation = path.originYOrientation;
             }
 
-            //H20 draw
-            Water(p5,path);
+            if (focusedMoleculeType==='water' && fullId === path.id && !path.focused){
+                path.colitionDistance *= 3;
+                path.focused = 1;
+            }
 
-            waterPaths[i]=path;
+            if(path.focused && fullId !== path.id){
+                path.colitionDistance /= 3;
+                path.focused = 0;
+            }
+
+   
+            //H20 draw
+            waterDraw(p5,path);
+
+            waterPaths[i-1]=path;
         }
         
     }
+
+    setWater();
 
     return <Sketch setup={setup} draw={draw}/>;
 }
