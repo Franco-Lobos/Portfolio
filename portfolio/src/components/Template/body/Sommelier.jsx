@@ -18,7 +18,7 @@ const Sommelier = () =>{
 
     let colitions =[];
 
-    let scale = 0.2;
+    let scale = 0.3;
     let totalMolecules = 100;
 
     let allMolecules = [
@@ -122,6 +122,7 @@ const Sommelier = () =>{
         otherMolecule.orientation.y = cosine * vFinal[1].y + sine * vFinal[1].x;
     
     }
+
     const colitionManager =(thisMolecule)=>{
         let flag = 0;
 
@@ -150,15 +151,26 @@ const Sommelier = () =>{
                             fixed: thisMolecule.id,
                             mobile: otherMolecule.id
                         });
-                        if(!thisMolecule.sapwned || !otherMolecule.sapwned){
+                        if(!thisMolecule.spawned || !otherMolecule.spawned){
                             colitionDriver(p5, thisMolecule, otherMolecule, minDistance) 
                         }
                     }
 
-                    if(thisMolecule.sapwned){
+                    if(thisMolecule.spawned){
                         thisMolecule.position.y-=10*(thisMolecule.originYOrientation);
                         thisMolecule.position.x-=10*(thisMolecule.originXOrientation);
                     }
+
+                    if(thisMolecule.pushed){
+                        console.log('pushed')
+                        let a = thisMolecule.pushed.x-thisMolecule.position.x;
+                        let b = thisMolecule.pushed.y-thisMolecule.position.y;
+                        // otherMolecule.orientation.x*=a;
+                        // otherMolecule.orientation.y*=b;
+                        otherMolecule.position.x-=thisMolecule.orientation.x*a;
+                        otherMolecule.position.y-=thisMolecule.orientation.y*b;
+                    }
+
             
                     flag=1;
                 }
@@ -168,13 +180,22 @@ const Sommelier = () =>{
         if(flag){
             thisMolecule.colitionable = 1;
         } else {
-            colitions= colitions.filter(colition=>{
-                if(colition?.fixed !== thisMolecule.id ){
-                    return colition
-                }
-            })
+
+            let filtered = [];
+
+            if(colitions[0]){
+                colitions.map((colition)=>{
+                    let colitioneds = [colition?.fixed,colition?.mobile ]
+                    if(!colitioneds.includes(thisMolecule.id)){
+                        filtered.push(colition)
+                    }
+                })
+            }
+            colitions=[...filtered];
+
             thisMolecule.colitionable = 0;
-            thisMolecule.sapwned =0;
+            thisMolecule.spawned =0;
+            thisMolecule.pushed =0;
         }
     }
 
@@ -187,11 +208,6 @@ const Sommelier = () =>{
         p5.background(bg);
         let count = p5.frameCount;
 
-        //MOUSE TRACK
-        // FOCUSED!
-        // let [focusedMoleculeType,focusedMoleculeId] = getFocusMoleculeId(p5);
-        // let fullId  = focusedMoleculeType+ '-' + focusedMoleculeId;
-        
         //H20 DRAWING
         allMolecules.map(moleculeGroup=>{
             moleculeGroup.moleculeData.map((thisMolecule)=>{
@@ -199,42 +215,37 @@ const Sommelier = () =>{
                 
                 //Colition
                 colitionManager(thisMolecule);
-
-
-                // if(!thisMolecule.colitionable){
-                //     thisMolecule.orientation.y = thisMolecule.originYOrientation;
-                //     colitions= colitions.filter(colition=>{
-                //         colition.fixed !== thisMolecule.id
-                //     })
-                // }
+                thisMolecule.checkIfFocused(p5);
+                if(thisMolecule.focused){
+                    thisMolecule.focusAnimation(count);
+                    //set others to move out;
+                    let mobilesId =[];
+                    if(colitions[0]){
+                        colitions.map(colition=>{
+                            if(colition.fixed === thisMolecule.id){
+                                mobilesId.push(colition.mobile)
+                            }
+                        })
+                    }
+                    
+                    if(mobilesId[0]){
+                        allMolecules.map(moleculeGroup2=>{
+                            moleculeGroup2.moleculeData.map((otherMolecule2)=>{
+                                if(mobilesId.includes(otherMolecule2.id)){
+                                    thisMolecule.pushed=otherMolecule2.position;
+                                }
+                            }
+                        )})
+                    }
+    
+                }else{
+                    thisMolecule.colitionDistance = thisMolecule.settings.colitionDistance;
+                }
             
 
-                //set others to move out;
-                // let mobilesId = colitions.map(colition=>{
-                //     if(colition.fixed === path.id ){
-                //         return colition.mobile
-                //     }
-                // })
+            
+               
 
-                // allMolecules.map(type=>{
-                //     type.filter(molecule=>{
-                //         return molecule
-                //     })
-                // })
-
-                // FOCUSED!
-
-                // if (focusedMoleculeType==='water' && fullId === thisMolecule.id && !thisMolecule.focused){
-                //     thisMolecule.colitionDistance *= 3;
-                //     thisMolecule.focused = 1;
-                // }
-
-                // if(thisMolecule.focused && fullId !== thisMolecule.id){
-                //     thisMolecule.colitionDistance /= 3;
-                //     thisMolecule.focused = 0;
-                // }
-
-    
                 //H20 draw
                 thisMolecule.draw(p5);
             })

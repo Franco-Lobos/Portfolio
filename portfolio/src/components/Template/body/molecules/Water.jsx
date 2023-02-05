@@ -25,11 +25,14 @@ export class Water {
         this.originYOrientation = -0.4 + randomYVelocity,
         this.position = new p5.Vector(randomXStart * w, randomYStart),
         this.orientation =  new p5.Vector( (0.2 + randomXVelocity) * randomOrientation , -0.4 + randomYVelocity),
-        this.sapwned =1,
+        this.spawned =1,
+        this.pushed=0,
         
-        this.colitionable = 0,// set default 1
-        this.focused=0, 
+        this.colitionable = 0;// set default 1
+        this.focused=0;
+        this.focusedFinished=0;
         this.colitionDistance = this.settings.colitionDistance;
+        this.colitionFocused = this.colitionDistance*3;
         this.m= (this.settings.colitionDistance /2)*0.01;
     }
 
@@ -52,13 +55,41 @@ export class Water {
         this.position.x+= this.orientation.x;
         this.position.y+= this.orientation.y;
     }
+
+    checkIfFocused =(p5)=>{
+        let mouseX = p5.mouseX;
+        let mouseY =  p5.mouseY;
+        let a = this.position.x-mouseX;
+        let b = this.position.y-mouseY;
+
+        let hipotenuse = Math.sqrt((a)**2+(b)**2);
+
+        if(this.colitionDistance>hipotenuse){
+            this.focused = 1;
+        }
+
+        else{
+            this.focused =0;
+            this.focusedFinished = 0;
+        }
+    }
+
+    focusAnimation(count){
+        if(this.focusedFinished)return;
+        let cicle = count%100;
+        let percent = cicle/99;
+        this.colitionDistance = this.settings.colitionDistance + this.colitionFocused*percent;
+        if(percent===1){
+            this.focusedFinished=1;
+        }
+    }
+
     draw(p5){
         let lightBlue = getRGB('light-blue');
         let orange = getRGB('orange');
 
         let x = this.position.x;
         let y = this.position.y;
-        let colitionable = this.colitionable
 
         p5.noStroke();
         p5.fill(lightBlue);
@@ -70,11 +101,15 @@ export class Water {
         p5.stroke('red');
         p5.noFill();
 
-        if(colitionable){
-            p5.fill('red')
+        if(this.colitionable){
+            p5.fill('#32323232')
         } 
 
-        p5.circle(x,y + this.settings.centerY, this.colitionDistance*2);
+        // if(this.focused){
+        //     p5.circle(x, y+ this.settings.centerY, this.colitionDistance*2);
+        // }
+        p5.circle(x, y+ this.settings.centerY, this.colitionDistance*2);
+
         
         // let triangleCoord = [
         //     x,
