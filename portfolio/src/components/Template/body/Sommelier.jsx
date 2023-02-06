@@ -21,6 +21,10 @@ const Sommelier = () =>{
     let scale = 0.3;
     let totalMolecules = 100;
 
+    let environment = {
+        focused:0,
+    }
+
     let allMolecules = [
         {moleculeType : "water",
         moleculeData : []},
@@ -47,8 +51,11 @@ const Sommelier = () =>{
         let d = distanceVect.copy();
         let correctionVector = d.normalize().mult(distanceCorrection);
 
-        otherMolecule.position.add(correctionVector);
-        thisMolecule.position.sub(correctionVector);
+        if(!thisMolecule.pushed){
+            otherMolecule.position.add(correctionVector);
+            thisMolecule.position.sub(correctionVector);
+        }
+
         
         // get angle of distanceVect
         let theta = distanceVect.heading();
@@ -68,6 +75,7 @@ const Sommelier = () =>{
          since b[1] will rotate around b[0] */
         bTemp[1].x = cosine * distanceVect.x + sine * distanceVect.y;
         bTemp[1].y = cosine * distanceVect.y - sine * distanceVect.x;
+
 
         // rotate Temporary velocities
         let vTemp = [new p5.Vector(), new p5.Vector()];
@@ -94,6 +102,7 @@ const Sommelier = () =>{
           (thisMolecule.m + otherMolecule.m);
         vFinal[1].y = vTemp[1].y;
 
+ 
         // hack to avoid clumping
         bTemp[0].x += vFinal[0].x;
         bTemp[1].x += vFinal[1].x;
@@ -113,13 +122,22 @@ const Sommelier = () =>{
         otherMolecule.position.x = thisMolecule.position.x + bFinal[1].x;
         otherMolecule.position.y = thisMolecule.position.y + bFinal[1].y;
 
-        thisMolecule.position.add(bFinal[0]);
+        if(!thisMolecule.pushed){
+            thisMolecule.position.add(bFinal[0]);
+            thisMolecule.orientation.x = cosine * vFinal[0].x - sine * vFinal[0].y;
+            thisMolecule.orientation.y = cosine * vFinal[0].y + sine * vFinal[0].x;
+        }
+
+        if(!otherMolecule.pushed){
+            otherMolecule.orientation.x = cosine * vFinal[1].x - sine * vFinal[1].y;
+            otherMolecule.orientation.y = cosine * vFinal[1].y + sine * vFinal[1].x;
+        }
 
         // update velocities
-        thisMolecule.orientation.x = cosine * vFinal[0].x - sine * vFinal[0].y;
-        thisMolecule.orientation.y = cosine * vFinal[0].y + sine * vFinal[0].x;
-        otherMolecule.orientation.x = cosine * vFinal[1].x - sine * vFinal[1].y;
-        otherMolecule.orientation.y = cosine * vFinal[1].y + sine * vFinal[1].x;
+        // thisMolecule.orientation.x = cosine * vFinal[0].x - sine * vFinal[0].y;
+        // thisMolecule.orientation.y = cosine * vFinal[0].y + sine * vFinal[0].x;
+        // otherMolecule.orientation.x = cosine * vFinal[1].x - sine * vFinal[1].y;
+        // otherMolecule.orientation.y = cosine * vFinal[1].y + sine * vFinal[1].x;
     
     }
 
@@ -135,7 +153,7 @@ const Sommelier = () =>{
 
                 let minDistance=thisMolecule.colitionDistance + otherMolecule.colitionDistance;
 
-                if(hipotenuse <= minDistance){
+                if(hipotenuse < minDistance){
                     let existentColition = 0;
 
                     if(colitions[0]){
@@ -161,14 +179,20 @@ const Sommelier = () =>{
                         thisMolecule.position.x-=10*(thisMolecule.originXOrientation);
                     }
 
-                    if(thisMolecule.pushed){
+                    if(thisMolecule.pushed && !thisMolecule.focusedFinished){
                         console.log('pushed')
-                        let a = thisMolecule.pushed.x-thisMolecule.position.x;
-                        let b = thisMolecule.pushed.y-thisMolecule.position.y;
-                        // otherMolecule.orientation.x*=a;
-                        // otherMolecule.orientation.y*=b;
-                        otherMolecule.position.x-=thisMolecule.orientation.x*a;
-                        otherMolecule.position.y-=thisMolecule.orientation.y*b;
+                
+                        otherMolecule.orientation.x=thisMolecule.pushed.x *0.1
+                        otherMolecule.orientation.y=thisMolecule.pushed.y *0.1
+
+                        colitionDriver(p5, thisMolecule, thisMolecule, minDistance) 
+                
+                        // let a = thisMolecule.pushed.x-thisMolecule.position.x;
+                        // let b = thisMolecule.pushed.y-thisMolecule.position.y;
+                        // otherMolecule.orientation.x*=3;
+                        // otherMolecule.orientation.y*=3;
+                        // otherMolecule.position.x-=thisMolecule.orientation.x*a;
+                        // otherMolecule.position.y-=thisMolecule.orientation.y*b;
                     }
 
             
@@ -196,6 +220,7 @@ const Sommelier = () =>{
             thisMolecule.colitionable = 0;
             thisMolecule.spawned =0;
             thisMolecule.pushed =0;
+            thisMolecule.pushedForceFlag=0;
         }
     }
 
@@ -207,18 +232,19 @@ const Sommelier = () =>{
 	const draw = (p5) => {
         p5.background(bg);
         let count = p5.frameCount;
-
-        //H20 DRAWING
+        let focusedFlag = 0;
+        //DRAWING
         allMolecules.map(moleculeGroup=>{
             moleculeGroup.moleculeData.map((thisMolecule)=>{
                 thisMolecule.oscilate(count);
                 
                 //Colition
-                colitionManager(thisMolecule);
-                thisMolecule.checkIfFocused(p5);
+                thisMolecule.checkIfFocused(p5,environment.focused);
+
                 if(thisMolecule.focused){
-                    thisMolecule.focusAnimation(count);
-                    //set others to move out;
+                    focusedFlag =thisMolecule.id;
+                    thisMolecule.focusAnimation();
+                    // set others to move out;
                     let mobilesId =[];
                     if(colitions[0]){
                         colitions.map(colition=>{
@@ -231,8 +257,11 @@ const Sommelier = () =>{
                     if(mobilesId[0]){
                         allMolecules.map(moleculeGroup2=>{
                             moleculeGroup2.moleculeData.map((otherMolecule2)=>{
-                                if(mobilesId.includes(otherMolecule2.id)){
-                                    thisMolecule.pushed=otherMolecule2.position;
+                                if(mobilesId.includes(otherMolecule2.id) ){
+                                    let a = otherMolecule2.position.x - thisMolecule.position.x;
+                                    let b = otherMolecule2.position.y - thisMolecule.position.y;
+                                    thisMolecule.pushedForce(a,b);
+                                    // thisMolecule.pushed=otherMolecule2.position;
                                 }
                             }
                         )})
@@ -241,15 +270,14 @@ const Sommelier = () =>{
                 }else{
                     thisMolecule.colitionDistance = thisMolecule.settings.colitionDistance;
                 }
-            
-
-            
-               
+                colitionManager(thisMolecule);
 
                 //H20 draw
                 thisMolecule.draw(p5);
             })
         })
+
+        environment.focused=focusedFlag
     
     }
 

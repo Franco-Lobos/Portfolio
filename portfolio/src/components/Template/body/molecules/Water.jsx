@@ -27,12 +27,15 @@ export class Water {
         this.orientation =  new p5.Vector( (0.2 + randomXVelocity) * randomOrientation , -0.4 + randomYVelocity),
         this.spawned =1,
         this.pushed=0,
+        this.pushedForceFlag=0,
+
         
         this.colitionable = 0;// set default 1
         this.focused=0;
+        this.focusedPercent=0;
         this.focusedFinished=0;
         this.colitionDistance = this.settings.colitionDistance;
-        this.colitionFocused = this.colitionDistance*3;
+        this.colitionFocused = this.colitionDistance*5;
         this.m= (this.settings.colitionDistance /2)*0.01;
     }
 
@@ -56,7 +59,7 @@ export class Water {
         this.position.y+= this.orientation.y;
     }
 
-    checkIfFocused =(p5)=>{
+    checkIfFocused =(p5, otherFocusFlag)=>{
         let mouseX = p5.mouseX;
         let mouseY =  p5.mouseY;
         let a = this.position.x-mouseX;
@@ -64,7 +67,8 @@ export class Water {
 
         let hipotenuse = Math.sqrt((a)**2+(b)**2);
 
-        if(this.colitionDistance>hipotenuse){
+        if(this.colitionDistance>hipotenuse && (otherFocusFlag === this.id || !otherFocusFlag)){
+            console.log('foccc')
             this.focused = 1;
         }
 
@@ -74,14 +78,20 @@ export class Water {
         }
     }
 
-    focusAnimation(count){
+    focusAnimation(){
         if(this.focusedFinished)return;
-        let cicle = count%100;
-        let percent = cicle/99;
-        this.colitionDistance = this.settings.colitionDistance + this.colitionFocused*percent;
-        if(percent===1){
+
+        this.focusedPercent+=0.01;
+        this.colitionDistance = this.settings.colitionDistance + this.colitionFocused*this.focusedPercent;
+        
+        this.m= (this.colitionDistance/2)*0.01;
+        if(this.focusedPercent>=1){
             this.focusedFinished=1;
         }
+    }
+
+    pushedForce(a,b){
+        this.pushed = new p5.Vector(a,b);
     }
 
     draw(p5){
