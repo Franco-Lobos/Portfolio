@@ -2,11 +2,11 @@ import { ParkSharp } from "@mui/icons-material";
 import { useEffect, useState} from "react";
 import Sketch from "react-p5";
 
-import { getRGB } from "../../../library/library";
+import { getRGB, convertToCamelCase } from "../../../library/library";
 
 import '../../../styles/sommelier.css'
 
-import { Water } from "./molecules/Water";
+import { Molecule } from "./molecules/Molecule";
 
 const Sommelier = () =>{
 
@@ -15,18 +15,24 @@ const Sommelier = () =>{
     let w = window.innerWidth;
     let h = window.innerHeight;
 
+    let colors = {};    
+    let colorsRoot = ['purpule', 'orange', 'blue', 'light-blue', 'green', 'dark-bg', 'dark-grey','dark-bg', 'grey'];
+    colorsRoot.forEach(color=>{
+        colors[convertToCamelCase(color)] = getRGB(color);
+    })
+
     let frameRate = 30;
 
     let colitions =[];
 
     let scale = 0.2;
-    let totalMolecules = 500;
+    let totalMolecules = 300;
 
     let environment = {
         focused:0,
         focusedFinished:0,
-        maxVelocity: 1,
-        minVelocity: 0.3,
+        maxVelocity: Math.sqrt(2),
+        minVelocity: 0.03,
         defaultMaxVelocity: 1,
         defaultMinVelocity: 0.3,
     }
@@ -42,7 +48,7 @@ const Sommelier = () =>{
 
     //Set WATER
     for(let i=1; i<=allMoleculesAmount.water; i++){
-        let water = new Water(p5, i, scale, w, h);
+        let water = new Molecule(p5, i, scale, w, h, 'water');
         allMolecules.map(group=>{
             if(group.moleculeType === 'water'){
                 group.moleculeData.push(water)
@@ -159,17 +165,19 @@ const Sommelier = () =>{
     
     }
 
-    const checkVelocity = (velocity)=>{
+    const checkVelocity = (thisMolecule)=>{
+        let originVelocity = Math.sqrt(thisMolecule.orientation.x**2+thisMolecule.orientation.y**2);
 
-        if(velocity >0){
-            if(velocity >= environment.maxVelocity){velocity = environment.maxVelocity}
-            if(velocity <= environment.minVelocity){velocity = environment.minVelocity}
+        if(originVelocity >= environment.maxVelocity){
+            // orientation.x *= 0.97
+            // orientation.y *= 0.97
+            thisMolecule.downSpeed('x');
+            thisMolecule.downSpeed('y');
         }
-        if(velocity <0){
-            if(velocity <= -environment.maxVelocity){velocity = -environment.maxVelocity}
-            if(velocity >= -environment.minVelocity){velocity = -environment.minVelocity}
+        if(originVelocity <= environment.minVelocity){
+            thisMolecule.orientation.x *= 1.05
+            thisMolecule.orientation.y *= 1.05
         }
-        return velocity
     }
 
     const colitionManager =(thisMolecule)=>{
@@ -179,14 +187,14 @@ const Sommelier = () =>{
             moleculeGroup.moleculeData.map( otherMolecule=> { 
                 if( otherMolecule.id === thisMolecule.id) return;
                 let a = otherMolecule.position.x-thisMolecule.position.x;
-                let b = otherMolecule.position.y-thisMolecule.position.y
+                let b = otherMolecule.position.y-thisMolecule.position.y;
                 let hipotenuse = Math.sqrt((a)**2+(b)**2);
 
-                let minDistance=thisMolecule.colitionDistance + otherMolecule.colitionDistance;
+                let minDistance = thisMolecule.colitionDistance + otherMolecule.colitionDistance;
 
                 if(hipotenuse < minDistance){
                     if(otherMolecule.focused){
-                        thisMolecule.zoom = hipotenuse/minDistance *thisMolecule.settings.zoom;
+                        thisMolecule.zoom = hipotenuse/minDistance * thisMolecule.settings.zoom;
                     }
 
                     let existentColition = 0;
@@ -325,23 +333,19 @@ const Sommelier = () =>{
                 }
 
                 if(!thisMolecule.pushed && !thisMolecule.focused ){               
-                    thisMolecule.orientation.x = checkVelocity(thisMolecule.orientation.x);
-                    thisMolecule.orientation.y = checkVelocity(thisMolecule.orientation.y);
-                    
+                    checkVelocity(thisMolecule);   
                 }
 
-
-
-                thisMolecule.draw(p5, environment);
+                thisMolecule.draw(p5, colors);
             })
         })
 
         environment.focused=focusedFlag
     }
 
-
     return <Sketch setup={setup} draw={draw}/>;
 }
+
 
 
 export default Sommelier;

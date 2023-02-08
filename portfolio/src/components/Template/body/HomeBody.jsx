@@ -38,12 +38,14 @@ const HomeBody = ()=>{
                     <span className="color-light-blue"> languages : </span> <span className="color-purple">{`[`}</span>
                         <p style={{paddingLeft:"4rem"}}>
                             {
-                                languages.map((lan)=>
+                                languages.map((lan, indx)=>
                                     <>
                                         <span className="color-blue">{`{`}</span>
                                         <span className="color-light-blue"> name: </span> <span className="color-orange"> "{lan.name}"</span>,
                                         <span className="color-light-blue"> &emsp; level:</span> <span className="color-orange"> "{lan.level}" </span>
-                                        <span className="color-blue">{`}`}</span>, <br/>
+                                        <span className="color-blue">{`}`}</span>
+                                        {indx ===languages.length-1 ? "" : ","}
+                                        <br/>
                                     </>
                                 )
                             }
@@ -54,14 +56,14 @@ const HomeBody = ()=>{
                         <p style={{paddingLeft:"4rem"}}>
                             {hobbies.map((hob,indx)=>
                             <>
-                                <span className="color-orange"> "{hob}"</span>,
+                                <span className="color-orange"> "{hob}"</span>{indx ===hobbies.length-1 ? "" : ","}
                             </>
                             )}
                         </p>
                     <span className="color-purple">{`]`}</span>,<br/>
         
                     <span className="color-light-blue"> openToWork : </span> <span className="color-blue">{`${job.openToWork ? "true" :" false"}`}</span>, <br/>
-                    <span className="color-light-blue"> openReloacate : </span> <span className="color-light-blue">{`${job.openToWork ? "true" :" false"}`}  </span>, <br/>
+                    <span className="color-light-blue"> openReloacate : </span> <span className="color-blue">{`${job.openToRelocate ? "true" :" false"}`}  </span>, <br/>
                     <span className="color-light-blue"> salaryExpectation : </span> <span className="color-orange"> "{job.salary[0]}" </span> || <span className="color-orange"> "{job.salary[1]}" </span><br/>
 
 

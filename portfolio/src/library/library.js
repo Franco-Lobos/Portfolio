@@ -10,3 +10,15 @@ export const getRGB= (color)=>{
 
     return [colorR,colorG,colorB]
 }
+export const convertToCamelCase = (string)=>{
+        let words= string.split('-');
+        words = words.map((word,indx) => {
+            if(indx===0) return word;
+            let splitedWord = word.split('');
+            splitedWord[0] = splitedWord[0].toUpperCase();
+            splitedWord = splitedWord.join('');
+            return splitedWord
+        });
+
+        return words.join('');
+}

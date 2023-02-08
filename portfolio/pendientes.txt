@@ -1,0 +1,12 @@
+REVISAR 
+Agregar enlaces de electrones
+
+
+
+RESUELTO
+las moleculas no reaparecen por el otro lado
+
+checkVelocity -> unifica la velocidad igualando x=y= nvironment.maxVelocity;
+entonces todos los ángulos del módulo son múltiplos impares de PI (45-135-225-315)
+
+Reorganizar arquitectura

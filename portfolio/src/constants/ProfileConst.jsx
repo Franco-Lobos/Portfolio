@@ -15,10 +15,11 @@ export const ProfileConst = {
 
     job:{
         openToWork :1,
+        openToRelocate :1,
         salary : ["€30.000 - €36.000 ", "£30.000 - £36.000"]
     },
 
-    hobbies: ["Chess", "Guitar", "RPG games", "Wine tasting", "Cooking"],
+    hobbies: ["Chess", "Guitar", "RPG games", "Wine tasting", "Cooking", "Snowboard"],
 
 
     intro:[`
