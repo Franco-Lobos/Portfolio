@@ -26,7 +26,7 @@ const Sommelier = () =>{
     let colitions =[];
 
     let scale = 0.2;
-    let totalMolecules = 300;
+    let totalMolecules = 1;
 
     let environment = {
         focused:0,
@@ -40,10 +40,16 @@ const Sommelier = () =>{
     let allMolecules = [
         {moleculeType : "water",
         moleculeData : []},
+        {moleculeType : "ethanol",
+        moleculeData : []},
     ];
 
     let allMoleculesAmount = {
-        water: Math.ceil(totalMolecules*0.84),
+        // water: Math.ceil(totalMolecules*0.84),
+        water: 0,
+        ethanol: Math.ceil(totalMolecules*0.14),
+        // ethanol: 0,
+
     }
 
     //Set WATER
@@ -52,6 +58,16 @@ const Sommelier = () =>{
         allMolecules.map(group=>{
             if(group.moleculeType === 'water'){
                 group.moleculeData.push(water)
+            }
+        })
+    }
+
+    //Set ETHANOL
+    for(let i=1; i<=allMoleculesAmount.ethanol; i++){
+        let ethanol = new Molecule(p5, i, scale, w, h, 'ethanol');
+        allMolecules.map(group=>{
+            if(group.moleculeType === 'ethanol'){
+                group.moleculeData.push(ethanol)
             }
         })
     }
@@ -278,7 +294,6 @@ const Sommelier = () =>{
         allMolecules.map(moleculeGroup=>{
             moleculeGroup.moleculeData.map((thisMolecule)=>{
                 thisMolecule.oscilate(count);
-                
                 //Colition
                 if(!thisMolecule.spawned){
                     thisMolecule.checkIfFocused(p5,environment.focused);
@@ -320,7 +335,6 @@ const Sommelier = () =>{
                 }
                 colitionManager(thisMolecule);
 
-                //H20 draw
                 if(environment.focused && environment.focusedFinished){
                     thisMolecule.downSpeed('x');
                     thisMolecule.downSpeed('y');

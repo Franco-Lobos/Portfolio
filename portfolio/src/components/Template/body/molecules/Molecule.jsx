@@ -1,13 +1,14 @@
 import { getRGB } from "../../../../library/library";
 
 import { Water } from "./Water";
+import { Ethanol } from "./Ethanol";
 
 export class Molecule {
     constructor(p5, i, scale, w, h, moleculeType){
         this.settings ={
             scale: scale,
             zoom: 5*scale,
-            focusedIncrease: 60*scale,
+            focusedIncrease: 30*scale,
         }
         
         this.moleculeType = moleculeType;
@@ -64,6 +65,9 @@ export class Molecule {
         switch(this.moleculeType){
             case 'water':
                 this.specimen = new Water(p5, this);
+                break
+            case 'ethanol':
+                this.specimen = new Ethanol(p5, this);
                 break
             default:
                 this.specimen = new Water(p5, this);
