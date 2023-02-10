@@ -1,20 +1,17 @@
 
 export class Water {
     constructor( p5, molecule){
+        this.waterComparison=1;
+
         this.configuration= {
             oxigen : 30* molecule.settings.scale,
             hidrogen : 20* molecule.settings.scale,
-            distanceR : 95.84* molecule.settings.scale,
-            angle : 52.225*Math.PI/180,
+            // angle : 52.225*Math.PI/180,
         }
 
-        this.__setSetings(molecule);
-
         this.drawSet ={
-            xDif : this.configuration.xDif,
-            yDif : this.configuration.yDif,
-            hidrogen : this.configuration.hidrogen,
             oxigen : this.configuration.oxigen,
+            hidrogen : this.configuration.hidrogen,
             oxigen1:{
                 position: new p5.Vector(molecule.position.x,molecule.position.y),
                 orbital:{
@@ -28,7 +25,7 @@ export class Water {
 
             },
             hidrogen1:{
-                position: new p5.Vector(molecule.position.x-this.configuration.xDif,molecule.position.y+this.configuration.yDif),
+                // position: new p5.Vector(molecule.position.x-this.configuration.xDif,molecule.position.y+this.configuration.yDif),
                 bondOxigen: molecule.position.copy(),
                 bondThis: molecule.position.copy(),
                 orbital:{
@@ -37,25 +34,22 @@ export class Water {
                 }
             },
             hidrogen2:{
-                position: new p5.Vector(molecule.position.x+this.configuration.xDif,molecule.position.y+this.configuration.yDif),
+                // position: new p5.Vector(molecule.position.x+this.configuration.xDif,molecule.position.y+this.configuration.yDif),
                 bondOxigen: molecule.position.copy(),
                 bondThis: molecule.position.copy(),
+            },
+
+            bondDif:{
+                hoh: molecule.bond.hoh.dif
             }
+
         };
 
     }
 
-    __setSetings(){
-        this.configuration['cos'] =  Math.cos(this.configuration.angle);
-        this.configuration['sin'] =  Math.sin(this.configuration.angle);
-        this.configuration['xDif'] =   this.configuration.sin * this.configuration.distanceR;
-        this.configuration['yDif'] =   this.configuration.cos * this.configuration.distanceR;
-        this.configuration['colitionDistance'] = this.configuration.distanceR;
-    }
-
     __setZoom(molecule){
-        this.drawSet.xDif = this.configuration.xDif * molecule.zoom;
-        this.drawSet.yDif = this.configuration.yDif * molecule.zoom;
+        this.drawSet.bondDif.hoh = molecule.bond.hoh.dif.copy().mult(molecule.zoom);
+
         this.drawSet.hidrogen = this.configuration.hidrogen * molecule.zoom;
         this.drawSet.oxigen = this.configuration.oxigen * molecule.zoom;
 
@@ -63,60 +57,60 @@ export class Water {
         this.drawSet.oxigen1.position.x = molecule.position.x;
         this.drawSet.oxigen1.position.y = molecule.position.y - molecule.colitionDistance*0.4;
    
+        this.drawSet.hidrogen1.position = this.drawSet.oxigen1.position.copy().add(-this.drawSet.bondDif.hoh.x,this.drawSet.bondDif.hoh.y)
+        this.drawSet.hidrogen2.position = this.drawSet.oxigen1.position.copy().add(this.drawSet.bondDif.hoh.x,this.drawSet.bondDif.hoh.y)
+        
         //Set hidrogen 1
-        this.drawSet.hidrogen1.position.x =  this.drawSet.oxigen1.position.x-this.drawSet.xDif
-        this.drawSet.hidrogen1.position.y =  this.drawSet.oxigen1.position.y+this.drawSet.yDif
+        // this.drawSet.hidrogen1.position.x =  this.drawSet.oxigen1.position.x-this.drawSet.bondDif.hoh.x
+        // this.drawSet.hidrogen1.position.y =  this.drawSet.oxigen1.position.y+this.drawSet.bondDif.hoh.y
 
         //Set hidrogen 2
-        this.drawSet.hidrogen2.position.x =  this.drawSet.oxigen1.position.x+this.drawSet.xDif
-        this.drawSet.hidrogen2.position.y =  this.drawSet.oxigen1.position.y+this.drawSet.yDif
+        // this.drawSet.hidrogen2.position.x =  this.drawSet.oxigen1.position.x+this.drawSet.bondDif.hoh.x
+        // this.drawSet.hidrogen2.position.y =  this.drawSet.oxigen1.position.y+this.drawSet.bondDif.hoh.y
     }
 
-    __setBond(molecule){
+    // __drawBond(molecule){
 
-        //Set hidrogen 1
-        this.drawSet.hidrogen1.bondOxigen.x = this.drawSet.oxigen1.position.x - this.configuration.sin * this.drawSet.oxigen/2;
-        this.drawSet.hidrogen1.bondOxigen.y = this.drawSet.oxigen1.position.y + this.configuration.cos * this.drawSet.oxigen/2;
-        this.drawSet.hidrogen1.bondThis.x = this.drawSet.hidrogen1.position.x + this.configuration.sin * this.drawSet.hidrogen/2;
-        this.drawSet.hidrogen1.bondThis.y = this.drawSet.hidrogen1.position.y - this.configuration.cos * this.drawSet.hidrogen/2;
+    //     //Set hidrogen 1
+    //     this.drawSet.hidrogen1.bondOxigen.x = this.drawSet.oxigen1.position.x - this.configuration.sin * this.drawSet.oxigen/2;
+    //     this.drawSet.hidrogen1.bondOxigen.y = this.drawSet.oxigen1.position.y + this.configuration.cos * this.drawSet.oxigen/2;
+    //     this.drawSet.hidrogen1.bondThis.x = this.drawSet.hidrogen1.position.x + this.configuration.sin * this.drawSet.hidrogen/2;
+    //     this.drawSet.hidrogen1.bondThis.y = this.drawSet.hidrogen1.position.y - this.configuration.cos * this.drawSet.hidrogen/2;
 
-        //Set hidrogen 2
-        this.drawSet.hidrogen2.bondOxigen.x = this.drawSet.oxigen1.position.x + this.configuration.sin * this.drawSet.oxigen/2;
-        this.drawSet.hidrogen2.bondOxigen.y = this.drawSet.oxigen1.position.y + this.configuration.cos * this.drawSet.oxigen/2;
-        this.drawSet.hidrogen2.bondThis.x = this.drawSet.hidrogen2.position.x - this.configuration.sin * this.drawSet.hidrogen/2;
-        this.drawSet.hidrogen2.bondThis.y = this.drawSet.hidrogen2.position.y - this.configuration.cos * this.drawSet.hidrogen/2;
-
-
-        //general oxigen hidrogen n
-        this.drawSet.oxigen1.orbital.radius = this.drawSet.oxigen * 3 * this.drawSet.oxigen1.orbital.length;
-        //general oxigen hidrogen ends
-
-        //Set orbital Oxigen Hidrogen1:
-        this.drawSet.oxigen1.orbital.hidrogen1 = this.drawSet.hidrogen1.bondThis.copy();
-        this.drawSet.oxigen1.orbital.hidrogen1.x += (this.drawSet.hidrogen1.bondOxigen.x-this.drawSet.oxigen1.orbital.hidrogen1.x)* this.drawSet.oxigen1.orbital.length;
-        this.drawSet.oxigen1.orbital.hidrogen1.y += (this.drawSet.hidrogen1.bondOxigen.y-this.drawSet.oxigen1.orbital.hidrogen1.y)* this.drawSet.oxigen1.orbital.length;
+    //     //Set hidrogen 2
+    //     this.drawSet.hidrogen2.bondOxigen.x = this.drawSet.oxigen1.position.x + this.configuration.sin * this.drawSet.oxigen/2;
+    //     this.drawSet.hidrogen2.bondOxigen.y = this.drawSet.oxigen1.position.y + this.configuration.cos * this.drawSet.oxigen/2;
+    //     this.drawSet.hidrogen2.bondThis.x = this.drawSet.hidrogen2.position.x - this.configuration.sin * this.drawSet.hidrogen/2;
+    //     this.drawSet.hidrogen2.bondThis.y = this.drawSet.hidrogen2.position.y - this.configuration.cos * this.drawSet.hidrogen/2;
 
 
-        //Set orbital Oxigen Hidrogen2:
-        this.drawSet.oxigen1.orbital.hidrogen2 = this.drawSet.hidrogen2.bondThis.copy();
-        this.drawSet.oxigen1.orbital.hidrogen2.x += (this.drawSet.hidrogen2.bondOxigen.x-this.drawSet.oxigen1.orbital.hidrogen2.x)* this.drawSet.oxigen1.orbital.length;
-        this.drawSet.oxigen1.orbital.hidrogen2.y += (this.drawSet.hidrogen2.bondOxigen.y-this.drawSet.oxigen1.orbital.hidrogen2.y)* this.drawSet.oxigen1.orbital.length;
+    //     //general oxigen hidrogen n
+    //     this.drawSet.oxigen1.orbital.radius = this.drawSet.oxigen * 3 * this.drawSet.oxigen1.orbital.length;
+    //     //general oxigen hidrogen ends
+
+    //     //Set orbital Oxigen Hidrogen1:
+    //     this.drawSet.oxigen1.orbital.hidrogen1 = this.drawSet.hidrogen1.bondThis.copy();
+    //     this.drawSet.oxigen1.orbital.hidrogen1.x += (this.drawSet.hidrogen1.bondOxigen.x-this.drawSet.oxigen1.orbital.hidrogen1.x)* this.drawSet.oxigen1.orbital.length;
+    //     this.drawSet.oxigen1.orbital.hidrogen1.y += (this.drawSet.hidrogen1.bondOxigen.y-this.drawSet.oxigen1.orbital.hidrogen1.y)* this.drawSet.oxigen1.orbital.length;
 
 
-        //Set orbital Hidrogen Radius:
-        let bond = new p5.Vector(0,0);
-        bond.x = this.drawSet.oxigen1.orbital.hidrogen1.x - this.drawSet.oxigen1.orbital.radius*this.configuration.cos,
-        bond.y = this.drawSet.oxigen1.orbital.hidrogen1.y - this.drawSet.oxigen1.orbital.radius*this.configuration.sin,
-        bond.sub(this.drawSet.hidrogen1.position);
+    //     //Set orbital Oxigen Hidrogen2:
+    //     this.drawSet.oxigen1.orbital.hidrogen2 = this.drawSet.hidrogen2.bondThis.copy();
+    //     this.drawSet.oxigen1.orbital.hidrogen2.x += (this.drawSet.hidrogen2.bondOxigen.x-this.drawSet.oxigen1.orbital.hidrogen2.x)* this.drawSet.oxigen1.orbital.length;
+    //     this.drawSet.oxigen1.orbital.hidrogen2.y += (this.drawSet.hidrogen2.bondOxigen.y-this.drawSet.oxigen1.orbital.hidrogen2.y)* this.drawSet.oxigen1.orbital.length;
 
-        let bondLength = Math.sqrt(bond.x**2 + bond.y**2); 
-        this.drawSet.hidrogen1.orbital.radius = bondLength*2
-    }
+
+    //     //Set orbital Hidrogen Radius:
+    //     let bond = new p5.Vector(0,0);
+    //     bond.x = this.drawSet.oxigen1.orbital.hidrogen1.x - this.drawSet.oxigen1.orbital.radius*this.configuration.cos,
+    //     bond.y = this.drawSet.oxigen1.orbital.hidrogen1.y - this.drawSet.oxigen1.orbital.radius*this.configuration.sin,
+    //     bond.sub(this.drawSet.hidrogen1.position);
+
+    //     let bondLength = Math.sqrt(bond.x**2 + bond.y**2); 
+    //     this.drawSet.hidrogen1.orbital.radius = bondLength*2
+    // }
 
     draw(p5,molecule,colors){
-        // draw actualizations
-        this.__setZoom(molecule);
-        p5.noStroke();
 
         // Oxigen
         p5.fill(colors.lightBlue);
@@ -135,74 +129,75 @@ export class Water {
         if(molecule.focused){
             p5.fill('#32323232')
         } 
+        
         p5.circle(molecule.position.x,molecule.position.y,molecule.colitionDistance*2);
 
 
         //ZOOM BOND
-        if(molecule.focused){
-            this.__setBond(molecule);
-            p5.stroke('#ffffff');
-            p5.line(this.drawSet.hidrogen1.bondThis.x, this.drawSet.hidrogen1.bondThis.y, this.drawSet.hidrogen1.bondOxigen.x,this.drawSet.hidrogen1.bondOxigen.y)
-            p5.line(this.drawSet.hidrogen2.bondThis.x, this.drawSet.hidrogen2.bondThis.y, this.drawSet.hidrogen2.bondOxigen.x,this.drawSet.hidrogen2.bondOxigen.y)
+        // if(molecule.focused){
+        //     this.__drawBond(molecule);
+        //     p5.stroke('#ffffff');
+        //     p5.line(this.drawSet.hidrogen1.bondThis.x, this.drawSet.hidrogen1.bondThis.y, this.drawSet.hidrogen1.bondOxigen.x,this.drawSet.hidrogen1.bondOxigen.y)
+        //     p5.line(this.drawSet.hidrogen2.bondThis.x, this.drawSet.hidrogen2.bondThis.y, this.drawSet.hidrogen2.bondOxigen.x,this.drawSet.hidrogen2.bondOxigen.y)
 
 
-            p5.fill('#f0f0f0a0');
-            p5.noStroke();
-            //Oxigen - hidrogen 1 orbital
-            p5.arc(
-                this.drawSet.oxigen1.orbital.hidrogen1.x,
-                this.drawSet.oxigen1.orbital.hidrogen1.y,
-                this.drawSet.oxigen1.orbital.radius*2,
-                this.drawSet.oxigen1.orbital.radius*2,
-                this.configuration.angle,
-                this.configuration.angle+p5.PI
-            );
+        //     p5.fill('#f0f0f0a0');
+        //     p5.noStroke();
+        //     //Oxigen - hidrogen 1 orbital
+        //     p5.arc(
+        //         this.drawSet.oxigen1.orbital.hidrogen1.x,
+        //         this.drawSet.oxigen1.orbital.hidrogen1.y,
+        //         this.drawSet.oxigen1.orbital.radius*2,
+        //         this.drawSet.oxigen1.orbital.radius*2,
+        //         this.configuration.angle,
+        //         this.configuration.angle+p5.PI
+        //     );
 
-            //Orbital Oxigen-hidrogen-1
-            p5.triangle(
-                this.drawSet.oxigen1.orbital.hidrogen1.x - this.drawSet.oxigen1.orbital.radius*this.configuration.cos,
-                this.drawSet.oxigen1.orbital.hidrogen1.y - this.drawSet.oxigen1.orbital.radius*this.configuration.sin,
-                this.drawSet.oxigen1.orbital.hidrogen1.x + this.drawSet.oxigen1.orbital.radius*this.configuration.cos,
-                this.drawSet.oxigen1.orbital.hidrogen1.y + this.drawSet.oxigen1.orbital.radius*this.configuration.sin,
-                this.drawSet.hidrogen1.bondOxigen.x,
-                this.drawSet.hidrogen1.bondOxigen.y,
-            )
+        //     //Orbital Oxigen-hidrogen-1
+        //     p5.triangle(
+        //         this.drawSet.oxigen1.orbital.hidrogen1.x - this.drawSet.oxigen1.orbital.radius*this.configuration.cos,
+        //         this.drawSet.oxigen1.orbital.hidrogen1.y - this.drawSet.oxigen1.orbital.radius*this.configuration.sin,
+        //         this.drawSet.oxigen1.orbital.hidrogen1.x + this.drawSet.oxigen1.orbital.radius*this.configuration.cos,
+        //         this.drawSet.oxigen1.orbital.hidrogen1.y + this.drawSet.oxigen1.orbital.radius*this.configuration.sin,
+        //         this.drawSet.hidrogen1.bondOxigen.x,
+        //         this.drawSet.hidrogen1.bondOxigen.y,
+        //     )
 
-            //Hidrogen 1 orbital
-            p5.circle(
-                this.drawSet.hidrogen1.position.x,
-                this.drawSet.hidrogen1.position.y,
-                this.drawSet.hidrogen1.orbital.radius
-            )
+        //     //Hidrogen 1 orbital
+        //     p5.circle(
+        //         this.drawSet.hidrogen1.position.x,
+        //         this.drawSet.hidrogen1.position.y,
+        //         this.drawSet.hidrogen1.orbital.radius
+        //     )
 
-            //Oxigen - hidrogen 2 orbital
+        //     //Oxigen - hidrogen 2 orbital
 
-            p5.arc(
-                this.drawSet.oxigen1.orbital.hidrogen2.x,
-                this.drawSet.oxigen1.orbital.hidrogen2.y,
-                this.drawSet.oxigen1.orbital.radius*2,
-                this.drawSet.oxigen1.orbital.radius*2,
-                -this.configuration.angle,
-                p5.PI-this.configuration.angle,
+        //     p5.arc(
+        //         this.drawSet.oxigen1.orbital.hidrogen2.x,
+        //         this.drawSet.oxigen1.orbital.hidrogen2.y,
+        //         this.drawSet.oxigen1.orbital.radius*2,
+        //         this.drawSet.oxigen1.orbital.radius*2,
+        //         -this.configuration.angle,
+        //         p5.PI-this.configuration.angle,
 
-            );
-            //Orbital Oxigen-hidrogen-2
-            p5.triangle(
-                this.drawSet.oxigen1.orbital.hidrogen2.x - this.drawSet.oxigen1.orbital.radius* this.configuration.cos,
-                this.drawSet.oxigen1.orbital.hidrogen2.y - this.drawSet.oxigen1.orbital.radius*-this.configuration.sin,
-                this.drawSet.oxigen1.orbital.hidrogen2.x + this.drawSet.oxigen1.orbital.radius* this.configuration.cos,
-                this.drawSet.oxigen1.orbital.hidrogen2.y + this.drawSet.oxigen1.orbital.radius*-this.configuration.sin,
-                this.drawSet.hidrogen2.bondOxigen.x,
-                this.drawSet.hidrogen2.bondOxigen.y,
-            )       
+        //     );
+        //     //Orbital Oxigen-hidrogen-2
+        //     p5.triangle(
+        //         this.drawSet.oxigen1.orbital.hidrogen2.x - this.drawSet.oxigen1.orbital.radius* this.configuration.cos,
+        //         this.drawSet.oxigen1.orbital.hidrogen2.y - this.drawSet.oxigen1.orbital.radius*-this.configuration.sin,
+        //         this.drawSet.oxigen1.orbital.hidrogen2.x + this.drawSet.oxigen1.orbital.radius* this.configuration.cos,
+        //         this.drawSet.oxigen1.orbital.hidrogen2.y + this.drawSet.oxigen1.orbital.radius*-this.configuration.sin,
+        //         this.drawSet.hidrogen2.bondOxigen.x,
+        //         this.drawSet.hidrogen2.bondOxigen.y,
+        //     )       
 
-            //Hidrogen 2 orbital
-            p5.circle(
-                this.drawSet.hidrogen2.position.x,
-                this.drawSet.hidrogen2.position.y,
-                this.drawSet.hidrogen1.orbital.radius
-            )
-        }
+        //     //Hidrogen 2 orbital
+        //     p5.circle(
+        //         this.drawSet.hidrogen2.position.x,
+        //         this.drawSet.hidrogen2.position.y,
+        //         this.drawSet.hidrogen1.orbital.radius
+        //     )
+        // }
 
         //TESTING
 

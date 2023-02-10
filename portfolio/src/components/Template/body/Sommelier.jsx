@@ -26,7 +26,7 @@ const Sommelier = () =>{
     let colitions =[];
 
     let scale = 0.2;
-    let totalMolecules = 1;
+    let totalMolecules = 10;
 
     let environment = {
         focused:0,
@@ -34,7 +34,7 @@ const Sommelier = () =>{
         maxVelocity: Math.sqrt(2),
         minVelocity: 0.03,
         defaultMaxVelocity: 1,
-        defaultMinVelocity: 0.3,
+        defaultMinVelocity: 0.6,
     }
 
     let allMolecules = [
@@ -45,8 +45,8 @@ const Sommelier = () =>{
     ];
 
     let allMoleculesAmount = {
-        // water: Math.ceil(totalMolecules*0.84),
-        water: 0,
+        water: Math.ceil(totalMolecules*0.84),
+        // water: 0,
         ethanol: Math.ceil(totalMolecules*0.14),
         // ethanol: 0,
 
@@ -181,20 +181,6 @@ const Sommelier = () =>{
     
     }
 
-    const checkVelocity = (thisMolecule)=>{
-        let originVelocity = Math.sqrt(thisMolecule.orientation.x**2+thisMolecule.orientation.y**2);
-
-        if(originVelocity >= environment.maxVelocity){
-            // orientation.x *= 0.97
-            // orientation.y *= 0.97
-            thisMolecule.downSpeed('x');
-            thisMolecule.downSpeed('y');
-        }
-        if(originVelocity <= environment.minVelocity){
-            thisMolecule.orientation.x *= 1.05
-            thisMolecule.orientation.y *= 1.05
-        }
-    }
 
     const colitionManager =(thisMolecule)=>{
         let flag = 0;
@@ -336,8 +322,8 @@ const Sommelier = () =>{
                 colitionManager(thisMolecule);
 
                 if(environment.focused && environment.focusedFinished){
-                    thisMolecule.downSpeed('x');
-                    thisMolecule.downSpeed('y');
+                    thisMolecule.downSpeed();
+                    thisMolecule.checkVelocity(environment);   
                 }else{
                     thisMolecule.upSpeed('x');
                     thisMolecule.upSpeed('y');
@@ -347,7 +333,7 @@ const Sommelier = () =>{
                 }
 
                 if(!thisMolecule.pushed && !thisMolecule.focused ){               
-                    checkVelocity(thisMolecule);   
+                    thisMolecule.checkVelocity(environment);   
                 }
 
                 thisMolecule.draw(p5, colors);

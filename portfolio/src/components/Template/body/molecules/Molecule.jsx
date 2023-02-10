@@ -5,12 +5,6 @@ import { Ethanol } from "./Ethanol";
 
 export class Molecule {
     constructor(p5, i, scale, w, h, moleculeType){
-        this.settings ={
-            scale: scale,
-            zoom: 5*scale,
-            focusedIncrease: 30*scale,
-        }
-        
         this.moleculeType = moleculeType;
 
         let randomOscilation = Math.floor(Math.random()*300)+300 // from 0 to 1
@@ -23,6 +17,45 @@ export class Molecule {
 
         let randomXVelocity = Math.random()*4;
         let randomYVelocity = Math.random()*4;
+
+        let angle109 = 54*Math.PI/180;
+        let angle104 = 52.225*Math.PI/180;
+
+        this.bond={
+            cc:{
+                distance:  154  * scale,
+                cos: Math.cos(angle109),
+                sin: Math.sin(angle109),
+                dif: new p5.Vector(0,0)
+            },
+            co:{
+                distance:  143  * scale,
+                cos: Math.cos(angle109),
+                sin: Math.sin(angle109),
+                dif: new p5.Vector(0,0)
+            },
+            oh:{
+                distance:  96  * scale,
+                cos: Math.cos(angle109),
+                sin: Math.sin(angle109),
+                dif: new p5.Vector(0,0)
+            },
+
+            hoh:{
+                distance:  96  * scale,
+                cos: Math.cos(angle104),
+                sin: Math.sin(angle104),
+                dif: new p5.Vector(0,0)
+            }
+        }
+
+        this.__setBonds();
+
+        this.settings ={
+            scale: scale,
+            zoom: 5*scale,
+            colitionDistance : this.bond.oh.distance,
+        }
 
         //PROPS
         this.id = moleculeType+ '-' +i,
@@ -43,22 +76,40 @@ export class Molecule {
         this.unFocusedPercent=1;
         this.unFocusedFinished=0;
 
-        this.__setSpecimen(p5);
-
-        //Specimen dependents
-        this.m= (this.specimen.configuration.colitionDistance /2)*0.01;
-        this.colitionDistance = this.specimen.configuration.colitionDistance;
-        //Specimen dependents ends
-
-        this.colitionable = 0;// set default 1
-        this.colitionFocused = this.colitionDistance * this.settings.focusedIncrease;
 
         this.zoom = this.settings.zoom;
-        this.zoomFocused = this.zoom * this.settings.focusedIncrease;
+        this.focusedIncrease =30* scale;
 
+        this.colitionFocused = scale*1000;
+        this.zoomFocused = this.zoom * this.focusedIncrease;
+
+        this.colitionable = 0;// set default 1
         this.identifier =0;
-        
+        this.__setSpecimen(p5);
+
+        this.colitionDistance = this.settings.colitionDistance;
+        this.m= (this.colitionDistance /2)*0.01;
+       
     }
+
+    __setBonds(){
+        // C-C BOND
+        this.bond.cc.dif.x =   this.bond.cc.sin *  this.bond.cc.distance;
+        this.bond.cc.dif.y =   this.bond.cc.cos *  this.bond.cc.distance;
+        
+        // C-O BOND
+        this.bond.co.dif.x =   this.bond.cc.sin *  this.bond.co.distance;
+        this.bond.co.dif.y =   this.bond.cc.cos *  this.bond.co.distance;
+
+        // O-H BOND
+        this.bond.oh.dif.x =   this.bond.cc.sin *  this.bond.oh.distance;
+        this.bond.oh.dif.y =   this.bond.cc.cos *  this.bond.oh.distance;
+
+        // H-O-H BOND (TETRAHEDRUM FORCED)
+        this.bond.hoh.dif.x =   this.bond.cc.sin *  this.bond.hoh.distance;
+        this.bond.hoh.dif.y =   this.bond.cc.cos *  this.bond.hoh.distance;
+    }
+
 
 
     __setSpecimen(p5){
@@ -129,7 +180,7 @@ export class Molecule {
 
         this.focusedPercent+=0.1;
         this.zoom = this.settings.zoom + this.zoomFocused*this.focusedPercent;
-        this.colitionDistance = this.specimen.configuration.colitionDistance + this.colitionFocused*this.focusedPercent;
+        this.colitionDistance = this.settings.colitionDistance + this.colitionFocused*this.focusedPercent;
         this.m= (this.colitionDistance/2)*0.01;
 
         if(this.focusedPercent>=1){
@@ -147,9 +198,21 @@ export class Molecule {
 
         this.zoom = this.settings.zoom + this.zoomFocused*this.unFocusedPercent;
 
-        this.colitionDistance = this.specimen.configuration.colitionDistance + this.colitionFocused*this.unFocusedPercent;
+        this.colitionDistance = this.settings.colitionDistance + this.colitionFocused*this.unFocusedPercent;
         if(this.unFocusedPercent<=0.1){
             this.unFocusedFinished=1;
+        }
+    }
+
+
+    checkVelocity = (environment)=>{
+        let originVelocity = Math.sqrt(this.orientation.x**2+this.orientation.y**2);
+
+        if(originVelocity >= environment.maxVelocity){
+            this.downSpeed();
+        }
+        if(originVelocity <= environment.minVelocity){
+            this.orientation.mult(1.05)
         }
     }
 
@@ -158,8 +221,8 @@ export class Molecule {
         this.orientation.y=0;
     }
 
-    downSpeed(vector){
-        this.orientation[vector] *= 0.97
+    downSpeed(){
+        this.orientation.mult(0.97);
     }
 
     upSpeed(vector, scaled =0.1){
@@ -193,6 +256,9 @@ export class Molecule {
     draw(p5, colors){
         // if(this.spawned)return
         this.__infinitePermanece(p5);
+        p5.noStroke();
+        this.specimen.__setZoom(this);
+
         this.specimen.draw(p5, this, colors);
     }
 }
