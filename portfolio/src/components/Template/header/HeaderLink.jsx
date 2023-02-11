@@ -77,15 +77,15 @@ const HeaderLink =({indx, route, setLoad, setPath})=>{
             let percent = Math.abs(timePassed/time)
 
             let breathingColor1 = [
-                Math.ceil(color1[0] - rDifPrev*percent)* hoverBrightness,
-                Math.ceil(color1[1] - gDifPrev*percent)* hoverBrightness,
-                Math.ceil(color1[2] - bDifPrev*percent)* hoverBrightness
+                (color1[0] - rDifPrev*percent)* hoverBrightness,
+                (color1[1] - gDifPrev*percent)* hoverBrightness,
+                (color1[2] - bDifPrev*percent)* hoverBrightness
             ];
 
             let breathingColor2 = [
-                Math.ceil(color1[0] - rDifNext*percent)* hoverBrightness,
-                Math.ceil(color1[1] - gDifNext*percent)* hoverBrightness,
-                Math.ceil(color1[2] - bDifNext*percent)* hoverBrightness
+                (color1[0] - rDifNext*percent)* hoverBrightness,
+               (color1[1] - gDifNext*percent)* hoverBrightness,
+                (color1[2] - bDifNext*percent)* hoverBrightness
             ];
 
             let gradient = `-webkit-linear-gradient(0.25turn, rgb(${breathingColor1}),   rgb(${breathingColor2})`;

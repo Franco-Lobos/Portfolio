@@ -2,6 +2,7 @@ import { getRGB } from "../../../../library/library";
 
 import { Water } from "./Water";
 import { Ethanol } from "./Ethanol";
+import { Difference } from "@mui/icons-material";
 
 export class Molecule {
     constructor(p5, i, scale, w, h, moleculeType){
@@ -57,6 +58,12 @@ export class Molecule {
             colitionDistance : this.bond.oh.distance,
         }
 
+        this.sizes = {
+            carbon : 40* scale,
+            oxigen : 30* scale,
+            hidrogen : 20* scale,
+        }
+
         //PROPS
         this.id = moleculeType+ '-' +i,
         this.oscilations = randomOscilation,
@@ -92,6 +99,7 @@ export class Molecule {
        
     }
 
+    
     __setBonds(){
         // C-C BOND
         this.bond.cc.dif.x =   this.bond.cc.sin *  this.bond.cc.distance;
@@ -109,8 +117,6 @@ export class Molecule {
         this.bond.hoh.dif.x =   this.bond.cc.sin *  this.bond.hoh.distance;
         this.bond.hoh.dif.y =   this.bond.cc.cos *  this.bond.hoh.distance;
     }
-
-
 
     __setSpecimen(p5){
         switch(this.moleculeType){
@@ -253,11 +259,125 @@ export class Molecule {
     }
 
 
+
+    //BONDS DRAWING 
+
+    drawSP2S1(p5, atomOrigin, atomDestiny, bondType){
+        let bond= {
+            origin:{
+                nucle:  atomOrigin.position.copy(),
+                position: atomOrigin.position.copy(),
+            },
+            destiny:{
+                nucle:  atomDestiny.position.copy(),
+                position: atomDestiny.position.copy(),
+            },
+            module: {
+                x:0,
+                y:0,
+                z:0
+            },
+            sin : bondType.sin,
+            cos : bondType.cos,
+            limit: 0.9,
+            sp2:{
+                center:0,
+                radius: atomOrigin.size*2,
+            },
+            s1:{
+                center:0,
+                radius: atomDestiny.size*2,
+            },
+            electron:{
+                size: 2,
+                sizeDefault:2,
+                sizeFocus :6,
+            }
+        }
+
+        bond.sp2.center= bond.limit/3*2;
+        bond.s1.center= bond.limit/3*2;
+
+
+         //Set nucle in order to "add" the radius in all cases;
+        let xDeterminant = atomOrigin.position.x>=atomDestiny.position.x ? -1 : 1
+        let yDeterminant = atomOrigin.position.y>= atomDestiny.position.y ? -1 : 1
+
+        bond.origin.nucle.x = atomOrigin.size/2 * xDeterminant * bond.sin;
+        bond.origin.nucle.y = atomOrigin.size/2 * yDeterminant * bond.cos;
+        bond.destiny.nucle.x = atomDestiny.size/2 * -xDeterminant * bond.sin;
+        bond.destiny.nucle.y = atomDestiny.size/2 * -yDeterminant * bond.cos;
+
+        bond.origin.position.add(bond.origin.nucle);
+        bond.destiny.position.add(bond.destiny.nucle);
+
+        bond.module = bond.origin.position.copy().sub(bond.destiny.position);
+        bond.module.length = Math.sqrt(bond.module.x**2+bond.module.y**2);
+        
+        for(let i = 0; i<256;i++){
+
+        //size and colors settings
+        if(i<2){
+            p5.fill('red');
+            // bond.electron.size=bond.electron.sizeFocus;
+        }else{
+            let opacity = i.toString(16);
+            p5.fill(`#${opacity+opacity+opacity+opacity}`);
+            bond.electron.size=bond.electron.sizeDefault;
+        }
+        //First step: exe location
+        let exeLoctaion = Math.random();
+        let randomCoord = bond.origin.position.copy().sub(bond.module.copy().mult(exeLoctaion,exeLoctaion))
+
+        //Second step: orbital location
+        if(exeLoctaion <= bond.sp2.center){
+            let randomSide = Math.floor(Math.random()*10)%2 === 0 ? -1 : 1;
+            let triangleLocation = Math.random();
+            randomCoord.x += exeLoctaion* bond.sp2.radius*bond.cos/2*triangleLocation * randomSide;
+            randomCoord.y += exeLoctaion* bond.sp2.radius*bond.sin/2*triangleLocation * randomSide * -xDeterminant;
+            p5.circle( randomCoord.x, randomCoord.y,bond.electron.size);
+
+        }
+
+        else{
+            if(exeLoctaion < bond.limit){
+                let module = exeLoctaion - bond.sp2.center;
+                let randomCoordCopy= randomCoord.copy();
+                randomCoordCopy.add(bond.module.copy().mult(module,module));
+
+                let randomAngle = Math.acos(bond.cos)+(Math.random()*Math.PI);
+                let randomCos = Math.cos(randomAngle);
+                let randomSin = Math.sin(randomAngle);
+
+                randomCoordCopy.x += randomCos * bond.sp2.radius * module * -xDeterminant ;
+                randomCoordCopy.y += randomSin * bond.sp2.radius * module;
+                // p5.fill('#00ff00');
+                p5.circle( randomCoordCopy.x, randomCoordCopy.y,bond.electron.size);
+
+            }
+            if(exeLoctaion >= bond.s1.center){
+                let atomModule = atomDestiny.position.copy();
+
+                let randomAngle = Math.random()*Math.PI*2;
+                let randomCos = Math.cos(randomAngle);
+                let randomSin = Math.sin(randomAngle);
+    
+                let module = atomDestiny.position.copy().sub(randomCoord);
+                let moduleLength = Math.sqrt(module.x**2+module.y**2);
+    
+                randomCoord = atomModule.add(moduleLength*randomCos, moduleLength*randomSin)
+                p5.circle( randomCoord.x, randomCoord.y,bond.electron.size);
+            }
+        }
+        }
+    }
+
+
     draw(p5, colors){
         // if(this.spawned)return
         this.__infinitePermanece(p5);
         p5.noStroke();
-        this.specimen.__setZoom(this);
+        this.specimen.setZoom(this);
 
         this.specimen.draw(p5, this, colors);
     }

@@ -21,7 +21,7 @@ const Sommelier = () =>{
         colors[convertToCamelCase(color)] = getRGB(color);
     })
 
-    let frameRate = 30;
+    let frameRate =30;
 
     let colitions =[];
 
