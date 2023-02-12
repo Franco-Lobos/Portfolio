@@ -26,7 +26,7 @@ const Sommelier = () =>{
     let colitions =[];
 
     let scale = 0.2;
-    let totalMolecules = 10;
+    let totalMolecules = 100;
 
     let environment = {
         focused:0,

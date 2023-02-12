@@ -282,11 +282,11 @@ export class Molecule {
             limit: 0.9,
             sp2:{
                 center:0,
-                radius: atomOrigin.size*2,
+                radius: atomOrigin.size*2.5,
             },
             s1:{
                 center:0,
-                radius: atomDestiny.size*2,
+                // radius: atomDestiny.size*2,
             },
             electron:{
                 size: 2,
@@ -296,7 +296,7 @@ export class Molecule {
         }
 
         bond.sp2.center= bond.limit/3*2;
-        bond.s1.center= bond.limit/3*2;
+        bond.s1.center= bond.limit/5*4;
 
 
          //Set nucle in order to "add" the radius in all cases;
@@ -318,30 +318,45 @@ export class Molecule {
 
         //size and colors settings
         if(i<2){
-            p5.fill('red');
+            // p5.fill('red');
             // bond.electron.size=bond.electron.sizeFocus;
         }else{
             let opacity = i.toString(16);
             p5.fill(`#${opacity+opacity+opacity+opacity}`);
+            p5.fill(`#ffffff20`);
+
             bond.electron.size=bond.electron.sizeDefault;
         }
         //First step: exe location
-        let exeLoctaion = Math.random();
+        let exeLoctaion = 1-Math.random()**(Math.PI/2);
         let randomCoord = bond.origin.position.copy().sub(bond.module.copy().mult(exeLoctaion,exeLoctaion))
 
         //Second step: orbital location
         if(exeLoctaion <= bond.sp2.center){
             let randomSide = Math.floor(Math.random()*10)%2 === 0 ? -1 : 1;
             let triangleLocation = Math.random();
-            randomCoord.x += exeLoctaion* bond.sp2.radius*bond.cos/2*triangleLocation * randomSide;
-            randomCoord.y += exeLoctaion* bond.sp2.radius*bond.sin/2*triangleLocation * randomSide * -xDeterminant;
-            p5.circle( randomCoord.x, randomCoord.y,bond.electron.size);
-
+            let randomCoordCopy= randomCoord.copy();
+            randomCoordCopy.x += exeLoctaion* bond.sp2.radius*bond.cos/2*triangleLocation * randomSide;
+            randomCoordCopy.y += exeLoctaion* bond.sp2.radius*bond.sin/2*triangleLocation * randomSide * -xDeterminant;
+            p5.circle( randomCoordCopy.x, randomCoordCopy.y,bond.electron.size);
         }
 
         else{
             if(exeLoctaion < bond.limit){
-                let module = exeLoctaion - bond.sp2.center;
+
+                //testing
+                    // let exeSubdivition =
+                    //     exeLoctaion 
+                    //     - bond.sp2.center;
+
+                    // let exeLoctaionInverted =
+                    //     bond.sp2.center
+                    //     + (bond.sp2.radius/bond.module.length)
+                    //     - (exeSubdivition**2)
+                //testingends
+
+                let module = exeLoctaion-bond.sp2.center;
+
                 let randomCoordCopy= randomCoord.copy();
                 randomCoordCopy.add(bond.module.copy().mult(module,module));
 
@@ -355,17 +370,21 @@ export class Molecule {
                 p5.circle( randomCoordCopy.x, randomCoordCopy.y,bond.electron.size);
 
             }
-            if(exeLoctaion >= bond.s1.center){
+            if(exeLoctaion > bond.s1.center){
                 let atomModule = atomDestiny.position.copy();
 
                 let randomAngle = Math.random()*Math.PI*2;
                 let randomCos = Math.cos(randomAngle);
                 let randomSin = Math.sin(randomAngle);
     
+                exeLoctaion -=  bond.s1.center; 
+                randomCoord = bond.destiny.position.copy().add(bond.module.copy().mult(exeLoctaion,exeLoctaion))
+
                 let module = atomDestiny.position.copy().sub(randomCoord);
                 let moduleLength = Math.sqrt(module.x**2+module.y**2);
-    
+       
                 randomCoord = atomModule.add(moduleLength*randomCos, moduleLength*randomSin)
+                // p5.fill('#0000ff');
                 p5.circle( randomCoord.x, randomCoord.y,bond.electron.size);
             }
         }
