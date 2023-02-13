@@ -70,6 +70,8 @@ export class Molecule {
         this.originXOrientation =  (randomXVelocity) * randomXOrientation ,
         this.originYOrientation = (randomYVelocity)* randomYOrientation ,
         this.position = new p5.Vector(randomXStart * w, randomYStart),
+        this.focusedModule =    this.position.copy(),
+
         this.orientation =  new p5.Vector( this.originXOrientation , this.originYOrientation),
 
         this.scale = scale;
@@ -133,7 +135,7 @@ export class Molecule {
     }
 
 
-    oscilate(count){     
+    oscilate(count, environment){     
         let cicle = count%this.oscilations;
         if (cicle === 0){
             this.orientation.x*=-1;
@@ -151,32 +153,46 @@ export class Molecule {
 
     }
 
-    checkIfFocused =(p5, otherFocusFlag)=>{
+    centerAnimation = (environment, thisFocused = 0)=>{
+        // if(!environment.focusedFinished) return
+        console.log('centering')
+        if(thisFocused){
+            this.focusedModule = this.position.copy();
+            this.focusedModule.x -= environment.centerDot.x;
+            this.focusedModule.y -= environment.centerDot.y;
+            environment.centerCoord = this.focusedModule.copy().mult(environment.centerFraction,environment.centerFraction);
+        }
+
+        this.position.sub(environment.centerCoord);
+        if( environment.centerCoord.x <= 1 && environment.centerCoord.y <= 1){
+            environment.centerFlag =1;
+        }
+    }
+
+    checkIfFocused =(p5, otherFocusFlag,environment)=>{
         let mouseX = p5.mouseX;
         let mouseY =  p5.mouseY;
         let a = this.position.x - mouseX;
         let b = this.position.y - mouseY;
 
-
         let hipotenuse = Math.sqrt((a)**2+(b)**2);
 
         if(this.colitionDistance>hipotenuse && (otherFocusFlag === this.id || !otherFocusFlag)){
             this.focused = 1;
+
+            environment.centerFlag =0;
+            this.focusedModule = this.position.copy();
+            this.focusedModule.x -= environment.centerDot.x;
+            this.focusedModule.y -= environment.centerDot.y;
+            environment.centerCoord = this.focusedModule.copy().mult(environment.centerFraction,environment.centerFraction); 
         }
 
         else{
             this.focused =0;
             this.focusedFinished = 0;
-            this.focusedPercent = 0;
+            this.focusedPercent = 0;   
 
-            if(this.unFocusedPercent<1){
-                this.unFocusAnimation();
-            }     
-                
-            if(otherFocusFlag === this.id){
-                this.resetOrientation();
-                this.unFocusAnimation();
-            }
+            this.focusedModule = 0;
         }
     }
 
@@ -258,8 +274,6 @@ export class Molecule {
         if(this.position.y>=p5.height+this.colitionDistance){ this.position.y-=p5.height}
         if(this.position.y<=-this.colitionDistance){ this.position.y=p5.height}
     }
-
-
 
     //BONDS DRAWING 
 
@@ -352,7 +366,7 @@ export class Molecule {
         //Contra Bond
         // let contraBondPosition = bond.origin.position.copy().sub(bond.origin.nucle.copy().mult(2));
 
-        let lots = 2;
+        let lots = 1;
         for(let i = 0; i<256*lots;i++){
             let opacity = (Math.ceil(i/lots)).toString(16);
             p5.fill(`#${opacity+opacity+opacity+opacity}`);
@@ -373,6 +387,7 @@ export class Molecule {
         this.specimen.setZoom(this);
 
         this.specimen.draw(p5, this, colors);
+
     }
 }
 

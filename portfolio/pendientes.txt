@@ -1,15 +1,16 @@
 PENDIENTE 
-Agregar enlaces de electrones
-Construir gliceroñ
+centrar molécula en focused y agregar campo de texto
+Construir glicerol
 
 
 
 RESUELTO
-las moleculas no reaparecen por el otro lado
+-las moleculas no reaparecen por el otro lado
 
-checkVelocity -> unifica la velocidad igualando x=y= nvironment.maxVelocity;
+-checkVelocity -> unifica la velocidad igualando x=y= nvironment.maxVelocity;
 entonces todos los ángulos del módulo son múltiplos impares de PI (45-135-225-315)
 
-Reorganizar arquitectura
+-Reorganizar arquitectura
+-Construir Ethanol
+-Agregar enlaces de electrones
 
-Construir Ethanol

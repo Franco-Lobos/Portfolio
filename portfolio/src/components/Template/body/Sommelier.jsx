@@ -26,7 +26,7 @@ const Sommelier = () =>{
     let colitions =[];
 
     let scale = 0.2;
-    let totalMolecules = 100;
+    let totalMolecules = 50;
 
     let environment = {
         focused:0,
@@ -35,6 +35,13 @@ const Sommelier = () =>{
         minVelocity: 0.03,
         defaultMaxVelocity: 1,
         defaultMinVelocity: 0.6,
+        centerDot: {
+            x: w/2,
+            y: h/3,
+        },
+        centerCoord:0,
+        centerFraction: 0.08,
+        centerFlag :0,
     }
 
     let allMolecules = [
@@ -262,7 +269,26 @@ const Sommelier = () =>{
     }
 
     const setup = (p5, canvasParentRef) => {
-		p5.createCanvas(w, h).parent(canvasParentRef);
+		let cnv = p5.createCanvas(w, h).parent(canvasParentRef);
+    
+        cnv.mousePressed((e) => {
+            let focusedFlag = environment.focused;
+
+            allMolecules.map(moleculeGroup=>{
+                moleculeGroup.moleculeData.map((thisMolecule)=>{
+                    //Colition
+                    if(!thisMolecule.spawned){
+                        thisMolecule.checkIfFocused(p5,environment.focused, environment);
+                        if(thisMolecule.focused){
+                            focusedFlag = thisMolecule.id;
+                            return;
+                        }
+                    }
+                })
+            })
+            environment.focused=focusedFlag;
+          })
+
         p5.frameRate(frameRate);
         window.onresize=()=>{
             adjustScreen(p5);
@@ -274,26 +300,19 @@ const Sommelier = () =>{
 	const draw = (p5) => {
         p5.background(bg);
         let count = p5.frameCount;
-        let focusedFlag = 0;
 
         //DRAWING
         allMolecules.map(moleculeGroup=>{
             moleculeGroup.moleculeData.map((thisMolecule)=>{
-                thisMolecule.oscilate(count);
-                //Colition
-                if(!thisMolecule.spawned){
-                    thisMolecule.checkIfFocused(p5,environment.focused);
-                }
-
-                // thisMolecule.identifier  = thisMolecule.focused ? 1 : 2;
-                // thisMolecule.identifier  = thisMolecule.spawned ? 3 : thisMolecule.identifier;
-
+                thisMolecule.oscilate(count, environment);
 
                 if(thisMolecule.focused){
                     thisMolecule.focusDownspeed();
-                    focusedFlag = thisMolecule.id;
                     p5.frameRate(frameRate*2);
                     thisMolecule.focusAnimation(environment);
+                    if(!environment.centerFlag){
+                        thisMolecule.centerAnimation(environment, 1);
+                    }
 
                     // set others to move out;
                     let mobilesId =[];
@@ -311,24 +330,41 @@ const Sommelier = () =>{
                                 if(mobilesId.includes(otherMolecule2.id) ){
                                     let a = otherMolecule2.position.x - thisMolecule.position.x;
                                     let b = otherMolecule2.position.y - thisMolecule.position.y;
-                                    // thisMolecule.pushedForce(a,b);
                                     otherMolecule2.pushedForce(a*0.1,b*0.1);
                                 }
                             }
                         )})
                     }
-    
+                }
+
+                else{
+                    if(environment.focused && !environment.centerFlag){
+                        thisMolecule.centerAnimation(environment);
+                    }
+
+                    if(environment.focused === thisMolecule.id ){
+                        thisMolecule.resetOrientation();
+                        thisMolecule.unFocusAnimation();
+                        environment.focused= 0;
+                        environment.centerCoord = 0;
+                    }
+                    if(thisMolecule.unFocusedPercent<1 && !thisMolecule.unFocusedFinished ){
+                        thisMolecule.unFocusAnimation();
+                    } 
+
+
                 }
                 colitionManager(thisMolecule);
 
                 if(environment.focused && environment.focusedFinished){
                     thisMolecule.downSpeed();
-                    thisMolecule.checkVelocity(environment);   
+                    thisMolecule.checkVelocity(environment);  
+    
                 }else{
                     thisMolecule.upSpeed('x');
                     thisMolecule.upSpeed('y');
                     if(thisMolecule.zoom<thisMolecule.settings.zoom){
-                    thisMolecule.zoom =thisMolecule.settings.zoom;
+                        thisMolecule.zoom =thisMolecule.settings.zoom;
                     }
                 }
 
@@ -337,11 +373,21 @@ const Sommelier = () =>{
                 }
 
                 thisMolecule.draw(p5, colors);
+
             })
         })
 
-        environment.focused=focusedFlag
+        if(environment.focusedFinished){
+            console.log('fok')
+        }
+
     }
+
+    p5.mouseClicked = (p5) => {
+        console.log('clicked')
+        p5.mouseClicked =1
+    }
+
 
     return <Sketch setup={setup} draw={draw}/>;
 }
