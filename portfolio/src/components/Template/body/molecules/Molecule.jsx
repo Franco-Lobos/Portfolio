@@ -72,6 +72,7 @@ export class Molecule {
         this.position = new p5.Vector(randomXStart * w, randomYStart),
         this.orientation =  new p5.Vector( this.originXOrientation , this.originYOrientation),
 
+        this.scale = scale;
         this.spawned =1,
         this.pushed=0,
         this.pushedForceFlag=0,
@@ -262,7 +263,48 @@ export class Molecule {
 
     //BONDS DRAWING 
 
-    drawSP2S1(p5, atomOrigin, atomDestiny, bondType){
+    drawSuperposition(p5,originPoint, length, angle, electronSize,xDeterminant, yDeterminant){
+        //First step: exe location
+        let exeLoctaion = 1-Math.random()**(Math.PI/2);
+
+        let randomCoord = originPoint.copy();
+
+        if(1){
+        //orbital form
+        let randomAngle = Math.random()*Math.PI/2;
+        let randomCos = Math.cos(randomAngle);
+        let randomSin = Math.sin(randomAngle);
+
+
+        let n = 32
+        randomCos -= (Math.cos(randomAngle)**n) ;
+        randomSin -= (Math.sin(randomAngle)**n) ;
+
+        randomCoord.x += randomCos * (length) * exeLoctaion * xDeterminant ;
+        randomCoord.y += randomSin * (length) * exeLoctaion * yDeterminant ;
+        //Orbital form ends
+
+        //Orbital correction
+        let difAngle = Math.PI/4*xDeterminant*yDeterminant- angle*xDeterminant*yDeterminant;
+        let difCos = Math.cos(difAngle);
+        let difSin = Math.sin(difAngle);
+
+        // Pivot point traslate
+        randomCoord.sub(originPoint)
+
+        // Rotate
+        randomCoord.x = difCos*randomCoord.x - difSin*randomCoord.y;
+        randomCoord.y = difSin*randomCoord.x + difCos*randomCoord.y;
+
+        // Origin point traslate
+        randomCoord.add(originPoint)
+        //Orbital correction ends
+
+        // p5.fill('#ff0000');
+        p5.circle( randomCoord.x, randomCoord.y, electronSize);}
+    }
+
+    drawP1P1(p5, atomOrigin, atomDestiny, bondType, half=1){
         let bond= {
             origin:{
                 nucle:  atomOrigin.position.copy(),
@@ -277,26 +319,17 @@ export class Molecule {
                 y:0,
                 z:0
             },
+            angle :Math.acos(bondType.cos),
             sin : bondType.sin,
             cos : bondType.cos,
-            limit: 0.9,
-            sp2:{
-                center:0,
-                radius: atomOrigin.size*2.5,
-            },
-            s1:{
-                center:0,
-                // radius: atomDestiny.size*2,
-            },
+            contraBondProportion: 2,
+
             electron:{
-                size: 2,
-                sizeDefault:2,
-                sizeFocus :6,
+                size: 10 * this.scale,
+                sizeDefault: 10 * this.scale,
+                sizeFocus : 30 * this.scale,
             }
         }
-
-        bond.sp2.center= bond.limit/3*2;
-        bond.s1.center= bond.limit/5*4;
 
 
          //Set nucle in order to "add" the radius in all cases;
@@ -305,92 +338,33 @@ export class Molecule {
 
         bond.origin.nucle.x = atomOrigin.size/2 * xDeterminant * bond.sin;
         bond.origin.nucle.y = atomOrigin.size/2 * yDeterminant * bond.cos;
-        bond.destiny.nucle.x = atomDestiny.size/2 * -xDeterminant * bond.sin;
-        bond.destiny.nucle.y = atomDestiny.size/2 * -yDeterminant * bond.cos;
+        bond.destiny.nucle.x = atomDestiny.size/2 * xDeterminant * bond.sin*3;
+        bond.destiny.nucle.y = atomDestiny.size/2 * yDeterminant * bond.cos*3;
 
         bond.origin.position.add(bond.origin.nucle);
         bond.destiny.position.add(bond.destiny.nucle);
 
+        //Set nucle End
         bond.module = bond.origin.position.copy().sub(bond.destiny.position);
-        bond.module.length = Math.sqrt(bond.module.x**2+bond.module.y**2);
-        
-        for(let i = 0; i<256;i++){
+        bond.module.length = Math.sqrt(bond.module.x**2+bond.module.y**2)*half*1.2;
 
-        //size and colors settings
-        if(i<2){
-            // p5.fill('red');
-            // bond.electron.size=bond.electron.sizeFocus;
-        }else{
-            let opacity = i.toString(16);
+
+        //Contra Bond
+        // let contraBondPosition = bond.origin.position.copy().sub(bond.origin.nucle.copy().mult(2));
+
+        let lots = 2;
+        for(let i = 0; i<256*lots;i++){
+            let opacity = (Math.ceil(i/lots)).toString(16);
             p5.fill(`#${opacity+opacity+opacity+opacity}`);
-            p5.fill(`#ffffff20`);
-
             bond.electron.size=bond.electron.sizeDefault;
-        }
-        //First step: exe location
-        let exeLoctaion = 1-Math.random()**(Math.PI/2);
-        let randomCoord = bond.origin.position.copy().sub(bond.module.copy().mult(exeLoctaion,exeLoctaion))
 
-        //Second step: orbital location
-        if(exeLoctaion <= bond.sp2.center){
-            let randomSide = Math.floor(Math.random()*10)%2 === 0 ? -1 : 1;
-            let triangleLocation = Math.random();
-            let randomCoordCopy= randomCoord.copy();
-            randomCoordCopy.x += exeLoctaion* bond.sp2.radius*bond.cos/2*triangleLocation * randomSide;
-            randomCoordCopy.y += exeLoctaion* bond.sp2.radius*bond.sin/2*triangleLocation * randomSide * -xDeterminant;
-            p5.circle( randomCoordCopy.x, randomCoordCopy.y,bond.electron.size);
-        }
-
-        else{
-            if(exeLoctaion < bond.limit){
-
-                //testing
-                    // let exeSubdivition =
-                    //     exeLoctaion 
-                    //     - bond.sp2.center;
-
-                    // let exeLoctaionInverted =
-                    //     bond.sp2.center
-                    //     + (bond.sp2.radius/bond.module.length)
-                    //     - (exeSubdivition**2)
-                //testingends
-
-                let module = exeLoctaion-bond.sp2.center;
-
-                let randomCoordCopy= randomCoord.copy();
-                randomCoordCopy.add(bond.module.copy().mult(module,module));
-
-                let randomAngle = Math.acos(bond.cos)+(Math.random()*Math.PI);
-                let randomCos = Math.cos(randomAngle);
-                let randomSin = Math.sin(randomAngle);
-
-                randomCoordCopy.x += randomCos * bond.sp2.radius * module * -xDeterminant ;
-                randomCoordCopy.y += randomSin * bond.sp2.radius * module;
-                // p5.fill('#00ff00');
-                p5.circle( randomCoordCopy.x, randomCoordCopy.y,bond.electron.size);
-
+            if(i%bond.contraBondProportion!==0){
+                this.drawSuperposition(p5, atomOrigin.position, bond.module.length, bond.angle, bond.electron.size, xDeterminant, yDeterminant);
+            }else{
+                this.drawSuperposition(p5, atomOrigin.position, bond.module.length/bond.contraBondProportion, bond.angle, bond.electron.size, -xDeterminant, -yDeterminant);
             }
-            if(exeLoctaion > bond.s1.center){
-                let atomModule = atomDestiny.position.copy();
-
-                let randomAngle = Math.random()*Math.PI*2;
-                let randomCos = Math.cos(randomAngle);
-                let randomSin = Math.sin(randomAngle);
-    
-                exeLoctaion -=  bond.s1.center; 
-                randomCoord = bond.destiny.position.copy().add(bond.module.copy().mult(exeLoctaion,exeLoctaion))
-
-                let module = atomDestiny.position.copy().sub(randomCoord);
-                let moduleLength = Math.sqrt(module.x**2+module.y**2);
-       
-                randomCoord = atomModule.add(moduleLength*randomCos, moduleLength*randomSin)
-                // p5.fill('#0000ff');
-                p5.circle( randomCoord.x, randomCoord.y,bond.electron.size);
-            }
-        }
         }
     }
-
 
     draw(p5, colors){
         // if(this.spawned)return

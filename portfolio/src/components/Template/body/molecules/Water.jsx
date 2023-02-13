@@ -34,8 +34,10 @@ export class Water {
 
             bondDif:{
                 hoh: molecule.bond.hoh.dif
-            }
+            },
 
+            textSize : 24,
+            textCentered: 0.4
         };
 
         // this.bondSet={
@@ -84,33 +86,41 @@ export class Water {
 
 
     draw(p5,molecule,colors){
+        
+        //Bonds
+        if(molecule.focused){
+            molecule.drawP1P1(p5,this.drawSet.oxigen1, this.drawSet.hidrogen1, molecule.bond.oh);
+            molecule.drawP1P1(p5,this.drawSet.oxigen1, this.drawSet.hidrogen2, molecule.bond.oh);
+        }
 
         // Oxigen
         p5.fill(colors.lightBlue);
         p5.circle(this.drawSet.oxigen1.position.x,this.drawSet.oxigen1.position.y,this.drawSet.oxigen1.size);
 
-        // Hidrogens
-        p5.fill(colors.orange);
         // Hidrogen 1
+        p5.fill(colors.orange);
         p5.circle(this.drawSet.hidrogen1.position.x,this.drawSet.hidrogen1.position.y,this.drawSet.hidrogen1.size);
+
         // Hidrogen 2
         p5.circle(this.drawSet.hidrogen2.position.x,this.drawSet.hidrogen2.position.y,this.drawSet.hidrogen2.size);
 
 
+        //Letters
+        if(molecule.focused){
+            p5.fill(colors.darkBg);
+            p5.textSize(this.drawSet.textSize);
+            p5.text('O', this.drawSet.oxigen1.position.x-this.drawSet.textSize*this.drawSet.textCentered,this.drawSet.oxigen1.position.y+this.drawSet.textSize*this.drawSet.textCentered);
+            p5.text('H', this.drawSet.hidrogen1.position.x-this.drawSet.textSize*this.drawSet.textCentered,this.drawSet.hidrogen1.position.y+this.drawSet.textSize*this.drawSet.textCentered);
+            p5.text('H', this.drawSet.hidrogen2.position.x-this.drawSet.textSize*this.drawSet.textCentered,this.drawSet.hidrogen2.position.y+this.drawSet.textSize*this.drawSet.textCentered);
+        }
+        
         //Bacgrownd
         p5.noFill();
         if(molecule.focused){
             p5.fill('#32323232')
+            p5.circle(molecule.position.x,molecule.position.y,molecule.colitionDistance*2);
         } 
         
-        p5.circle(molecule.position.x,molecule.position.y,molecule.colitionDistance*2);
-
-
-        //Bonds
-        if(molecule.focused){
-            molecule.drawSP2S1(p5,this.drawSet.oxigen1, this.drawSet.hidrogen1, molecule.bond.oh);
-            molecule.drawSP2S1(p5,this.drawSet.oxigen1, this.drawSet.hidrogen2, molecule.bond.oh);
-        }
 
         
 

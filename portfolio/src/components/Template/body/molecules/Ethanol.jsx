@@ -40,7 +40,9 @@ export class Ethanol {
                 cc: molecule.bond.cc.dif,
                 co: molecule.bond.co.dif,
                 oh: molecule.bond.oh.dif
-            }
+            },
+            textSize : 24,
+            textCentered: 0.4
         }
     }
 
@@ -64,11 +66,23 @@ export class Ethanol {
 
 
     draw(p5,molecule,colors){
+              
+        //Bonds
+        if(molecule.focused){
+        // oxigen 1 - hidrogen 1
+        molecule.drawP1P1(p5,this.drawSet.oxigen1, this.drawSet.hidrogen1, molecule.bond.oh);
 
-        //Bacgrownd
-        p5.fill('#323232a0')
-        p5.circle(molecule.position.x,molecule.position.y,molecule.colitionDistance*2);
+        // oxigen 1 - carbon 2
+        molecule.drawP1P1(p5,this.drawSet.oxigen1, this.drawSet.carbon1, molecule.bond.oh, 2/5);
+        molecule.drawP1P1(p5,this.drawSet.carbon1, this.drawSet.oxigen1, molecule.bond.oh, 2/5);
 
+        // carbon 1 - carbon 2
+        molecule.drawP1P1(p5,this.drawSet.carbon1, this.drawSet.carbon2, molecule.bond.oh, 2/5);
+        molecule.drawP1P1(p5,this.drawSet.carbon2, this.drawSet.carbon1, molecule.bond.oh, 2/5);
+
+        }
+
+  
         //Carbon1
         p5.fill(colors.blue)
         p5.circle(this.drawSet.carbon1.position.x,this.drawSet.carbon1.position.y,this.drawSet.carbon1.size);
@@ -85,6 +99,22 @@ export class Ethanol {
         p5.circle(this.drawSet.hidrogen1.position.x,this.drawSet.hidrogen1.position.y,this.drawSet.hidrogen1.size);
 
 
-
+  
+        //Letters
+        if(molecule.focused){
+            p5.fill(colors.darkBg);
+            p5.textSize(this.drawSet.textSize);
+            p5.text('C', this.drawSet.carbon1.position.x-this.drawSet.textSize*this.drawSet.textCentered,this.drawSet.carbon1.position.y+this.drawSet.textSize*this.drawSet.textCentered);
+            p5.text('C', this.drawSet.carbon2.position.x-this.drawSet.textSize*this.drawSet.textCentered,this.drawSet.carbon2.position.y+this.drawSet.textSize*this.drawSet.textCentered);
+            p5.text('O', this.drawSet.oxigen1.position.x-this.drawSet.textSize*this.drawSet.textCentered,this.drawSet.oxigen1.position.y+this.drawSet.textSize*this.drawSet.textCentered);
+            p5.text('H', this.drawSet.hidrogen1.position.x-this.drawSet.textSize*this.drawSet.textCentered,this.drawSet.hidrogen1.position.y+this.drawSet.textSize*this.drawSet.textCentered);
+        }
+        //Bacgrownd
+        p5.noFill();
+        if(molecule.focused){
+            p5.fill('#32323232')
+            p5.circle(molecule.position.x,molecule.position.y,molecule.colitionDistance*2);
+        } 
+               
     }
 }
