@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { ProfileConst } from "../constants/ProfileConst";
 
-const WriteWithForSpan = ({inptString, specialWords=[], indx, writed , setWrited, delay = 100, veloc = 30})=>{
+const WriteWithForSpan = ({inptString="", specialWords=[], indx=0, writed , setWrited, delay = 100, veloc = 30})=>{
     let allWords = inptString.split(" ");
     allWords= allWords.filter(word=> word!=='');
 

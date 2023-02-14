@@ -1,10 +1,10 @@
-import { ParkSharp } from "@mui/icons-material";
 import { useEffect, useState} from "react";
 import Sketch from "react-p5";
 
 import { getRGB, convertToCamelCase } from "../../../library/library";
 
 import '../../../styles/sommelier.css'
+import Description from "./molecules/Description";
 
 import { Molecule } from "./molecules/Molecule";
 
@@ -32,12 +32,12 @@ const Sommelier = () =>{
         focused:0,
         focusedFinished:0,
         maxVelocity: Math.sqrt(2),
-        minVelocity: 0.03,
+        minVelocity: 0.3,
         defaultMaxVelocity: 1,
         defaultMinVelocity: 0.6,
         centerDot: {
-            x: w/2,
-            y: h/3,
+            x: w * 0.5,
+            y: h * 0.4,
         },
         centerCoord:0,
         centerFraction: 0.08,
@@ -268,12 +268,34 @@ const Sommelier = () =>{
         }
     }
 
+    const useHook = new CustomEvent(
+        'useHook',
+        {
+            focused:0,
+            closed:0,
+        });
+
+
+    window.addEventListener('useHook', (e)=>{
+        if(e.closed===1) {
+            allMolecules.map(moleculeGroup=>{
+                moleculeGroup.moleculeData.map((thisMolecule)=>{
+                    thisMolecule.focused=0;
+                    thisMolecule.focusedFinished = 0;
+                    thisMolecule.focusedPercent = 0;   
+                    thisMolecule.focusedModule = 0;
+                })
+            })
+            environment.focused=environment.focused;
+        }
+    })
+
     const setup = (p5, canvasParentRef) => {
 		let cnv = p5.createCanvas(w, h).parent(canvasParentRef);
     
         cnv.mousePressed((e) => {
             let focusedFlag = environment.focused;
-
+            let changedFlag = 0;
             allMolecules.map(moleculeGroup=>{
                 moleculeGroup.moleculeData.map((thisMolecule)=>{
                     //Colition
@@ -281,20 +303,27 @@ const Sommelier = () =>{
                         thisMolecule.checkIfFocused(p5,environment.focused, environment);
                         if(thisMolecule.focused){
                             focusedFlag = thisMolecule.id;
+                            changedFlag =1;
                             return;
                         }
                     }
                 })
             })
+
             environment.focused=focusedFlag;
+
+            useHook.closed = 0;
+            useHook.focused =  changedFlag ? focusedFlag : 0;
+            window.dispatchEvent(useHook);
           })
 
         p5.frameRate(frameRate);
+
         window.onresize=()=>{
             adjustScreen(p5);
             p5.createCanvas(w, h).parent(canvasParentRef);
 
-        }
+        }        
 	};
 
 	const draw = (p5) => {
@@ -310,9 +339,9 @@ const Sommelier = () =>{
                     thisMolecule.focusDownspeed();
                     p5.frameRate(frameRate*2);
                     thisMolecule.focusAnimation(environment);
-                    if(!environment.centerFlag){
+                    // if(!environment.centerFlag){
                         thisMolecule.centerAnimation(environment, 1);
-                    }
+                    // }
 
                     // set others to move out;
                     let mobilesId =[];
@@ -338,7 +367,9 @@ const Sommelier = () =>{
                 }
 
                 else{
-                    if(environment.focused && !environment.centerFlag){
+                    if(environment.focused
+                        //  && !environment.centerFlag
+                         ){
                         thisMolecule.centerAnimation(environment);
                     }
 
@@ -377,19 +408,17 @@ const Sommelier = () =>{
             })
         })
 
-        if(environment.focusedFinished){
-            console.log('fok')
-        }
-
-    }
-
-    p5.mouseClicked = (p5) => {
-        console.log('clicked')
-        p5.mouseClicked =1
     }
 
 
-    return <Sketch setup={setup} draw={draw}/>;
+
+    return (
+        <>
+            <Sketch setup={setup} draw={draw} />
+             
+            <Description useHook={useHook} ></Description>
+        </>
+    );
 }
 
 

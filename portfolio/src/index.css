@@ -21,11 +21,19 @@
   --dark-bg: #1e1e1e;
   --dark-grey:#808080;
   --grey: #d4d4d4;
+
+  /* Transparent */
+
+  --dark-grey-10 :#80808010;
 }
 *{
   -webkit-transition: inherit;
   transition: inherit;
   box-sizing: border-box;
+}
+
+h6, h5, h4, h3, h2, h1, p{
+  font-size: 1rem;
 }
 
 a {

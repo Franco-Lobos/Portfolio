@@ -118,7 +118,7 @@ export class Water {
         p5.noFill();
         if(molecule.focused){
             p5.fill('#32323232')
-            p5.circle(molecule.position.x,molecule.position.y,molecule.colitionDistance*2);
+            // p5.circle(molecule.position.x,molecule.position.y,molecule.colitionDistance*2);
         } 
         
 

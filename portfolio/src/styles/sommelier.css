@@ -9,3 +9,42 @@
     margin: auto 0;
     z-index: 1;
 }
+
+
+#description-main{
+    width: 90vw;
+    height: 35vh;
+    background-color: var(--dark-grey-10);
+    padding: 2rem;
+    border-radius: 1rem;
+    position: absolute;
+    bottom: 5vh;
+    left:0;
+    right: 0;
+    margin: 0 auto;
+    opacity: 0;
+}
+
+.description-title{
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--purpule);
+    text-transform: capitalize;
+    padding: 0 0 1rem 0;
+}
+
+.description-body{
+    height: 80%;
+    overflow-y: scroll;
+}
+
+
+#closing-description{
+    position: absolute;
+    right: 2rem;
+    top: 1rem;
+    margin: 0 auto;
+    font-weight: 900;
+    color: var(--grey);
+    cursor: pointer;
+}

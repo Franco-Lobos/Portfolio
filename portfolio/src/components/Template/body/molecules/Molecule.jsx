@@ -155,7 +155,6 @@ export class Molecule {
 
     centerAnimation = (environment, thisFocused = 0)=>{
         // if(!environment.focusedFinished) return
-        console.log('centering')
         if(thisFocused){
             this.focusedModule = this.position.copy();
             this.focusedModule.x -= environment.centerDot.x;
@@ -172,8 +171,8 @@ export class Molecule {
     checkIfFocused =(p5, otherFocusFlag,environment)=>{
         let mouseX = p5.mouseX;
         let mouseY =  p5.mouseY;
-        let a = this.position.x - mouseX;
-        let b = this.position.y - mouseY;
+        let a = (this.position.x - mouseX);
+        let b = (this.position.y - mouseY);
 
         let hipotenuse = Math.sqrt((a)**2+(b)**2);
 
@@ -245,7 +244,7 @@ export class Molecule {
     }
 
     downSpeed(){
-        this.orientation.mult(0.97);
+        this.orientation.mult(0.95);
     }
 
     upSpeed(vector, scaled =0.1){
