@@ -1,6 +1,9 @@
 PENDIENTE 
-centrar molécula en focused y agregar campo de texto
-Construir glicerol
+Acidos orgánicos
+Polifenoles
+Aromas
+Otros
+
 
 
 
@@ -14,3 +17,6 @@ entonces todos los ángulos del módulo son múltiplos impares de PI (45-135-225
 -Construir Ethanol
 -Agregar enlaces de electrones
 
+
+centrar molécula en focused y agregar campo de texto
+Construir glicerol

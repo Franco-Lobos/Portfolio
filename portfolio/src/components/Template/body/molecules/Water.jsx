@@ -1,7 +1,7 @@
 
 export class Water {
     constructor(p5, molecule){
-        this.waterComparison=1;
+        this.waterComparison=0;
 
         this.drawSet ={
             oxigen1:{
@@ -36,7 +36,7 @@ export class Water {
                 hoh: molecule.bond.hoh.dif
             },
 
-            textSize : 24,
+            textSize : molecule.settings.textSize,
             textCentered: 0.4
         };
 

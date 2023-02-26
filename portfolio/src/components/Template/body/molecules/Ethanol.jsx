@@ -1,7 +1,7 @@
 
 export class Ethanol {
     constructor( p5, molecule){
-        this.waterComparison=3;
+        this.waterComparison=1;
         
         this.drawSet ={
             carbon1:{
@@ -41,7 +41,7 @@ export class Ethanol {
                 co: molecule.bond.co.dif,
                 oh: molecule.bond.oh.dif
             },
-            textSize : 24,
+            textSize : molecule.settings.textSize,
             textCentered: 0.4
         }
     }
@@ -63,8 +63,6 @@ export class Ethanol {
         this.drawSet.hidrogen1.position = this.drawSet.oxigen1.position.copy().add(this.drawSet.bondDif.oh.x,-this.drawSet.bondDif.oh.y)
     }
 
-
-
     draw(p5,molecule,colors){
               
         //Bonds
@@ -72,13 +70,13 @@ export class Ethanol {
         // oxigen 1 - hidrogen 1
         molecule.drawP1P1(p5,this.drawSet.oxigen1, this.drawSet.hidrogen1, molecule.bond.oh);
 
-        // oxigen 1 - carbon 2
-        molecule.drawP1P1(p5,this.drawSet.oxigen1, this.drawSet.carbon1, molecule.bond.oh, 2/5);
-        molecule.drawP1P1(p5,this.drawSet.carbon1, this.drawSet.oxigen1, molecule.bond.oh, 2/5);
+        //carbon 1 - oxigen 1 
+        molecule.drawP1P1(p5,this.drawSet.carbon1, this.drawSet.oxigen1, molecule.bond.co, 2/6);
+        molecule.drawP1P1(p5,this.drawSet.oxigen1, this.drawSet.carbon1, molecule.bond.co, 2/6);
 
         // carbon 1 - carbon 2
-        molecule.drawP1P1(p5,this.drawSet.carbon1, this.drawSet.carbon2, molecule.bond.oh, 2/5);
-        molecule.drawP1P1(p5,this.drawSet.carbon2, this.drawSet.carbon1, molecule.bond.oh, 2/5);
+        molecule.drawP1P1(p5,this.drawSet.carbon1, this.drawSet.carbon2, molecule.bond.cc, 2/6);
+        molecule.drawP1P1(p5,this.drawSet.carbon2, this.drawSet.carbon1, molecule.bond.cc, 2/6);
 
         }
 

@@ -9,7 +9,6 @@ import Description from "./molecules/Description";
 import { Molecule } from "./molecules/Molecule";
 
 const Sommelier = () =>{
-
     let bg = getRGB('dark-bg');
 
     let w = window.innerWidth;
@@ -49,14 +48,20 @@ const Sommelier = () =>{
         moleculeData : []},
         {moleculeType : "ethanol",
         moleculeData : []},
+        {moleculeType : "glycerol",
+        moleculeData : []},
+        {moleculeType : "organic-acids",
+        moleculeData : []},
     ];
 
     let allMoleculesAmount = {
-        water: Math.ceil(totalMolecules*0.84),
-        // water: 0,
-        ethanol: Math.ceil(totalMolecules*0.14),
-        // ethanol: 0,
-
+        // water: Math.ceil(totalMolecules*0.84),
+        water: 0,
+        // ethanol: Math.ceil(totalMolecules*0.14),
+        ethanol: 0,
+        // glycerol: Math.ceil(totalMolecules*0.01),
+        glycerol: 0,
+        organicAcids: Math.ceil(totalMolecules*0.01),
     }
 
     //Set WATER
@@ -75,6 +80,27 @@ const Sommelier = () =>{
         allMolecules.map(group=>{
             if(group.moleculeType === 'ethanol'){
                 group.moleculeData.push(ethanol)
+            }
+        })
+    }
+
+
+    //Set GLYCEROL
+    for(let i=1; i<=allMoleculesAmount.glycerol; i++){
+        let glycerol = new Molecule(p5, i, scale, w, h, 'glycerol');
+        allMolecules.map(group=>{
+            if(group.moleculeType === 'glycerol'){
+                group.moleculeData.push(glycerol)
+            }
+        })
+    }
+
+    //Set ORGANIC ACIDS
+    for(let i=1; i<=allMoleculesAmount.organicAcids; i++){
+        let organicAcids = new Molecule(p5, i, scale, w, h, 'organic-acids');
+        allMolecules.map(group=>{
+            if(group.moleculeType === 'organic-acids'){
+                group.moleculeData.push(organicAcids)
             }
         })
     }
@@ -189,7 +215,7 @@ const Sommelier = () =>{
     }
 
 
-    const colitionManager =(thisMolecule)=>{
+    const colitionManager =(p6,thisMolecule)=>{
         let flag = 0;
 
         allMolecules.map(moleculeGroup=>{
@@ -199,9 +225,15 @@ const Sommelier = () =>{
                 let b = otherMolecule.position.y-thisMolecule.position.y;
                 let hipotenuse = Math.sqrt((a)**2+(b)**2);
 
-                let minDistance = thisMolecule.colitionDistance + otherMolecule.colitionDistance;
+                let cos = Math.abs(a/hipotenuse);
+                let thisOvalColition = thisMolecule.colitionDistance + (thisMolecule.specimen.waterComparison * thisMolecule.colitionDistance*cos);
+                let otherOvalColition = otherMolecule.colitionDistance + (otherMolecule.specimen.waterComparison * otherMolecule.colitionDistance*cos);
+
+                let minDistance = thisOvalColition + otherOvalColition;
 
                 if(hipotenuse < minDistance){
+                    p6.stroke('red')
+                    p6.line(thisMolecule.position.x,thisMolecule.position.y,otherMolecule.position.x,otherMolecule.position.y, 10)
                     if(otherMolecule.focused){
                         thisMolecule.zoom = hipotenuse/minDistance * thisMolecule.settings.zoom;
                     }
@@ -385,7 +417,7 @@ const Sommelier = () =>{
 
 
                 }
-                colitionManager(thisMolecule);
+                colitionManager(p5,thisMolecule);
 
                 if(environment.focused && environment.focusedFinished){
                     thisMolecule.downSpeed();

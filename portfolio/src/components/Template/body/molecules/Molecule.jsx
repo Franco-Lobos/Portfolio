@@ -2,7 +2,8 @@ import { getRGB } from "../../../../library/library";
 
 import { Water } from "./Water";
 import { Ethanol } from "./Ethanol";
-import { Difference } from "@mui/icons-material";
+import { Glycerol } from "./Glycerol";
+import { OrganicAcids } from "./OrganicAcids";
 
 export class Molecule {
     constructor(p5, i, scale, w, h, moleculeType){
@@ -19,43 +20,79 @@ export class Molecule {
         let randomXVelocity = Math.random()*4;
         let randomYVelocity = Math.random()*4;
 
-        let angle109 = 54*Math.PI/180;
-        let angle104 = 52.225*Math.PI/180;
+        let angle54 = 54*Math.PI/180;
+        let angle52 = 52.225*Math.PI/180;
+        let angle360 = 0;
+
 
         this.bond={
             cc:{
                 distance:  154  * scale,
-                cos: Math.cos(angle109),
-                sin: Math.sin(angle109),
+                angle: angle54,
+                cos: Math.cos(angle54),
+                sin: Math.sin(angle54),
                 dif: new p5.Vector(0,0)
             },
             co:{
                 distance:  143  * scale,
-                cos: Math.cos(angle109),
-                sin: Math.sin(angle109),
+                angle: angle54,
+                cos: Math.cos(angle54),
+                sin: Math.sin(angle54),
                 dif: new p5.Vector(0,0)
             },
+
+            c__o:{
+                distance:  123  * scale,
+                angle: angle360,
+                cos: Math.cos(angle360),
+                sin: Math.sin(angle360),
+                dif: new p5.Vector(0,0)
+            },
+
             oh:{
                 distance:  96  * scale,
-                cos: Math.cos(angle109),
-                sin: Math.sin(angle109),
+                angle: angle54,
+                cos: Math.cos(angle54),
+                sin: Math.sin(angle54),
                 dif: new p5.Vector(0,0)
             },
 
             hoh:{
                 distance:  96  * scale,
-                cos: Math.cos(angle104),
-                sin: Math.sin(angle104),
+                angle: angle52,
+                cos: Math.cos(angle52),
+                sin: Math.sin(angle52),
                 dif: new p5.Vector(0,0)
+            },
+
+            coBehindCenter:{
+                distance:  143  * scale,
+                angle: angle360,
+                cos: Math.cos(angle360),
+                sin: Math.sin(angle360),
+                dif: new p5.Vector(0,0),
+                behind:1,
+            },
+
+            ohBehindBehind:{
+                distance:  96  * scale,
+                angle: angle360,
+                cos: Math.cos(angle360),
+                sin: Math.sin(angle360),
+                dif: new p5.Vector(0,0),
+                behind:1.5,
             }
+
         }
 
         this.__setBonds();
 
         this.settings ={
             scale: scale,
-            zoom: 5*scale,
+            zoom: 4*scale,
             colitionDistance : this.bond.oh.distance,
+            behindScale : 0.6,
+            textSize: scale * 100,
         }
 
         this.sizes = {
@@ -70,7 +107,7 @@ export class Molecule {
         this.originXOrientation =  (randomXVelocity) * randomXOrientation ,
         this.originYOrientation = (randomYVelocity)* randomYOrientation ,
         this.position = new p5.Vector(randomXStart * w, randomYStart),
-        this.focusedModule =    this.position.copy(),
+        this.focusedModule =   this.position.copy(),
 
         this.orientation =  new p5.Vector( this.originXOrientation , this.originYOrientation),
 
@@ -88,9 +125,9 @@ export class Molecule {
 
 
         this.zoom = this.settings.zoom;
-        this.focusedIncrease =30* scale;
+        this.focusedIncrease = 25* scale;
 
-        this.colitionFocused = scale*1000;
+        this.colitionFocused = scale*700;
         this.zoomFocused = this.zoom * this.focusedIncrease;
 
         this.colitionable = 0;// set default 1
@@ -109,16 +146,30 @@ export class Molecule {
         this.bond.cc.dif.y =   this.bond.cc.cos *  this.bond.cc.distance;
         
         // C-O BOND
-        this.bond.co.dif.x =   this.bond.cc.sin *  this.bond.co.distance;
-        this.bond.co.dif.y =   this.bond.cc.cos *  this.bond.co.distance;
+        this.bond.co.dif.x =   this.bond.co.sin *  this.bond.co.distance;
+        this.bond.co.dif.y =   this.bond.co.cos *  this.bond.co.distance;
 
+        // C=O BOND
+        this.bond.c__o.dif.x =   this.bond.c__o.sin *  this.bond.c__o.distance;
+        this.bond.c__o.dif.y =   this.bond.c__o.cos *  this.bond.c__o.distance;
+ 
         // O-H BOND
-        this.bond.oh.dif.x =   this.bond.cc.sin *  this.bond.oh.distance;
-        this.bond.oh.dif.y =   this.bond.cc.cos *  this.bond.oh.distance;
+        this.bond.oh.dif.x =   this.bond.oh.sin *  this.bond.oh.distance;
+        this.bond.oh.dif.y =   this.bond.oh.cos *  this.bond.oh.distance;
 
         // H-O-H BOND (TETRAHEDRUM FORCED)
-        this.bond.hoh.dif.x =   this.bond.cc.sin *  this.bond.hoh.distance;
-        this.bond.hoh.dif.y =   this.bond.cc.cos *  this.bond.hoh.distance;
+        this.bond.hoh.dif.x =   this.bond.hoh.sin *  this.bond.hoh.distance;
+        this.bond.hoh.dif.y =   this.bond.hoh.cos *  this.bond.hoh.distance;
+
+
+         // C-O BEHIND CCENTER
+        this.bond.coBehindCenter.dif.x =   this.bond.coBehindCenter.sin *  this.bond.coBehindCenter.distance;
+        this.bond.coBehindCenter.dif.y =   this.bond.coBehindCenter.cos *  this.bond.coBehindCenter.distance;
+    
+        // C-O BEHIND CCENTER
+        this.bond.ohBehindBehind.dif.x =   this.bond.ohBehindBehind.sin *  this.bond.ohBehindBehind.distance;
+        this.bond.ohBehindBehind.dif.y =   this.bond.ohBehindBehind.cos *  this.bond.ohBehindBehind.distance;
+      
     }
 
     __setSpecimen(p5){
@@ -128,6 +179,13 @@ export class Molecule {
                 break
             case 'ethanol':
                 this.specimen = new Ethanol(p5, this);
+                break
+            case 'glycerol':
+                this.specimen = new Glycerol(p5, this);
+                break
+
+            case 'organic-acids':
+                this.specimen = new OrganicAcids(p5, this);
                 break
             default:
                 this.specimen = new Water(p5, this);
@@ -276,48 +334,92 @@ export class Molecule {
 
     //BONDS DRAWING 
 
-    drawSuperposition(p5,originPoint, length, angle, electronSize,xDeterminant, yDeterminant){
+    drawSuperposition(p5,originPoint, length, angle, electronSize,xDeterminant, yDeterminant, behind=0, double){
         //First step: exe location
         let exeLoctaion = 1-Math.random()**(Math.PI/2);
 
         let randomCoord = originPoint.copy();
 
+        exeLoctaion = 1;
         if(1){
         //orbital form
         let randomAngle = Math.random()*Math.PI/2;
+        let n = 32 + behind *16;
         let randomCos = Math.cos(randomAngle);
         let randomSin = Math.sin(randomAngle);
 
+        randomCos -= (Math.cos(randomAngle)**n);
+        randomSin -= (Math.sin(randomAngle)**n);
+        
 
-        let n = 32
-        randomCos -= (Math.cos(randomAngle)**n) ;
-        randomSin -= (Math.sin(randomAngle)**n) ;
+        if(double){
+            // n=17
+            exeLoctaion *= -1;
+        }
 
-        randomCoord.x += randomCos * (length) * exeLoctaion * xDeterminant ;
-        randomCoord.y += randomSin * (length) * exeLoctaion * yDeterminant ;
+        randomCoord.x += randomCos * (length) * exeLoctaion
+            * xDeterminant ;
+        randomCoord.y += randomSin * (length) * exeLoctaion
+            * yDeterminant ;
+
         //Orbital form ends
 
         //Orbital correction
-        let difAngle = Math.PI/4*xDeterminant*yDeterminant- angle*xDeterminant*yDeterminant;
+        let difAngle = 45*Math.PI/180
+            *xDeterminant*yDeterminant
+            - angle
+            *xDeterminant*yDeterminant;
+
         let difCos = Math.cos(difAngle);
         let difSin = Math.sin(difAngle);
 
-        // Pivot point traslate
-        randomCoord.sub(originPoint)
+        let x = originPoint.x
+        let y = originPoint.y
 
-        // Rotate
-        randomCoord.x = difCos*randomCoord.x - difSin*randomCoord.y;
-        randomCoord.y = difSin*randomCoord.x + difCos*randomCoord.y;
+        let TInverted = [
+            [1, 0, x],
+            [0, 1, y],
+            [0, 0, 1]
+        ]
+        let Rotation = [
+            [difCos, -difSin , 0],
+            [difSin, difCos, 0],
+            [0,0,1]
+        ]
+        let T = [
+            [1, 0, -x],
+            [0, 1, -y], 
+            [0, 0, 1]
+        ]
 
-        // Origin point traslate
-        randomCoord.add(originPoint)
-        //Orbital correction ends
+        /*TInverted*Rotation =  TIR =[
+            [difCos, -difSin , x],
+            [difSin, difCos, y],
+            [0,0,1]
+        ]
+        */
 
-        // p5.fill('#ff0000');
-        p5.circle( randomCoord.x, randomCoord.y, electronSize);}
+        //  TIR* T =
+        let RotationMatrix = [
+            [difCos, -difSin , (-x*difCos+ y*difSin +x)],
+            [difSin, difCos, (-x*difSin+ -y*difCos +y)],
+            [0,0,1]
+        ]
+
+        let resultRotation ={
+            x : RotationMatrix[0][0]*randomCoord.x + RotationMatrix[0][1]* randomCoord.y + RotationMatrix[0][2],
+            y : RotationMatrix[1][0]*randomCoord.x + RotationMatrix[1][1]* randomCoord.y + RotationMatrix[1][2],
+        }
+        
+        // if(1)
+        
+        p5.circle( resultRotation.x, resultRotation.y, electronSize);
+
+        }
+
     }
 
-    drawP1P1(p5, atomOrigin, atomDestiny, bondType, half=1){
+    drawP1P1(p5, atomOrigin, atomDestiny, bondType, half=1, double=0){
         let bond= {
             origin:{
                 nucle:  atomOrigin.position.copy(),
@@ -332,7 +434,7 @@ export class Molecule {
                 y:0,
                 z:0
             },
-            angle :Math.acos(bondType.cos),
+            angle: bondType.angle,
             sin : bondType.sin,
             cos : bondType.cos,
             contraBondProportion: 2,
@@ -346,7 +448,7 @@ export class Molecule {
 
 
          //Set nucle in order to "add" the radius in all cases;
-        let xDeterminant = atomOrigin.position.x>=atomDestiny.position.x ? -1 : 1
+        let xDeterminant = atomOrigin.position.x>= atomDestiny.position.x ? -1 : 1
         let yDeterminant = atomOrigin.position.y>= atomDestiny.position.y ? -1 : 1
 
         bond.origin.nucle.x = atomOrigin.size/2 * xDeterminant * bond.sin;
@@ -354,27 +456,23 @@ export class Molecule {
         bond.destiny.nucle.x = atomDestiny.size/2 * xDeterminant * bond.sin*3;
         bond.destiny.nucle.y = atomDestiny.size/2 * yDeterminant * bond.cos*3;
 
-        bond.origin.position.add(bond.origin.nucle);
+        // bond.origin.position.add(bond.origin.nucle);
         bond.destiny.position.add(bond.destiny.nucle);
 
         //Set nucle End
         bond.module = bond.origin.position.copy().sub(bond.destiny.position);
         bond.module.length = Math.sqrt(bond.module.x**2+bond.module.y**2)*half*1.2;
 
-
-        //Contra Bond
-        // let contraBondPosition = bond.origin.position.copy().sub(bond.origin.nucle.copy().mult(2));
-
-        let lots = 1;
+        let lots = 0.5;
         for(let i = 0; i<256*lots;i++){
             let opacity = (Math.ceil(i/lots)).toString(16);
             p5.fill(`#${opacity+opacity+opacity+opacity}`);
             bond.electron.size=bond.electron.sizeDefault;
 
             if(i%bond.contraBondProportion!==0){
-                this.drawSuperposition(p5, atomOrigin.position, bond.module.length, bond.angle, bond.electron.size, xDeterminant, yDeterminant);
+                this.drawSuperposition(p5, atomOrigin.position, bond.module.length, bond.angle, bond.electron.size, xDeterminant, yDeterminant, bond.behind, double);
             }else{
-                this.drawSuperposition(p5, atomOrigin.position, bond.module.length/bond.contraBondProportion, bond.angle, bond.electron.size, -xDeterminant, -yDeterminant);
+                this.drawSuperposition(p5, atomOrigin.position, bond.module.length/bond.contraBondProportion, bond.angle, bond.electron.size, -xDeterminant, -yDeterminant, bond.behind,double);
             }
         }
     }
