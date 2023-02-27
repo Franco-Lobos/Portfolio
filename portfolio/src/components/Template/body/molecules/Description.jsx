@@ -10,13 +10,24 @@ const Description = ({useHook})=>{
     const [eventAdded, setEventAdded] = useState(0);
     const [focusedId, setFocusedId] = useState(0);
     const [moleculeName, setMoleculeName] = useState(0);
+    const [moleculeType, setMoleculetType] = useState(0);
+    const [moleculeTypeActive, setMoleculetTypeActive] = useState(0);
+
     const[writed, setWrited] = useState(0);
 
     const closeDescription = () =>{
         setFocusedId(0);
         useHook.closed = 1;
         useHook.focused = 0;
+        useHook.types = 0;
         window.dispatchEvent(useHook);
+    }
+
+    const prevType=()=>{
+        setMoleculetTypeActive(moleculeTypeActive === 0? moleculeType.length-1 : moleculeTypeActive-1 );
+    }
+    const nextType=()=>{
+        setMoleculetTypeActive(moleculeTypeActive+1 === moleculeType.length? 0 :moleculeTypeActive+1);
     }
 
     useEffect(()=>{
@@ -28,6 +39,7 @@ const Description = ({useHook})=>{
                 let splited = e.focused.split('-');
                 splited.pop();
                 setMoleculeName(splited.join(' '));
+                setMoleculetType(useHook.types);
                 setEventAdded(1);
             })
         }
@@ -39,6 +51,16 @@ const Description = ({useHook})=>{
         mainDescription.style.opacity = '1';
     })
 
+
+    useEffect(()=>{
+        console.log(moleculeTypeActive);
+        // useHook.closed = 0;
+        // useHook.focused = 0;
+        // useHook.types = 0;
+        useHook.activeType = moleculeTypeActive;
+        window.dispatchEvent(useHook);
+    },[moleculeTypeActive]);
+
     return(
         <>
         {
@@ -47,8 +69,21 @@ const Description = ({useHook})=>{
             <div id="description-main" >
                 <div id='closing-description' onClick={closeDescription}> X </div>
                 <div className="description-title">
-                    {moleculeName}
+                    {moleculeName}: 
                 </div>
+                <div className="description-title selector" id='active-type' >
+                    {
+                    moleculeType
+                    ? 
+                    <>
+                    <button onClick={prevType}> {" < "} </button> 
+                        { moleculeType[moleculeTypeActive]}
+                    <button onClick={nextType}> {" > "} </button> 
+                    </>
+                    :""
+
+                    }
+                    </div>
                 <div className="description-body">
 
                     {

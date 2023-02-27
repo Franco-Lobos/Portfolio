@@ -4,6 +4,7 @@ import { Water } from "./Water";
 import { Ethanol } from "./Ethanol";
 import { Glycerol } from "./Glycerol";
 import { OrganicAcids } from "./OrganicAcids";
+import { Polyfenols } from "./Polyphenols";
 
 export class Molecule {
     constructor(p5, i, scale, w, h, moleculeType){
@@ -23,6 +24,7 @@ export class Molecule {
         let angle54 = 54*Math.PI/180;
         let angle52 = 52.225*Math.PI/180;
         let angle360 = 0;
+        let angle120 = 60*Math.PI/180;
 
 
         this.bond={
@@ -38,6 +40,29 @@ export class Molecule {
                 angle: angle54,
                 cos: Math.cos(angle54),
                 sin: Math.sin(angle54),
+                dif: new p5.Vector(0,0)
+            },
+            c6c:{
+                distance:  139  * scale,
+                angle: angle120,
+                cos: Math.cos(angle120),
+                sin: Math.sin(angle120),
+                dif: new p5.Vector(0,0)
+            },
+
+            c6cPlane:{
+                distance:  139  * scale,
+                angle: angle360,
+                cos: Math.cos(angle360),
+                sin: Math.sin(angle360),
+                dif: new p5.Vector(0,0)
+            },
+
+            c__c:{
+                distance:  134  * scale,
+                angle: angle360,
+                cos: Math.cos(angle360),
+                sin: Math.sin(angle360),
                 dif: new p5.Vector(0,0)
             },
 
@@ -90,7 +115,7 @@ export class Molecule {
         this.settings ={
             scale: scale,
             zoom: 4*scale,
-            colitionDistance : this.bond.oh.distance,
+            colitionDistance : 96*scale,
             behindScale : 0.6,
             textSize: scale * 100,
         }
@@ -99,6 +124,7 @@ export class Molecule {
             carbon : 40* scale,
             oxigen : 30* scale,
             hidrogen : 20* scale,
+            radical : 60*scale,
         }
 
         //PROPS
@@ -153,6 +179,16 @@ export class Molecule {
         this.bond.c__o.dif.x =   this.bond.c__o.sin *  this.bond.c__o.distance;
         this.bond.c__o.dif.y =   this.bond.c__o.cos *  this.bond.c__o.distance;
  
+        // C=C BOND
+        this.bond.c__c.dif.x =   this.bond.c__c.sin *  this.bond.c__c.distance;
+        this.bond.c__c.dif.y =   this.bond.c__c.cos *  this.bond.c__c.distance;
+        
+        // C HEXAGON C BOND
+        this.bond.c6c.dif.x =   this.bond.c6c.sin *  this.bond.c6c.distance;
+        this.bond.c6c.dif.y =   this.bond.c6c.cos *  this.bond.c6c.distance;
+        this.bond.c6cPlane.dif.x =   this.bond.c6cPlane.sin *  this.bond.c6cPlane.distance;
+        this.bond.c6cPlane.dif.y =   this.bond.c6cPlane.cos *  this.bond.c6cPlane.distance;
+        
         // O-H BOND
         this.bond.oh.dif.x =   this.bond.oh.sin *  this.bond.oh.distance;
         this.bond.oh.dif.y =   this.bond.oh.cos *  this.bond.oh.distance;
@@ -162,7 +198,7 @@ export class Molecule {
         this.bond.hoh.dif.y =   this.bond.hoh.cos *  this.bond.hoh.distance;
 
 
-         // C-O BEHIND CCENTER
+        // C-O BEHIND CCENTER
         this.bond.coBehindCenter.dif.x =   this.bond.coBehindCenter.sin *  this.bond.coBehindCenter.distance;
         this.bond.coBehindCenter.dif.y =   this.bond.coBehindCenter.cos *  this.bond.coBehindCenter.distance;
     
@@ -187,6 +223,13 @@ export class Molecule {
             case 'organic-acids':
                 this.specimen = new OrganicAcids(p5, this);
                 break
+
+            case 'polyphenols':
+                this.zoomFocused *=0.5;
+                this.colitionFocused *=0.5;
+                this.specimen = new Polyfenols(p5, this);
+                break
+
             default:
                 this.specimen = new Water(p5, this);
         }
@@ -234,7 +277,11 @@ export class Molecule {
 
         let hipotenuse = Math.sqrt((a)**2+(b)**2);
 
-        if(this.colitionDistance>hipotenuse && (otherFocusFlag === this.id || !otherFocusFlag)){
+        let cos = Math.abs(a/hipotenuse);
+        let sin = Math.abs(b/hipotenuse);
+        let thisOvalColition = this.colitionDistance + (this.specimen.waterComparisonX * this.colitionDistance*cos) + (this.specimen.waterComparisonY * this.colitionDistance*sin);
+
+        if(thisOvalColition>hipotenuse && (otherFocusFlag === this.id || !otherFocusFlag)){
             this.focused = 1;
 
             environment.centerFlag =0;
@@ -340,7 +387,6 @@ export class Molecule {
 
         let randomCoord = originPoint.copy();
 
-        exeLoctaion = 1;
         if(1){
         //orbital form
         let randomAngle = Math.random()*Math.PI/2;
@@ -352,10 +398,12 @@ export class Molecule {
         randomSin -= (Math.sin(randomAngle)**n);
         
 
-        if(double){
-            // n=17
-            exeLoctaion *= -1;
-        }
+        // if(double){
+        //     // n=17
+        //     exeLoctaion *= -1;
+        // }
+        // exeLoctaion = 1;
+
 
         randomCoord.x += randomCos * (length) * exeLoctaion
             * xDeterminant ;
@@ -410,9 +458,7 @@ export class Molecule {
             x : RotationMatrix[0][0]*randomCoord.x + RotationMatrix[0][1]* randomCoord.y + RotationMatrix[0][2],
             y : RotationMatrix[1][0]*randomCoord.x + RotationMatrix[1][1]* randomCoord.y + RotationMatrix[1][2],
         }
-        
-        // if(1)
-        
+                
         p5.circle( resultRotation.x, resultRotation.y, electronSize);
 
         }
@@ -463,7 +509,11 @@ export class Molecule {
         bond.module = bond.origin.position.copy().sub(bond.destiny.position);
         bond.module.length = Math.sqrt(bond.module.x**2+bond.module.y**2)*half*1.2;
 
-        let lots = 0.5;
+        let lots = 0.8;
+        if( this.specimen.name = 'polyfenols'){
+            lots=0.2;
+        }
+
         for(let i = 0; i<256*lots;i++){
             let opacity = (Math.ceil(i/lots)).toString(16);
             p5.fill(`#${opacity+opacity+opacity+opacity}`);

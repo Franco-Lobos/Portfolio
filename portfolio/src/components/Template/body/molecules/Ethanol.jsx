@@ -1,8 +1,12 @@
 
 export class Ethanol {
     constructor( p5, molecule){
-        this.waterComparison=1;
+        this.waterComparisonX=1;
+        this.waterComparisonY=0;
         
+        this.name = 'ethanol'
+
+
         this.drawSet ={
             carbon1:{
                 position: new p5.Vector(molecule.position.x,molecule.position.y),
@@ -44,6 +48,8 @@ export class Ethanol {
             textSize : molecule.settings.textSize,
             textCentered: 0.4
         }
+        this.activeType = 0;
+
     }
 
     setZoom(molecule){
@@ -55,7 +61,6 @@ export class Ethanol {
         this.drawSet.carbon2.size = molecule.sizes.carbon * molecule.zoom 
         this.drawSet.oxigen1.size = molecule.sizes.oxigen * molecule.zoom 
         this.drawSet.hidrogen1.size = molecule.sizes.hidrogen * molecule.zoom
-        // (this.waterComparison-molecule.settings.zoom)
 
         this.drawSet.carbon1.position = molecule.position.copy().sub(this.drawSet.bondDif.co.x/2,this.drawSet.bondDif.co.y/2)
         this.drawSet.carbon2.position = this.drawSet.carbon1.position.copy().add(-this.drawSet.bondDif.cc.x,this.drawSet.bondDif.cc.y)

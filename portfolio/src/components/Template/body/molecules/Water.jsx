@@ -1,7 +1,10 @@
 
 export class Water {
     constructor(p5, molecule){
-        this.waterComparison=0;
+        this.waterComparisonX=0;
+        this.waterComparisonY=0;
+
+        this.name = 'water'
 
         this.drawSet ={
             oxigen1:{
@@ -40,32 +43,7 @@ export class Water {
             textCentered: 0.4
         };
 
-        // this.bondSet={
-        //     o1h1:{
-        //         origin : {
-        //             nucle :molecule.position.copy(),
-        //             position: molecule.position.copy(),
-        //         },
-        //         destiny : {
-        //             nucle :molecule.position.copy(),
-        //             position: molecule.position.copy(),
-        //         },
-        //         module: new p5.Vector(0,0)
-        //     },
-
-        //     o1h2:{
-        //         origin : {
-        //             nucle :molecule.position.copy(),
-        //             position: molecule.position.copy(),
-        //         },
-        //         destiny : {
-        //             nucle :molecule.position.copy(),
-        //             position: molecule.position.copy(),
-        //         },
-        //         module: new p5.Vector(0,0)
-
-        //     }
-        // }    
+        this.activeType = 0; 
     }
 
     setZoom(molecule){

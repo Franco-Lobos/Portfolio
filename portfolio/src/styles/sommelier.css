@@ -31,6 +31,29 @@
     color: var(--purpule);
     text-transform: none;
     padding: 0 0 1rem 0;
+    display: flex;
+}
+
+.description-title.selector{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    top: 1rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    position: absolute;
+    padding: 1rem;
+    background-color: var(--dark-grey-10);
+    color: var(--blue);
+    border-radius: 1rem;
+    width: 40%;
+}
+
+.description-title.selector button{
+    padding: 0 1rem;
+    color: inherit;
+    background-color: #00000000;
 }
 
 .description-title:first-letter{

@@ -36,7 +36,7 @@ const Sommelier = () =>{
         defaultMinVelocity: 0.6,
         centerDot: {
             x: w * 0.5,
-            y: h * 0.4,
+            y: h * 0.35,
         },
         centerCoord:0,
         centerFraction: 0.08,
@@ -52,16 +52,22 @@ const Sommelier = () =>{
         moleculeData : []},
         {moleculeType : "organic-acids",
         moleculeData : []},
+        {moleculeType : "polyphenols",
+        moleculeData : []},
     ];
 
     let allMoleculesAmount = {
-        // water: Math.ceil(totalMolecules*0.84),
-        water: 0,
+        water: Math.ceil(totalMolecules*0.84),
+        // water: 0,
         // ethanol: Math.ceil(totalMolecules*0.14),
         ethanol: 0,
         // glycerol: Math.ceil(totalMolecules*0.01),
         glycerol: 0,
         organicAcids: Math.ceil(totalMolecules*0.01),
+        // organicAcids:0,
+        polyphenols: Math.ceil(totalMolecules*0.01),
+        // polyphenols: 0,
+
     }
 
     //Set WATER
@@ -101,6 +107,17 @@ const Sommelier = () =>{
         allMolecules.map(group=>{
             if(group.moleculeType === 'organic-acids'){
                 group.moleculeData.push(organicAcids)
+            }
+        })
+    }
+
+
+    //Set POLYPHENOLS
+    for(let i=1; i<=allMoleculesAmount.polyphenols; i++){
+        let polyphenols = new Molecule(p5, i, scale, w, h, 'polyphenols');
+        allMolecules.map(group=>{
+            if(group.moleculeType === 'polyphenols'){
+                group.moleculeData.push(polyphenols)
             }
         })
     }
@@ -226,14 +243,16 @@ const Sommelier = () =>{
                 let hipotenuse = Math.sqrt((a)**2+(b)**2);
 
                 let cos = Math.abs(a/hipotenuse);
-                let thisOvalColition = thisMolecule.colitionDistance + (thisMolecule.specimen.waterComparison * thisMolecule.colitionDistance*cos);
-                let otherOvalColition = otherMolecule.colitionDistance + (otherMolecule.specimen.waterComparison * otherMolecule.colitionDistance*cos);
+                let sin = Math.abs(b/hipotenuse);
+
+                let thisOvalColition = thisMolecule.colitionDistance + (thisMolecule.specimen.waterComparisonX * thisMolecule.colitionDistance*cos) + (thisMolecule.specimen.waterComparisonY * thisMolecule.colitionDistance*sin);
+                let otherOvalColition = otherMolecule.colitionDistance + (otherMolecule.specimen.waterComparisonX * otherMolecule.colitionDistance*cos) + (otherMolecule.specimen.waterComparisonY * otherMolecule.colitionDistance*sin);
 
                 let minDistance = thisOvalColition + otherOvalColition;
 
                 if(hipotenuse < minDistance){
-                    p6.stroke('red')
-                    p6.line(thisMolecule.position.x,thisMolecule.position.y,otherMolecule.position.x,otherMolecule.position.y, 10)
+                    // p6.stroke('red')
+                    // p6.line(thisMolecule.position.x,thisMolecule.position.y,otherMolecule.position.x,otherMolecule.position.y, 10)
                     if(otherMolecule.focused){
                         thisMolecule.zoom = hipotenuse/minDistance * thisMolecule.settings.zoom;
                     }
@@ -305,6 +324,8 @@ const Sommelier = () =>{
         {
             focused:0,
             closed:0,
+            types:0,
+            activeType:0,
         });
 
 
@@ -320,6 +341,18 @@ const Sommelier = () =>{
             })
             environment.focused=environment.focused;
         }
+        else{
+            allMolecules.map(moleculeGroup=>{
+                moleculeGroup.moleculeData.map((molecule)=>{
+                if(molecule.id === environment.focused){
+                    molecule.specimen.activeType = e.activeType;
+                    if(molecule.specimen.waterComparisonVariable){
+                        molecule.specimen.waterComparisonX = molecule.specimen.waterComparisonVariable[e.activeType];
+                    }
+                }
+                })
+            })
+        }
     })
 
     const setup = (p5, canvasParentRef) => {
@@ -327,6 +360,7 @@ const Sommelier = () =>{
     
         cnv.mousePressed((e) => {
             let focusedFlag = environment.focused;
+            let moleculeTypesFlag = 0;
             let changedFlag = 0;
             allMolecules.map(moleculeGroup=>{
                 moleculeGroup.moleculeData.map((thisMolecule)=>{
@@ -335,6 +369,7 @@ const Sommelier = () =>{
                         thisMolecule.checkIfFocused(p5,environment.focused, environment);
                         if(thisMolecule.focused){
                             focusedFlag = thisMolecule.id;
+                            moleculeTypesFlag = thisMolecule.specimen.types;
                             changedFlag =1;
                             return;
                         }
@@ -346,6 +381,7 @@ const Sommelier = () =>{
 
             useHook.closed = 0;
             useHook.focused =  changedFlag ? focusedFlag : 0;
+            useHook.types = moleculeTypesFlag;
             window.dispatchEvent(useHook);
           })
 

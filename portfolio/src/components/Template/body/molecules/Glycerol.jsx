@@ -3,8 +3,11 @@
 
 export class Glycerol{
     constructor( p5, molecule){
-        this.waterComparison=1.5;
-        
+        this.waterComparisonX=1.5;
+        this.waterComparisonY=0;   
+             
+        this.name = 'glycerol'
+
         this.drawSet ={
             carbon1:{
                 position: new p5.Vector(molecule.position.x,molecule.position.y),
@@ -89,6 +92,8 @@ export class Glycerol{
             textSize : molecule.settings.textSize,
             textCentered: 0.4
         }
+        this.activeType = 0;
+
     }
 
     setZoom(molecule){
@@ -110,7 +115,6 @@ export class Glycerol{
         this.drawSet.hidrogen2.size = molecule.sizes.hidrogen * molecule.zoom
         this.drawSet.hidrogen3.size = molecule.sizes.hidrogen * molecule.zoom
 
-        // (this.waterComparison-molecule.settings.zoom)
 
         this.drawSet.carbon1.position = molecule.position.copy();
         this.drawSet.carbon2.position = this.drawSet.carbon1.position.copy().add(-this.drawSet.bondDif.cc.x,this.drawSet.bondDif.cc.y)
