@@ -36,7 +36,7 @@ const Sommelier = () =>{
         defaultMinVelocity: 0.6,
         centerDot: {
             x: w * 0.5,
-            y: h * 0.35,
+            y: h * 0.4,
         },
         centerCoord:0,
         centerFraction: 0.08,
@@ -59,10 +59,10 @@ const Sommelier = () =>{
     let allMoleculesAmount = {
         water: Math.ceil(totalMolecules*0.84),
         // water: 0,
-        // ethanol: Math.ceil(totalMolecules*0.14),
-        ethanol: 0,
-        // glycerol: Math.ceil(totalMolecules*0.01),
-        glycerol: 0,
+        ethanol: Math.ceil(totalMolecules*0.14),
+        // ethanol: 0,
+        glycerol: Math.ceil(totalMolecules*0.01),
+        // glycerol: 0,
         organicAcids: Math.ceil(totalMolecules*0.01),
         // organicAcids:0,
         polyphenols: Math.ceil(totalMolecules*0.01),

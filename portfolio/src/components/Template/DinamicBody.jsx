@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Portfolio from "./body/Portfolio";
 import Sommelier from "./body/Sommelier";
 import HomeBody from "./body/HomeBody";
+import School from "./body/School";
 
 const DinamicBody = ({componentPath}) =>{
 
@@ -22,6 +23,11 @@ const DinamicBody = ({componentPath}) =>{
             style='sommelier-wine';
             break;
 
+        case "/school":
+            style='school-main';
+            Routed = School;
+            break;
+            
         default:
         Routed = HomeBody; //default
         break;

@@ -68,10 +68,10 @@ const Description = ({useHook})=>{
             ?
             <div id="description-main" >
                 <div id='closing-description' onClick={closeDescription}> X </div>
-                <div className="description-title">
+                <div className="description-title title">
                     {moleculeName}: 
                 </div>
-                <div className="description-title selector" id='active-type' >
+                <div className="description-title-selector" id='active-type'>
                     {
                     moleculeType
                     ? 

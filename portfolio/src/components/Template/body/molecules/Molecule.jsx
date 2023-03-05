@@ -225,8 +225,8 @@ export class Molecule {
                 break
 
             case 'polyphenols':
-                this.zoomFocused *=0.5;
-                this.colitionFocused *=0.5;
+                this.zoomFocused *=0.4;
+                this.colitionFocused *=0.4;
                 this.specimen = new Polyfenols(p5, this);
                 break
 
@@ -387,6 +387,7 @@ export class Molecule {
 
         let randomCoord = originPoint.copy();
 
+        // exeLoctaion = 1;
         if(1){
         //orbital form
         let randomAngle = Math.random()*Math.PI/2;

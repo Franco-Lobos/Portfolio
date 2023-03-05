@@ -25,7 +25,15 @@
   /* Transparent */
 
   --dark-grey-10 :#80808010;
+  
+  --blue-99: #569cd699;
+  --light-blue-99:#9cdcfe99;
+  --purpule-99:#c586c099;
+  --green-99:#dcdcaa99;
+  --orange-99:#ce917899;
+
 }
+
 *{
   -webkit-transition: inherit;
   transition: inherit;

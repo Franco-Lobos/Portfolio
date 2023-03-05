@@ -1,0 +1,268 @@
+.school-main{
+    position: relative;
+    width: 100vw;
+}
+
+.school-body{
+    position: absolute;
+    top: 20vh;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+
+    height: 80vh;
+    width: 80vw;
+
+    /* background-color: var(--dark-grey-10); */
+    border-radius: 1rem;
+
+    display: grid;
+    grid-template-rows: 1fr 6fr;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.school-title,
+.school-kanban{
+    border-radius: 1rem;
+    display: grid;
+    /* background-color: var(--dark-grey-10); */
+    /* gap: 2rem; */
+    /* padding: 1rem; */
+}
+
+
+.school-title{
+    padding: 1rem 0.5rem;
+    gap: 1.5rem;
+    /* max-height: 10vh; */
+}
+
+.school-title #degree-type{
+    font-size: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: var(--orange);
+}
+
+.school-title #degree-type a{
+    color: var(--light-blue-99);
+    font-weight: 900;
+}
+
+.school-title #degree-name{
+    color: var(--purpule-99);
+    font-size: 2.5rem;
+    text-align: end;
+    font-weight: 900;
+}
+
+/* HOVER */
+
+.school-title #degree-type a:hover{
+    color: var(--light-blue);
+}
+
+.school-title #degree-name:hover{
+    color: var(--purpule);
+}
+
+/* HOVER ENDS */
+
+
+.school-kanban{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.kanban-column{
+    position: relative;
+    display: inline-block;
+    /* max-height: 70%; */
+}
+
+.kanban-column-title{
+    background-color: var(--blue-99);
+    color: var(--dark-bg);
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    max-width: fit-content;
+    padding: 0.2rem 1rem 0rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    /* margin-left: 1rem; */
+    border-radius: 1rem 1rem 0 0;  
+}
+
+.kanban-column-title::first-letter{
+    text-transform: capitalize;
+}
+
+#backlog .kanban-column-title{
+    background-color: var(--orange-99);
+}
+
+#doing .kanban-column-title{
+    background-color: var(--purpule-99);
+}
+
+#done .kanban-column-title{
+    background-color: var(--green-99);
+}
+
+
+
+.kanban-column-cards{
+    /* height: 100%;
+    max-height: 100%; */
+    height: 55vh;
+    width: 100%;
+    border-radius: 1rem 1rem 1rem 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 1rem 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: var(--dark-grey-10);
+    /* border: 0.2rem solid; */
+}
+
+.kanban-column-cards .card-item{
+    padding:  0 1rem 1rem 1rem;
+    /* background-color: var(--dark-grey-10); */
+    border-radius: 0;
+    /* min-height: 22%; */
+    font-weight: 900;
+    position: relative;
+
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+
+    transition: all ease-in-out 70ms;
+    cursor:pointer;
+}
+
+#backlog .kanban-column-cards .card-item{
+    color: var(--orange-99);
+    border-bottom: var(--orange-99) solid 0.3rem;
+}
+#to-do .kanban-column-cards .card-item{
+    color: var(--blue-99);
+    border-bottom: var(--blue-99) solid 0.3rem;
+}
+#doing .kanban-column-cards .card-item{
+    color: var(--purpule-99);
+    border-bottom: var(--purpule-99) solid 0.3rem;
+}
+#done .kanban-column-cards .card-item{
+    color: var(--green-99);
+    border-bottom: var(--green-99) solid 0.3rem;
+}
+
+/* HOVER */
+#backlog .kanban-column-cards .card-item:hover{
+    color: var(--orange);
+    border-color: var(--orange);
+}
+#to-do .kanban-column-cards .card-item:hover{
+    color: var(--blue);
+    border-color: var(--blue);
+}
+#doing .kanban-column-cards .card-item:hover{
+    color: var(--purpule);
+    border-color: var(--purpule);
+}
+#done .kanban-column-cards .card-item:hover{
+    color: var(--green);
+    border-color: var(--green);
+}
+
+#done .kanban-column-cards .card-item:hover .card-item-calification{
+    background-color: var(--green);
+}
+
+
+#backlog:hover .kanban-column-title{
+    background-color: var(--orange);
+}
+#to-do:hover .kanban-column-title{
+    background-color: var(--blue);
+}
+#doing:hover .kanban-column-title{
+    background-color: var(--purpule);
+}
+#done:hover .kanban-column-title{
+    background-color: var(--green);
+}
+
+
+/* HOVER ENDS */
+
+.card-item-title{
+    padding: 1rem 0 0;
+    font-size: 1.2rem;
+    max-width: 70%;
+    word-break: keep-all;
+}
+
+
+.card-item-calification{
+    position: absolute;
+    bottom: 0;
+    /* right: 1rem; */
+    color: var(--dark-bg);
+    background-color: var(--green-99);
+    padding: 0.2rem 0.5rem 0;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.card-item-calification::after{
+    position: absolute;
+    content:"";
+    display: block;
+    border-bottom: 0.5rem solid var(--dark-bg);
+    width: 0.3rem;
+    top: 1.5rem;
+    bottom: 0rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.card-item-dropdown{
+    display: grid;
+}
+
+.card-item-dropdown-item{
+    width: 100%;
+    font-size: 0.8rem;
+    margin: 0.2rem 0;
+    color: var(--orange-99);
+    font-weight: 900;
+}
+.card-item-dropdown a:first-child{
+    margin-top: 1rem;
+}
+
+.card-item-dropdown-item:hover{
+    color: var(--orange);
+}
+.card-item-dropdown-item.no-hover:hover{
+    color: var(--orange-99);
+}
+
+.card-item-dropdown-item span{
+    font-weight: 900;
+    font-size: 1rem;
+    color: var(--orange-99) ;
+}

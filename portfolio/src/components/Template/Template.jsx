@@ -16,7 +16,7 @@ const Template = ()=>{
         { path: '/portfolio', icon: 'work'},
         { path: '/', icon: 'science'},
         { path: '/sommelier', icon: 'local_bar'},
-        { path: '/', icon: 'school'},
+        { path: '/school', icon: 'school'},
     ]
 
     useEffect(()=>{

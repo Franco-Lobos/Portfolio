@@ -1,6 +1,7 @@
 import {createBrowserRouter} from "react-router-dom";
 
-import Animation from "./components/intro/Animation";
+// import Animation from "./components/intro/Animation";
+import Intro from "./components/intro/Intro";
 import Template from "./components/Template/Template";
 
 const Router = createBrowserRouter([
@@ -9,8 +10,8 @@ const Router = createBrowserRouter([
     element: <Template></Template>,
   },
   {
-    path: "/animation",
-    element: <Animation></Animation>,
+    path: "/intro",
+    element: <Intro></Intro>,
   }
 
 ]);

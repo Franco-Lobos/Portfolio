@@ -1,0 +1,272 @@
+export const UocConst = {
+    degree:{
+        type: "Bachelor's Degree",
+        name:"Techniques for Software Development",
+        university: "UOC",
+        universityLink:"https://www.uoc.edu/portal/en/index.html",
+        link: "https://studies.uoc.edu/en/bachelors-degrees/software-development/study-plan",
+        credits: 180,
+    },
+
+    planification:{
+        semesters: 8,
+        done: 1,
+        doing: 2,
+        todo:3,
+        backlog:4,
+    },
+
+    kanbanStatus:[
+        "backlog","to-do", "doing", "done", 
+    ],
+
+    semesters:[
+        1,2,3,4,5,6,7,8
+    ],
+
+    asignatures:[
+        {
+            name:"Algebra",
+            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.600&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 4,
+            calification: 7.2,
+            credits: 6,
+            semseter:1,
+        },
+        {
+            name:"Web-based Teamwork",
+            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.604&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 4,
+            calification: 8.9,
+            credits: 6,
+            semseter:1,
+
+        },
+        {
+            name:"Computer Structure",
+            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.630&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 4,
+            calification: 8.7,
+            credits: 6,
+            semseter:1,
+
+        },
+        {
+            name:"Web Programming",
+            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.612&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 4,
+            calification: 7.9,
+            credits: 6,
+            semseter:1,
+
+        },
+        {
+            name:"Logic",
+            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.602&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 3,
+            calification: 0,
+            credits: 6,
+            semseter:2,
+        },
+        {
+            name:"Operating Systems",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.623&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 3,
+            calification: 0,
+            credits: 6,
+            semseter:2,
+        },
+        {
+            name:"Software Engineering",
+            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.615&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 3,
+            calification: 0,
+            credits: 6,
+            semseter:2,
+        },
+        {
+            name:"Fundamentals of Programming",
+            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.607&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 3,
+            calification: 0,
+            credits: 6,
+            semseter:2,
+        },
+
+        {
+            name:"Object-Oriented Programming",
+            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.609&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 2,
+            calification: 0,
+            credits: 6,
+            semseter:3,
+        },
+        {
+            name:"Software Design Patterns",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.617&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 2,
+            calification: 0,
+            credits: 6,
+            semseter:3,
+        },
+        {
+            name:"Programming in practice",
+            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.608&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 2,
+            calification: 0,
+            credits: 6,
+            semseter:3,
+        },
+        {
+            name:"Web Standards and Languages",
+            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.611&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 2,
+            calification: 0,
+            credits: 6,
+            semseter:3,
+        },
+
+        {
+            name:"Introduction to databases",
+            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.621&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:4,
+        },
+        {
+            name:"Networks and Internet Applications",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.625&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:4,
+        },
+        {
+            name:"Entrepreneurship",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.606&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:4,
+        },
+        {
+            name:"Business and IT Management",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.616&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:4,
+        },
+
+        {
+            name:"Data Structures",
+            link: "https://campus.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.610&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:5,
+        },
+        {
+            name:"Software Architecture",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.618&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:5,
+        },
+        {
+            name:"Network and System administration",
+            link: "https://campus.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.626&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:5,
+        },
+        {
+            name:"Database Design",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.622&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:5,
+        },
+
+        
+        {
+            name:"Cloud computing",
+            link: "https://campus.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.601&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:6,
+        },
+        {
+            name:"Advanced Web Programming",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.613&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:6,
+        },
+        {
+            name:"Human-Computer Interaction",
+            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.620&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:6,
+        },
+        {
+            name:"Mobile app development",
+            link: "https://campus.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.603&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:6,
+        },
+
+        {
+            name:"Optional Course 1",
+            link: "",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:7,
+        },
+        {
+            name:"Optional Course 2",
+            link: "",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:7,
+        },
+        {
+            name:"Optional Course 3",
+            link: "",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:7,
+        },
+        {
+            name:"Optional Course 4",
+            link: "",
+            status: 1,
+            calification: 0,
+            credits: 6,
+            semseter:7,
+        },
+
+        {
+            name:"Final Proyect",
+            link: "https://campus.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.635&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 1,
+            calification: 0,
+            credits: 12,
+            semseter: 8,
+        },
+
+    ]
+}

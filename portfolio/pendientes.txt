@@ -1,8 +1,18 @@
 PENDIENTE 
-Polifenoles
+Azucares
 Aromas
-Otros
+Otros (methanol)
 
+grab para moléculas 3d
+Enlaces doblres
+
+
+SCHOOL:
+on change resloution => calification position reset
+
+
+GLOBAL:
+responsive website
 
 
 
@@ -16,7 +26,8 @@ entonces todos los ángulos del módulo son múltiplos impares de PI (45-135-225
 -Construir Ethanol
 -Agregar enlaces de electrones
 
-
 centrar molécula en focused y agregar campo de texto
 Construir glicerol
 Acidos orgánicos
+Polifenoles
+

@@ -234,8 +234,8 @@ export class Polyfenols{
             'Tannins',
         ]
         this.waterComparisonVariable =[
-            2,
-            2,
+            3,
+            3,
             2
         ]
 
@@ -265,12 +265,12 @@ export class Polyfenols{
 
 
 
-        this.drawSet.oxigen1.position = molecule.position.copy().add(-this.drawSet.bondDif.c6c.x/2,-this.drawSet.bondDif.c6c.y/2)
+        this.drawSet.oxigen1.position = molecule.position.copy().add(-this.drawSet.bondDif.c6c.x,-this.drawSet.bondDif.c6c.y)
 
         this.drawSet.carbon1.position = this.drawSet.oxigen1.position.copy().add(-this.drawSet.bondDif.c6c.x,this.drawSet.bondDif.c6c.y)
         
         if(this.activeType ===2){
-            this.drawSet.carbon2.position = molecule.position.copy().add(this.drawSet.bondDif.c6c.x/2,-this.drawSet.bondDif.c6c.y/2)
+            this.drawSet.carbon2.position = molecule.position.copy();
             this.drawSet.carbon1.position = this.drawSet.carbon2.position.copy().add(this.drawSet.bondDif.c6cPlane.x,-this.drawSet.bondDif.c6cPlane.y)
             this.drawSet.oxigen1.position = this.drawSet.carbon1.position.copy().add(this.drawSet.bondDif.c6c.x,-this.drawSet.bondDif.c6c.y)
         }else{

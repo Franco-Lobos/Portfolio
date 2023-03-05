@@ -34,7 +34,9 @@
     display: flex;
 }
 
-.description-title.selector{
+.description-title-selector{
+    font-size: 2rem;
+    font-weight: 500;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -50,7 +52,7 @@
     width: 40%;
 }
 
-.description-title.selector button{
+.description-title-selector button{
     padding: 0 1rem;
     color: inherit;
     background-color: #00000000;
@@ -58,6 +60,7 @@
 
 .description-title:first-letter{
     text-transform: uppercase;
+    color:red;
 }
 
 .description-body{
