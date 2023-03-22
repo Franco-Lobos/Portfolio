@@ -1,11 +1,4 @@
 PENDIENTE 
-Azucares
-Aromas
-Otros (methanol)
-
-grab para moléculas 3d
-Enlaces doblres
-
 
 SCHOOL:
 on change resloution => calification position reset
@@ -14,6 +7,14 @@ on change resloution => calification position reset
 GLOBAL:
 responsive website
 
+
+
+NEXT-VERSION:
+-grab para moléculas 3d
+-Enlaces doblres
+-Azucares
+-Aromas
+-Otros (methanol)
 
 
 RESUELTO

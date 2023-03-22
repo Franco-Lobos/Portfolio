@@ -4,14 +4,19 @@ import { useEffect, useState } from "react";
 import WriteWithForSpan from "../../../../library/WriteWithForSpan";
 
 import { MoleculeConst } from "../../../../constants/MoleculesConst";
+import { convertToCamelCase, capitalize} from "../../../../library/library";
 
 const Description = ({useHook})=>{
 
     const [eventAdded, setEventAdded] = useState(0);
     const [focusedId, setFocusedId] = useState(0);
     const [moleculeName, setMoleculeName] = useState(0);
+    const [moleculeObj, setMoleculeObj] = useState(0);
     const [moleculeType, setMoleculetType] = useState(0);
     const [moleculeTypeActive, setMoleculetTypeActive] = useState(0);
+    const [moleculeChangeFlag, setMoleculeChangeFlag] = useState(0);
+
+    const [typeDescription, setTypeDescription] = useState([]);
 
     const[writed, setWrited] = useState(0);
 
@@ -39,6 +44,7 @@ const Description = ({useHook})=>{
                 let splited = e.focused.split('-');
                 splited.pop();
                 setMoleculeName(splited.join(' '));
+                setMoleculeObj(convertToCamelCase(splited.join('-')));
                 setMoleculetType(useHook.types);
                 setEventAdded(1);
             })
@@ -53,13 +59,19 @@ const Description = ({useHook})=>{
 
 
     useEffect(()=>{
-        console.log(moleculeTypeActive);
-        // useHook.closed = 0;
-        // useHook.focused = 0;
-        // useHook.types = 0;
         useHook.activeType = moleculeTypeActive;
         window.dispatchEvent(useHook);
-    },[moleculeTypeActive]);
+        if(moleculeType){
+            setTypeDescription(MoleculeConst[moleculeObj]?.description[convertToCamelCase(moleculeType[moleculeTypeActive]?.toLowerCase())])
+        }
+    },[moleculeTypeActive, moleculeType]);
+
+    useEffect(()=>{
+        setMoleculeChangeFlag(0);
+        setTimeout(()=>{
+            setMoleculeChangeFlag(1);
+        }, 10)
+    },[typeDescription]);
 
     return(
         <>
@@ -69,34 +81,33 @@ const Description = ({useHook})=>{
             <div id="description-main" >
                 <div id='closing-description' onClick={closeDescription}> X </div>
                 <div className="description-title title">
-                    {moleculeName}: 
+                    {capitalize(moleculeName,'')}:
                 </div>
-                <div className="description-title-selector" id='active-type'>
                     {
                     moleculeType
                     ? 
-                    <>
+                    <div className="description-title-selector" id='active-type'>
+
                     <button onClick={prevType}> {" < "} </button> 
                         { moleculeType[moleculeTypeActive]}
                     <button onClick={nextType}> {" > "} </button> 
-                    </>
-                    :""
-
-                    }
                     </div>
+                    :""
+                    }
                 <div className="description-body">
 
                     {
-                    MoleculeConst[moleculeName]?.description && MoleculeConst[moleculeName].description[0]
-                        ?
-                        MoleculeConst[moleculeName].description.map((fr,indx)=>
-                            <WriteWithForSpan 
-                                key={indx}
-                                inptString={fr} specialWords={MoleculeConst.specialWords} indx={indx}
-                                writed = {writed} setWrited={setWrited} delay={10}
-                            ></WriteWithForSpan>
-                        )
-                        :""
+                    // MoleculeConst[moleculeObj]?.description && (MoleculeConst[moleculeObj].description[0])
+                        moleculeChangeFlag 
+                            ?
+                            typeDescription.map((fr,indx)=>
+                                <WriteWithForSpan 
+                                    key={indx}
+                                    inptString={fr} specialWords={MoleculeConst.specialWords} indx={indx}
+                                    writed = {writed} setWrited={setWrited} delay={10}
+                                ></WriteWithForSpan>
+                            )
+                            :""
                     }
                 </div>
             </div>

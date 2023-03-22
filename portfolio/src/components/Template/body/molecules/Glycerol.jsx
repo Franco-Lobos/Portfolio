@@ -92,7 +92,7 @@ export class Glycerol{
             textSize : molecule.settings.textSize,
             textCentered: 0.4
         }
-        this.activeType = 0;
+        this.activeType = -1; 
 
     }
 

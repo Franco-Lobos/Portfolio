@@ -40,13 +40,12 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    top: 1rem;
+    top: 0.7rem;
     left: 0;
     right: 0;
     margin: 0 auto;
     position: absolute;
-    padding: 1rem;
-    background-color: var(--dark-grey-10);
+    padding: 0.2rem;
     color: var(--blue);
     border-radius: 1rem;
     width: 40%;

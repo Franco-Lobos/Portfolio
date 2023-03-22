@@ -14,8 +14,7 @@ const Template = ()=>{
     const routes = [
         { path: '/', icon: 'home'},
         { path: '/portfolio', icon: 'work'},
-        { path: '/', icon: 'science'},
-        { path: '/sommelier', icon: 'local_bar'},
+        { path: '/sommelier', icon: 'science'},
         { path: '/school', icon: 'school'},
     ]
 
@@ -28,7 +27,6 @@ const Template = ()=>{
         if(!loaded){
             setLoad(routes.length-1);
         }
-        console.log(path)
     },[loaded])
 
     return(

@@ -11,7 +11,9 @@ export const getRGB= (color)=>{
     return [colorR,colorG,colorB]
 }
 export const convertToCamelCase = (string)=>{
-        let words= string.split('-');
+    if(!string) return;
+    
+        let words= string.split('-')[1] ? string.split('-') : string.split(' ') ;
         words = words.map((word,indx) => {
             if(indx===0) return word;
             let splitedWord = word.split('');
@@ -21,6 +23,13 @@ export const convertToCamelCase = (string)=>{
         });
 
         return words.join('');
+}
+
+export const capitalize = (string, spliter) =>{
+    let letters = string.split(spliter);
+    letters[0] = letters[0].toUpperCase();
+    letters = letters.join(spliter);
+    return letters;
 }
 
 const colors = ['purpule', 'orange' ,'light-blue','blue', 'green'];

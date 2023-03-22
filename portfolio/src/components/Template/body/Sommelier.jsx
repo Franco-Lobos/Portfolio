@@ -7,8 +7,12 @@ import '../../../styles/sommelier.css'
 import Description from "./molecules/Description";
 
 import { Molecule } from "./molecules/Molecule";
+import ModalCard from "./ModalCard";
 
 const Sommelier = () =>{
+
+    const [modal, setModal] = useState(1);
+
     let bg = getRGB('dark-bg');
 
     let w = window.innerWidth;
@@ -482,6 +486,11 @@ const Sommelier = () =>{
 
     return (
         <>
+            {modal
+            ?
+            <ModalCard title={"title"} text={"text"} button={"Continue"} closer={()=>setModal(0)} ></ModalCard>
+            :""
+            }
             <Sketch setup={setup} draw={draw} />
              
             <Description useHook={useHook} ></Description>
