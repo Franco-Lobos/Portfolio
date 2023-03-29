@@ -9,6 +9,8 @@ import Description from "./molecules/Description";
 import { Molecule } from "./molecules/Molecule";
 import ModalCard from "./ModalCard";
 
+import { MoleculeConst } from "../../../constants/MoleculesConst";
+
 const Sommelier = () =>{
 
     const [modal, setModal] = useState(1);
@@ -28,8 +30,8 @@ const Sommelier = () =>{
 
     let colitions =[];
 
-    let scale = 0.2;
-    let totalMolecules = 50;
+    let scale = w*0.000135;
+    let totalMolecules = w*0.075;
 
     let environment = {
         focused:0,
@@ -65,11 +67,11 @@ const Sommelier = () =>{
         // water: 0,
         ethanol: Math.ceil(totalMolecules*0.14),
         // ethanol: 0,
-        glycerol: Math.ceil(totalMolecules*0.01),
+        glycerol: Math.ceil(totalMolecules*0.005),
         // glycerol: 0,
-        organicAcids: Math.ceil(totalMolecules*0.01),
+        organicAcids: Math.ceil(totalMolecules*0.005),
         // organicAcids:0,
-        polyphenols: Math.ceil(totalMolecules*0.01),
+        polyphenols: Math.ceil(totalMolecules*0.005),
         // polyphenols: 0,
 
     }
@@ -361,7 +363,6 @@ const Sommelier = () =>{
 
     const setup = (p5, canvasParentRef) => {
 		let cnv = p5.createCanvas(w, h).parent(canvasParentRef);
-    
         cnv.mousePressed((e) => {
             let focusedFlag = environment.focused;
             let moleculeTypesFlag = 0;
@@ -394,7 +395,6 @@ const Sommelier = () =>{
         window.onresize=()=>{
             adjustScreen(p5);
             p5.createCanvas(w, h).parent(canvasParentRef);
-
         }        
 	};
 
@@ -482,19 +482,32 @@ const Sommelier = () =>{
 
     }
 
-
+    useEffect(()=>{
+        const canvas = document.getElementById('canvas-body');
+        if(!canvas) return;
+        canvas.addEventListener('animationend', ()=>{
+            canvas.style.filter= "blur(0rem)"
+        })
+     },[modal])
 
     return (
         <>
             {modal
             ?
-            <ModalCard title={"title"} text={"text"} button={"Continue"} closer={()=>setModal(0)} ></ModalCard>
-            :""
+            <>
+                <div className="modal-card-bg" style={ {filter: modal ?`blur(0.5rem)` : "none"}}>
+                </div>
+                <ModalCard title={MoleculeConst.intro.title} text={MoleculeConst.intro.text} button={MoleculeConst.intro.button} closer={()=>setModal(0)}></ModalCard>
+            </>
+
+            : 
+            
+            <div id="canvas-body">
+                <Sketch setup={setup} draw={draw}/>    
+                <Description useHook={useHook} MoleculeConst={MoleculeConst} ></Description>
+            </div>
             }
-            <Sketch setup={setup} draw={draw} />
-             
-            <Description useHook={useHook} ></Description>
-        </>
+         </>
     );
 }
 

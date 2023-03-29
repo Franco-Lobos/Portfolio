@@ -12,10 +12,15 @@ const Intro = ()=>{
     const[writed, setWrited] = useState(0);
     const[pageReady, setPageReady] = useState(0);
 
+    const[disappear, setDisappeear] = useState(0);
+
     const disappearRandom=(element, last = 1)=>{
-        let randTime = (Math.floor(Math.random()*10)*100*last + 500 );
+        let randTime = (Math.floor(Math.random()*10)*100*last + 300 );
             setTimeout(()=>{
                 element.style.color="var(--dark-bg)";
+                element.style.backgroundColor="var(--dark-bg)";
+                element.style.border="0px";
+
             },randTime)
     }
 
@@ -32,7 +37,6 @@ const Intro = ()=>{
 
             title.addEventListener('transitionend', e=>{
                 if(e.target===title && !pageReady){
-                    console.log('ready');
                     setTimeout(() => {
                         // setPageReady(1);
                         window.location.href= "/"
@@ -40,13 +44,22 @@ const Intro = ()=>{
                 }
             })
 
-            disappearRandom(title, 2);
+            disappearRandom(title, 3);
 
             parragraphs.forEach(ph=>{
                 let sWord = ph.querySelectorAll('span');
+                let aWord = ph.querySelectorAll('a');
+                let button = document.getElementById('main-go-button');
+
                 sWord.forEach(word=>{
-                    disappearRandom(word)
-                })
+                    disappearRandom(word, 2)
+                });
+
+                aWord.forEach(anchor=>{
+                    disappearRandom(anchor, 2.5)
+                });
+
+                disappearRandom(button, 0)
             })
 
         }
@@ -55,7 +68,7 @@ const Intro = ()=>{
     useEffect(()=>{
         console.log('writed:',writed)
         if (writed  === ProfileConst.intro.length +1 ){
-            disappearText();
+            setDisappeear(1);
         }
     },[writed]);
 
@@ -66,6 +79,7 @@ const Intro = ()=>{
                     <WriteWithForSpan 
                         inptString="Hi, I am Franco Lobos" indx={0}
                         writed = {writed} setWrited={setWrited} delay={10} veloc={100}
+                        style={{fontSize:"2rem"}}
                     ></WriteWithForSpan>
                 </div>
                 <div className='intro-text-description'>
@@ -82,6 +96,12 @@ const Intro = ()=>{
                         :""
                     }
                 </div>
+                {
+                    disappear
+                    ?
+                    <button id="main-go-button" onClick={()=>disappearText()}> Go!</button>
+                    :""
+                }
             </div>
         </div>
     )

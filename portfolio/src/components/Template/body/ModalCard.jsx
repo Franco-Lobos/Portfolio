@@ -1,11 +1,17 @@
 const ModalCard = ({title, text, button, closer})=>{
     return(
-        <div>
-            {/* <div onClick={closer}>X</div> */}
-            <div>{title}</div>
-            <div>{text}</div>
-            <button onClick={closer}>{button}</button>
-        </div>
+            <div className="modal-card-main">
+                <div className="title">{title}</div>
+                <div className="text">
+                    {
+                text.map((pgfh,indx)=> 
+                    <div key={indx}>{pgfh}</div>
+                    )
+                }
+                </div>
+                <button onClick={closer}>{button}</button>
+            </div>
+
     );
 };
 

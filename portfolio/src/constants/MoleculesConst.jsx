@@ -1,4 +1,14 @@
 export const MoleculeConst = {
+    intro:{
+        title:"Wine Chemical compunds",
+        text:[`As a chemical technician and sommelier, I find wine composition very interesting. That's why I've decided to create a representation of the most relevant compounds in wines, labeling them with a short description of how they ended up in the grape or wine.`,
+        `There are 5 main molecules, be sure to click on each molecule to fully enjoy the experience.`,
+        `The forms and angles of each bond are meant to be proportional, but for display reasons, I have used different scales in larger molecules. Since it is a 2D representation, double bonds have not been drawn yet, but I am planning to include them in the next version.`,
+        `I hope you enjoy it and learn a little more about chemistry and wine!`
+        ],
+        button:"Continue",
+        specialWords:["click"]
+    },
     specialWords: [],
     water:{
         description:[

@@ -29,14 +29,14 @@ const HomeBody = ()=>{
         <div>
             <h5>
                 <span className="color-blue">const</span> <span className="color-light-blue">thisGuy</span> = <span className="color-purple">{`{`}</span>
-                <h6 style={{paddingLeft:"4rem"}}>
+                <h6 style={{paddingLeft:"4rem", margin: "1rem"}}>
                     <span className="color-light-blue"> fullName : </span> <span className="color-orange">{`"${profile.name} ${profile.lastName}"`}</span>, <br/>
                     <span className="color-light-blue"> nationality : </span> <span className="color-orange">{`"${profile.nationality}"`}</span>, <br/>
                     <span className="color-light-blue"> livesIn : </span> <span className="color-orange">{`"${profile.livesIn}"`}</span>, <br/>
                     <span className="color-light-blue"> age : </span> <span className="color-green">{`${age}`}</span>, <br/>
 
                     <span className="color-light-blue"> languages : </span> <span className="color-purple">{`[`}</span>
-                        <p style={{paddingLeft:"4rem"}}>
+                        <p style={{paddingLeft:"4rem", lineHeight: "1.5rem"}}>
                             {
                                 languages.map((lan, indx)=>
                                     <>
@@ -64,9 +64,7 @@ const HomeBody = ()=>{
         
                     <span className="color-light-blue"> openToWork : </span> <span className="color-blue">{`${job.openToWork ? "true" :" false"}`}</span>, <br/>
                     <span className="color-light-blue"> openReloacate : </span> <span className="color-blue">{`${job.openToRelocate ? "true" :" false"}`}  </span>, <br/>
-                    <span className="color-light-blue"> salaryExpectation : </span> <span className="color-orange"> "{job.salary[0]}" </span> || <span className="color-orange"> "{job.salary[1]}" </span><br/>
-
-
+                    <span className="color-light-blue"> salaryExpectation : </span> <span className="color-orange"> "{job.salary[0]}" </span>
                 </h6>
                 <span className="color-purple">{`}`}</span>;
 

@@ -31,6 +31,7 @@
   --purpule-99:#c586c099;
   --green-99:#dcdcaa99;
   --orange-99:#ce917899;
+  --dark-bg-99: #1e1e1e99;
 
 }
 
@@ -40,9 +41,9 @@
   box-sizing: border-box;
 }
 
-h6, h5, h4, h3, h2, h1, p{
+/* h6, h5, h4, h3, h2, h1, p{
   font-size: 1rem;
-}
+} */
 
 a {
   font-weight: 500;
@@ -78,11 +79,12 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--purpule);
 }
 button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+button:focus-visible{
+  /* outline: 4px auto -webkit-focus-ring-color; */
+  border-color: var(--purpule);
 }
 
 

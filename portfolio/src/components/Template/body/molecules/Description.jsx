@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 
 import WriteWithForSpan from "../../../../library/WriteWithForSpan";
 
-import { MoleculeConst } from "../../../../constants/MoleculesConst";
 import { convertToCamelCase, capitalize} from "../../../../library/library";
 
-const Description = ({useHook})=>{
+const Description = ({useHook, MoleculeConst})=>{
 
     const [eventAdded, setEventAdded] = useState(0);
     const [focusedId, setFocusedId] = useState(0);
@@ -63,6 +62,9 @@ const Description = ({useHook})=>{
         window.dispatchEvent(useHook);
         if(moleculeType){
             setTypeDescription(MoleculeConst[moleculeObj]?.description[convertToCamelCase(moleculeType[moleculeTypeActive]?.toLowerCase())])
+        }else if(MoleculeConst[moleculeObj]){
+            // console.log(MoleculeConst[moleculeObj])
+            setTypeDescription(MoleculeConst[moleculeObj].description)
         }
     },[moleculeTypeActive, moleculeType]);
 
@@ -97,7 +99,6 @@ const Description = ({useHook})=>{
                 <div className="description-body">
 
                     {
-                    // MoleculeConst[moleculeObj]?.description && (MoleculeConst[moleculeObj].description[0])
                         moleculeChangeFlag 
                             ?
                             typeDescription.map((fr,indx)=>

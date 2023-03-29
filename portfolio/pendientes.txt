@@ -2,7 +2,7 @@ PENDIENTE
 
 SCHOOL:
 on change resloution => calification position reset
-
+Kanban title => hover -> descripción breve 
 
 GLOBAL:
 responsive website
