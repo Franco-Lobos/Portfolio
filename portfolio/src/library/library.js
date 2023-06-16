@@ -78,3 +78,84 @@ export const breath = (link, indx, setBreathing, time, hoverBrightness) =>{
     }, 10);
 
 }
+
+
+export const arrayShuffle = (dataArray)=>{
+
+    const length = dataArray.length;
+    let random;
+    let buf;
+
+    dataArray.forEach((element, indx) => {
+        random = Math.floor(Math.random()*length);
+        buf = dataArray[random];
+        dataArray[random] = element;
+        dataArray[indx] = buf;
+    });
+
+    return dataArray;
+}
+
+export const addHover=(thisEl, othersEl, card, time, hoverBrightness,setLoad, indx)=>{
+    
+    let specialTime = time /2;
+
+    let othersXOR = othersEl.filter(ln=>ln.id !== thisEl.id);
+
+    card.addEventListener('mouseenter', ()=>{
+    })
+
+    card.addEventListener('mouseover', ()=>{
+        time = specialTime;
+        hoverBrightness = 1.5;
+        othersXOR.map(lin=>
+            lin.style.filter= 'blur(0.2rem)'
+        )
+    })
+
+    card.addEventListener('mouseout', ()=>{
+        time = 4000;
+        othersXOR.map(lin=>
+            lin.style.filter= 'blur(0rem)'
+        )
+        hoverBrightness = 1;
+    })
+
+    card.addEventListener('animationend',()=>{
+        setLoad(indx)
+    });
+}
+
+export const spawnElement = ( element, indx, time) =>{
+    let timeAnim = time*0.25 +"ms";
+
+    setTimeout(()=>{
+        element.style.animation = `spawn ${timeAnim}`;
+        element.style.opacity = '1';
+        
+    },300 + (time/20) *indx);
+}
+
+export const unSpawnElement = ( element, indx, time) =>{
+    let timeAnim = time*0.25 +"ms";
+    
+    element.addEventListener("animationend",()=>{
+        element.style.opacity = '0.5';   
+    })
+
+    setTimeout(()=>{
+        element.style.animation = `unSpawn ${timeAnim}`;
+    },300 +(time/20) *indx);
+}
+
+
+export const findOnArray = (el, arrayInpt)=>{
+    let ret =0;
+    arrayInpt.forEach(item=>{
+        if(item.split(" ").join("").toLowerCase() == el.split(" ").join("").toLowerCase()){
+            ret = 1;
+        }
+    }
+    )
+    return ret;
+};

@@ -28,7 +28,7 @@ const HomeBody = ()=>{
     return(
         <div>
             <h5>
-                <span className="color-blue">const</span> <span className="color-light-blue">thisGuy</span> = <span className="color-purple">{`{`}</span>
+                <span className="color-blue">const</span> <span className="color-light-blue">Personals</span> = <span className="color-purple">{`{`}</span>
                 <h6 style={{paddingLeft:"4rem", margin: "1rem"}}>
                     <span className="color-light-blue"> fullName : </span> <span className="color-orange">{`"${profile.name} ${profile.lastName}"`}</span>, <br/>
                     <span className="color-light-blue"> nationality : </span> <span className="color-orange">{`"${profile.nationality}"`}</span>, <br/>

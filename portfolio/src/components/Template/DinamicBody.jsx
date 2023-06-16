@@ -15,6 +15,7 @@ const DinamicBody = ({componentPath}) =>{
     switch(componentPath){
         case "/portfolio":
             Routed = Portfolio;
+            style='porfolio-main';
             break;
 
 

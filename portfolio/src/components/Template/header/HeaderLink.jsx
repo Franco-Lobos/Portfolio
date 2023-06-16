@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import MaterialIcon from 'material-icons-react';
 
-import { getRGB, breath } from "../../../library/library";
+import { getRGB, breath, spawnElement, addHover} from "../../../library/library";
 
 
 const HeaderLink =({indx, route, setLoad, setPath})=>{
@@ -14,46 +14,6 @@ const HeaderLink =({indx, route, setLoad, setPath})=>{
     let time = 4000 // miliseconds
     let hoverBrightness = 1 // scale 
 
-    let root = document.querySelector(':root');
-
-
-
-    const spawnLink = (link, links, card) =>{
-        let otherLinks = links.filter(ln=>ln.id !== link.id)
-
-        let specialTime = time /2;
-        card.addEventListener('mouseenter', ()=>{
-        })
-
-        card.addEventListener('mouseover', ()=>{
-            time = specialTime;
-            hoverBrightness = 1.5;
-            otherLinks.map(lin=>
-                lin.style.filter= 'blur(0.2rem)'
-            )
-        })
-
-        card.addEventListener('mouseout', ()=>{
-            time = 4000;
-            otherLinks.map(lin=>
-                lin.style.filter= 'blur(0rem)'
-            )
-            hoverBrightness = 1;
-        })
-
-        let timeAnim = '1.5s'
-
-        setTimeout(()=>{
-            card.style.animation = `spawn ${timeAnim}`;
-            card.style.opacity = '1';
-            card.addEventListener('animationend',()=>{
-                setLoad(indx)
-            });
-        },300+200*indx);
-    }
-
-
-
     useEffect(()=>{
         const link = document.getElementById(`header-link-${indx}`);
         const card = document.getElementById(`header-card-${indx}`);
@@ -62,7 +22,9 @@ const HeaderLink =({indx, route, setLoad, setPath})=>{
 
         if(!link ||!links) return;
 
-        spawnLink(link, links, card);
+        spawnElement( card, indx, time);
+        addHover(link, links, card, time, hoverBrightness, setLoad, indx);
+
         if(!breathing){
             breath(link, indx, setBreathing, time, hoverBrightness);
         }

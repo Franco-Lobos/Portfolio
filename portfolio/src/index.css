@@ -1,7 +1,7 @@
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
-  line-height: 24px;
+  /* line-height: 24px; */
   font-weight: 400;
 
   color-scheme: light dark;
@@ -102,6 +102,49 @@ span.color-green{ color: var(--green)}
 span.color-dark-grey{ color: var(--dark-grey)}
 span.color-grey{ color: var(--grey)}
 
+
+
+@keyframes spawn {
+  0%{
+      opacity: 0;
+      filter: blur(0.6px);
+  }
+
+  10%{
+      filter: blur(0.2px);
+  }
+  30%{
+      opacity: 1;
+  }
+
+  60%{
+      filter: blur(0.4rem);
+  }
+
+  100%{
+      filter: blur(0.01rem);
+  }
+}
+
+@keyframes unSpawn {
+  0%{
+    filter: blur(0.01rem);
+  }
+  40%{
+    filter: blur(0.4rem);
+  }
+  70%{
+    opacity: 1;
+  }
+
+  90%{
+    filter: blur(0.2px);
+  }
+  100%{
+      opacity: 0.5;
+      filter: blur(0.6px);
+  }
+}
 
 @media (prefers-color-scheme: light) {
   :root {

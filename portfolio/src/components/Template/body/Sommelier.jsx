@@ -30,7 +30,7 @@ const Sommelier = () =>{
 
     let colitions =[];
 
-    let scale = w*0.000135;
+    let scale = w*0.000115;
     let totalMolecules = w*0.075;
 
     let environment = {

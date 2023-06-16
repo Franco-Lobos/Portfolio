@@ -1,5 +1,18 @@
 PENDIENTE 
 
+
+RENDIMIENTO:
+Limppiar los time outs, set intervals (clearTimeout() y  clearInterval())
+Implementar libreria de matrices para optimizar el calculo y rendimiento (trabajar con 1, 2 o ningun decimal)
+trabajar con números enteros y evitar el uso de divisiones
+
+HEADER:
+corregir window.event.onFocus para evitas que los colores se pongan en RGB
+
+CHAT GPT:
+->Texto de moleculas pegar a ala api de el chat
+->Agregar un call to action para el texto, que no salga por defecto
+
 SCHOOL:
 on change resloution => calification position reset
 Kanban title => hover -> descripción breve 
@@ -7,6 +20,10 @@ Kanban title => hover -> descripción breve
 GLOBAL:
 responsive website
 
+WORKS:
+React Android -> MyDrinks 
+wordpress -> Maño manitas - Qcero - serradell
+React web -> Barber shop
 
 
 NEXT-VERSION:
