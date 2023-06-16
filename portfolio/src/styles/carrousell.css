@@ -36,8 +36,6 @@
     flex-direction: column;
     padding: 1rem;
     width: 30vw;
-    overflow-y: scroll;
-    overflow-x: hidden;
     background-color: var(--dark-grey-10);
 
     height : 90%;

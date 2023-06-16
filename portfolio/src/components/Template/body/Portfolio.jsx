@@ -1,5 +1,5 @@
 import { WorksConst } from "../../../constants/WorksConst";
-import { arrayShuffle } from "../../../library/library";
+import { breath } from "../../../library/library";
 
 import '../../../styles/portfolio.css'
 import '../../../styles/carrousell.css'
@@ -13,33 +13,51 @@ const Portfolio = ()=>{
 
     const words = WorksConst.specialWords;
     const works = WorksConst.proyects;
-    const center = 0;
-    const [selectedSkills, setSelectedSkills] = useState(works[center].keyWords);
+
+    const [centeredCard, updateCenterCard]=  useState(0);
+
+
+    const [selectedSkills, setSelectedSkills] = useState(works[centeredCard].keyWords);
     const [previousSkills, setPreviousSkills] = useState([]);
     const [reloadTags, setRealoadTags]= useState(1);
 
+    const [title, setTitle] = useState(0);
+    const [breathing, setBreathing] = useState(0);
+    const [brathInterval, setBreathInterval] = useState(0);
+
+    let time = 4000 // miliseconds
+    let hoverBrightness = 1 // scale 
+
     useEffect(()=>{
         window.addEventListener("updateCenter", (e)=>{
-            let indx = e.detail.centered
-            setSelectedSkills(works[indx]?.keyWords);
+            updateCenterCard(e.detail.centered);
+            setSelectedSkills(works[centeredCard]?.keyWords);
             setRealoadTags(0);
-
         })
     },[]);
 
     useEffect(()=>{
+        const titleEl = document.getElementById(`portfolio-title`);
+
+        if(titleEl){
+            clearInterval(brathInterval);
+            setBreathInterval(breath(titleEl, centeredCard, setBreathing, time, hoverBrightness));
+        }
+
         setPreviousSkills([...previousSkills, ...selectedSkills])
         setRealoadTags(1);
-    },[selectedSkills]);
+    },[centeredCard]);
 
     useEffect(()=>{
-        if(!reloadTags) setRealoadTags(1);
+        if(!reloadTags) setRealoadTags(1);  
     },[reloadTags]);
 
     return(
         <>
-            <div className="portfolio-title"> PORTFOLIO</div>
-            <Carrousell works={works} center={center}></Carrousell>
+            {
+                <div className="portfolio-title" id={`portfolio-title`}> {title}</div>
+            }
+            <Carrousell works={works} center={centeredCard} setTitle={setTitle}></Carrousell>
             {
             reloadTags
             ?

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CarrousellCard from "./CarrousellCard";
 
 
-const Carrousell = ({works, center})=>{
+const Carrousell = ({works, center, setTitle})=>{
 
     const [centeredCard, updateCenterCard]=  useState(center);
 
@@ -59,6 +59,8 @@ const Carrousell = ({works, center})=>{
     useEffect(()=>{
         const telescope = document.getElementById('telescope');
         const firstCard = document.getElementById('carrousell-card-0');
+        setTitle(works[centeredCard].name);
+
         if(!firstCard || !telescope){
             return;
         }
@@ -68,6 +70,7 @@ const Carrousell = ({works, center})=>{
 
     useEffect(()=>{
         centerCard();
+        setTitle(works[centeredCard].name);
 
         const updateCenter = new CustomEvent("updateCenter",{
             detail: { centered: centeredCard},
