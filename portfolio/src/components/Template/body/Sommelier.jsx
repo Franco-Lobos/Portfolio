@@ -15,7 +15,8 @@ const Sommelier = () =>{
 
     const [modal, setModal] = useState(1);
 
-    let bg = getRGB('dark-bg');
+    let colorObj = getRGB('dark-bg');
+    let bg = [colorObj.r, colorObj.g, colorObj.b];
 
     let w = window.innerWidth;
     let h = window.innerHeight;
@@ -23,7 +24,8 @@ const Sommelier = () =>{
     let colors = {};    
     let colorsRoot = ['purpule', 'orange', 'blue', 'light-blue', 'green', 'dark-bg', 'dark-grey','dark-bg', 'grey'];
     colorsRoot.forEach(color=>{
-        colors[convertToCamelCase(color)] = getRGB(color);
+        let colorObjBuf = getRGB(color);
+        colors[convertToCamelCase(color)] = [colorObjBuf.r, colorObjBuf.g, colorObjBuf.b];;
     })
 
     let frameRate =30;

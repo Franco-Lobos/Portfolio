@@ -39,14 +39,14 @@ const HomeBody = ()=>{
                         <p style={{paddingLeft:"4rem", lineHeight: "1.5rem"}}>
                             {
                                 languages.map((lan, indx)=>
-                                    <>
+                                    <span key={indx} >
                                         <span className="color-blue">{`{`}</span>
                                         <span className="color-light-blue"> name: </span> <span className="color-orange"> "{lan.name}"</span>,
                                         <span className="color-light-blue"> &emsp; level:</span> <span className="color-orange"> "{lan.level}" </span>
                                         <span className="color-blue">{`}`}</span>
                                         {indx ===languages.length-1 ? "" : ","}
                                         <br/>
-                                    </>
+                                    </span>
                                 )
                             }
                         </p>
@@ -56,7 +56,7 @@ const HomeBody = ()=>{
                         <p style={{paddingLeft:"4rem"}}>
                             {hobbies.map((hob,indx)=>
                             <>
-                                <span className="color-orange"> "{hob}"</span>{indx ===hobbies.length-1 ? "" : ","}
+                                <span className="color-orange" key={indx}> "{hob}"</span>{indx ===hobbies.length-1 ? "" : ","}
                             </>
                             )}
                         </p>

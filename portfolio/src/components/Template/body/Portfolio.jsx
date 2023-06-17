@@ -31,11 +31,9 @@ const Portfolio = ()=>{
     useEffect(()=>{
         window.addEventListener("updateCenter", (e)=>{
             updateCenterCard(e.detail.centered);
-            setSelectedSkills(works[centeredCard]?.keyWords);
-            setRealoadTags(0);
+           
         })
     },[]);
-
     useEffect(()=>{
         const titleEl = document.getElementById(`portfolio-title`);
 
@@ -43,10 +41,15 @@ const Portfolio = ()=>{
             clearInterval(brathInterval);
             setBreathInterval(breath(titleEl, centeredCard, setBreathing, time, hoverBrightness));
         }
+        setSelectedSkills(works[centeredCard]?.keyWords);
+        setRealoadTags(0);
 
+    },[centeredCard]);
+
+    useEffect(()=>{        
         setPreviousSkills([...previousSkills, ...selectedSkills])
         setRealoadTags(1);
-    },[centeredCard]);
+    },[selectedSkills]);
 
     useEffect(()=>{
         if(!reloadTags) setRealoadTags(1);  

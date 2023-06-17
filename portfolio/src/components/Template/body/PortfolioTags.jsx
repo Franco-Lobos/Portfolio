@@ -8,15 +8,11 @@ const PortfolioTags = ({words, selectedSkills, previousSkills})=>{
     return(
         <div className={`porfolio-word-container `}>
             {
-                // words
-                // ?
                     words.map((word,indx)=>
-                     <PortfolioTagSingle word={word} indx={indx} last={indx==amount}
+                     <PortfolioTagSingle word={word} indx={indx} last={indx==amount} key={indx}
                      selectedSkills={selectedSkills} previousSkills={previousSkills}
                      ></PortfolioTagSingle>
                     )
-                // :
-                // ""
             }
         </div>
     )

@@ -50,7 +50,7 @@ export const breath = (link, indx, setBreathing, time, hoverBrightness) =>{
     }
     let breathingColor1, breathingColor2, percent;
 
-    while(indx > listLength){
+    while(indx >= listLength){
         indx-=listLength;
     }
 
@@ -73,7 +73,8 @@ export const breath = (link, indx, setBreathing, time, hoverBrightness) =>{
     return setInterval(()=> {
         let timePassed = Date.now() - start;
         if (timePassed >= time) {
-            start+=time*2;
+            start = Date.now() +time;
+            // start+=time*2;
         }
         percent = Math.abs(timePassed/time)
 
