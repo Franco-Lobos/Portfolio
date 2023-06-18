@@ -1,6 +1,6 @@
 .carrousell-main{
-    /* background-color: red; */
     width: 100%;
+    height: 100%;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -11,8 +11,9 @@
 }
 
 .carrousell-body{
-    width: 80vw;
+    width: 100vw;
     overflow: hidden;
+    height: 100%;
 }
 
 .carrousell-telescope{
@@ -28,23 +29,38 @@
 }
 
 .carrousell-card{
-    border-radius: 1rem 1rem 1rem 1rem;
+    border-radius: 5rem;
     display: flex;
     gap: 1rem;
     align-items: stretch;
-    justify-content: flex-start;
+    justify-content: center;
     flex-direction: column;
     padding: 1rem;
-    width: 30vw;
-    background-color: var(--dark-grey-10);
+    width: 70vw;
 
-    height : 90%;
+    color: var(--dark-grey);
 
+    height : 50%;
+    position: relative;
+    opacity: 0;
+    font-size: 1.8rem;
+}
+
+.card-description{
+    transition: hover ease-in-out 0.01s;
+    width: 75%;
+    align-self: center;
+    color: var(--grey);
 }
 
 .carrousell-card.active{
-    background-color: var(--blue-99);
+    border-radius: 0;
     height :100%;
+
+    opacity: 1;
+
+    box-shadow:  0 0 10rem 4rem var(--purpule);
+    /* background-color: var(--dark-grey-10); */
 }
 
 
@@ -60,14 +76,82 @@
     align-items: center;
 
     padding: 1rem;
-    font-size:  2rem;
+    font-size:  3rem;
     font-weight: 900;
+    z-index: 1;
+
+    color: var(--dark-bg);
 }
 
 .carrousell-arrows#next{
-    right: 1rem;
+    right: 6vw;
 }
 
 .carrousell-arrows#prev{
-    left: 1rem;
+    left: 6vw;
+}
+
+.card-meta{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto 0;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.card-meta div{
+    padding: 0.2rem 0.5rem 0;
+    border-radius: 0.5rem 0.5rem;
+    font-size: 1rem;
+
+    background-color: var(--dark-grey-10);
+    color: var(--grey);
+}
+
+.card-country, .card-date{
+    position: absolute;
+    font-weight: 100;
+    opacity: 0.8;
+    /* min-width: 50%; */
+    width: fit-content;
+    color: var(--purpule-99);
+    font-style: oblique;
+}
+
+.card-date{
+    bottom: 1rem;
+    right: 2rem;
+    text-align: right;
+    font-size: 2rem;
+}
+
+.card-country{
+    top: 1rem;
+    left: 2rem;
+    text-align: left;
+    font-size: 3rem;   
+}
+
+.carrousell-card:hover{
+    color: var(--purpule);
+    font-size: 2rem;
+
+}
+
+.carrousell-card:hover {
+    height: 90%;
+    border-radius: 1rem;
+
+}
+
+.carrousell-card:hover .card-description{
+    color: var(--purpule);
+}
+
+.carrousell-card:hover .card-date,.carrousell-card:hover .card-country {
+    color: var(--dark-grey);
 }
