@@ -1,30 +1,18 @@
 PENDIENTE 
 
+PORFOLIO:
+Mejorar desripciones
 
 RENDIMIENTO:
-Limppiar los time outs, set intervals (clearTimeout() y  clearInterval())
-Implementar libreria de matrices para optimizar el calculo y rendimiento (trabajar con 1, 2 o ningun decimal)
-trabajar con números enteros y evitar el uso de divisiones
+-Limppiar los time outs, set intervals (clearTimeout() y  clearInterval())
+-Implementar libreria de matrices para optimizar el calculo y rendimiento
+- Trabajar con 1, 2 o ningun decimal
+- Evitar el uso de divisiones
 
-HEADER:
-corregir window.event.onFocus para evitas que los colores se pongan en RGB
-
-CHAT GPT:
-->Texto de moleculas pegar a ala api de el chat
+Moleculas:
 ->Agregar un call to action para el texto, que no salga por defecto
 
-SCHOOL:
-on change resloution => calification position reset
-Kanban title => hover -> descripción breve 
-
-GLOBAL:
-responsive website
-
-WORKS:
-React Android -> MyDrinks 
-wordpress -> Maño manitas - Qcero - serradell
-React web -> Barber shop
-
+------------------------------------------------------------------
 
 NEXT-VERSION:
 -grab para moléculas 3d
@@ -32,7 +20,12 @@ NEXT-VERSION:
 -Azucares
 -Aromas
 -Otros (methanol)
+-CHAT GPT:->Texto de moleculas pegar a ala api de el chat
 
+SCHOOL:
+Kanban title => hover -> descripción breve 
+
+------------------------------------------------------------------
 
 RESUELTO
 -las moleculas no reaparecen por el otro lado
@@ -49,3 +42,21 @@ Construir glicerol
 Acidos orgánicos
 Polifenoles
 
+HEADER:
+corregir window.event.onFocus para evitas que los colores se pongan en RGB
+
+WORKS:
+React Android -> MyDrinks 
+wordpress -> Maño manitas - Qcero - serradell
+React web -> Barber shop
+
+SCHOOL:
+on change resloution => calification position reset
+
+PORTFOLIO:
+on change resloution => resetear calculos de carrousell 
+
+GLOBAL:
+responsive website
+
+moleculas-description: skip

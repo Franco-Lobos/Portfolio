@@ -15,6 +15,8 @@ const Description = ({useHook, MoleculeConst})=>{
     const [moleculeTypeActive, setMoleculetTypeActive] = useState(0);
     const [moleculeChangeFlag, setMoleculeChangeFlag] = useState(0);
 
+    const [skip, setSkip] = useState(30);
+
     const [typeDescription, setTypeDescription] = useState([]);
 
     const[writed, setWrited] = useState(0);
@@ -58,6 +60,7 @@ const Description = ({useHook, MoleculeConst})=>{
 
 
     useEffect(()=>{
+        setSkip(30);
         useHook.activeType = moleculeTypeActive;
         window.dispatchEvent(useHook);
         if(moleculeType){
@@ -69,11 +72,20 @@ const Description = ({useHook, MoleculeConst})=>{
     },[moleculeTypeActive, moleculeType]);
 
     useEffect(()=>{
+        // setMoleculeChangeFlag(0);
+        // setTimeout(()=>{
+        //     setMoleculeChangeFlag(1);
+        // }, 10)
         setMoleculeChangeFlag(0);
-        setTimeout(()=>{
+
+    },[typeDescription, skip]);
+
+    useEffect(()=>{
+        if(!moleculeChangeFlag){
             setMoleculeChangeFlag(1);
-        }, 10)
-    },[typeDescription]);
+
+        }
+    },[moleculeChangeFlag]);
 
     return(
         <>
@@ -82,9 +94,11 @@ const Description = ({useHook, MoleculeConst})=>{
             ?
             <div id="description-main" >
                 <div id='closing-description' onClick={closeDescription}> X </div>
-                <div className="description-title title">
-                    {capitalize(moleculeName,'')}:
-                </div>
+                <div id='skiping-button' onClick={()=>setSkip(0)}> Skip </div>
+
+                    <div className="description-title title">
+                        {capitalize(moleculeName,'')}:
+                    </div>
                     {
                     moleculeType
                     ? 
@@ -106,6 +120,7 @@ const Description = ({useHook, MoleculeConst})=>{
                                     key={indx}
                                     inptString={fr} specialWords={MoleculeConst.specialWords} indx={indx}
                                     writed = {writed} setWrited={setWrited} delay={10}
+                                    veloc={skip}
                                 ></WriteWithForSpan>
                             )
                             :""

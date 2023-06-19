@@ -41,10 +41,6 @@
   box-sizing: border-box;
 }
 
-/* h6, h5, h4, h3, h2, h1, p{
-  font-size: 1rem;
-} */
-
 
 a {
   font-weight: 500;
@@ -61,6 +57,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--dark-bg);
+  display: inline-block;
 }
 
 h1 {
@@ -79,21 +77,12 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: var(--purpule);
-}
-button:focus,
+button:hover,
 button:focus-visible{
-  /* outline: 4px auto -webkit-focus-ring-color; */
   border-color: var(--purpule);
 }
 
 
-p{
-  font-weight: 700;
-  line-height: 2.5rem;
-  margin: 0rem;
-}
 
 span.color-blue{ color: var(--blue)}
 span.color-purple{ color: var(--purpule)}
@@ -159,3 +148,111 @@ span.color-grey{ color: var(--grey)}
     background-color: #f9f9f9;
   }
 }
+
+
+@media screen and (max-width: 375px){
+  html {
+    font-size: 7px !important;
+  }
+
+  .school-body{
+    min-width: 100vw ;
+    padding: 1rem;
+  }
+
+}
+
+
+@media (min-width: 376px) and (max-width: 738px){
+  html {
+    font-size: 9px !important;
+  }
+
+  .school-body{
+    min-width: 95vw ;
+  }
+}
+
+
+@media (min-width: 739px) and (max-width: 900px){
+  html {
+    font-size: 10px !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1024px){
+  html {
+    font-size: 12px !important;
+  }
+
+  #home-body-main{
+    font-weight: 600 !important;
+    line-height: 2rem !important;
+    font-size: 1.2rem !important;
+  }
+
+}
+
+@media (min-width: 1025px) and (max-width: 1280px){
+  html {
+    font-size: 13px !important;
+  }
+
+  #home-body-main{
+    line-height: 1.8rem !important;
+    font-size: 1rem !important;
+  }
+}
+
+@media (min-width: 1281px) and (max-width: 1440px){
+  html {
+    font-size: 14px !important;
+  }
+
+  #home-body-main{
+    line-height: 2.1rem !important;
+    font-size: 1.2rem !important;
+  }
+}
+
+@media (min-width: 1441px) and (max-width: 2500px){
+  html{
+    font-size: 16px !important;
+  }
+
+  .school-kanban{
+    gap: 3rem !important;
+  }
+
+  .school-body{
+    max-width: 85vw;
+  }
+
+  #home-body-main{
+    line-height: 1.5rem !important;
+    font-size: 0.9rem !important;
+  }
+  
+}
+
+
+@media (min-width: 2501px){
+  html{
+    font-size: 20px !important;
+  }
+
+  .school-kanban{
+    gap: 4rem !important;
+  }
+
+  .school-body{
+    max-width: 85vw;
+  }
+
+  #home-body-main{
+    line-height: 1.2rem !important;
+    font-size: 1.2rem !important;
+  }
+  
+}
+

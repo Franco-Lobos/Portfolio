@@ -18,8 +18,11 @@ export class Molecule {
         let randomXOrientation = Math.floor(Math.random()*10)%2===0 ? 1 : -1;
         let randomYOrientation = Math.floor(Math.random()*10)%2===0 ? 1 : -1;
 
-        let randomXVelocity = Math.random()*4;
-        let randomYVelocity = Math.random()*4;
+        // let randomXVelocity = Math.random()*4;
+        // let randomYVelocity = Math.random()*4;
+
+        let randomXVelocity = Math.random()*scale*5;
+        let randomYVelocity = Math.random()*scale*5;
 
         let angle54 = 54*Math.PI/180;
         let angle52 = 52.225*Math.PI/180;
@@ -114,10 +117,10 @@ export class Molecule {
 
         this.settings ={
             scale: scale,
-            zoom: 4*scale,
+            zoom: 3*scale,
             colitionDistance : 96*scale,
             behindScale : 0.6,
-            textSize: scale * 100,
+            textSize: scale * 80,
         }
 
         this.sizes = {
@@ -151,7 +154,7 @@ export class Molecule {
 
 
         this.zoom = this.settings.zoom;
-        this.focusedIncrease = 25* scale;
+        this.focusedIncrease = 20* scale;
 
         this.colitionFocused = scale*700;
         this.zoomFocused = this.zoom * this.focusedIncrease;

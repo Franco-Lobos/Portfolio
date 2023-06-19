@@ -38,7 +38,7 @@ export const capitalize = (string, spliter) =>{
     return letters;
 }
 
-const colors = ['purpule', 'orange' ,'light-blue','blue', 'green'];
+const colors = ['green', 'purpule', 'blue', 'light-blue', 'orange'];
 
 
 export const breath = (link, indx, setBreathing, time, hoverBrightness) =>{
@@ -178,3 +178,8 @@ export const findOnArray = (el, arrayInpt)=>{
     )
     return ret;
 };
+
+
+export const switchBool = (bool)=>{
+    return bool ? 0 : 1;
+}

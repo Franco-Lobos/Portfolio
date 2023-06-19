@@ -31,23 +31,23 @@ const Portfolio = ()=>{
     useEffect(()=>{
         window.addEventListener("updateCenter", (e)=>{
             updateCenterCard(e.detail.centered);
-           
         })
     },[]);
     useEffect(()=>{
         const titleEl = document.getElementById(`portfolio-title`);
 
-        if(titleEl){
+        if(titleEl && !breathing){
             clearInterval(brathInterval);
-            setBreathInterval(breath(titleEl, centeredCard, setBreathing, time, hoverBrightness));
+            setBreathInterval(breath(titleEl, 1, setBreathing, time, hoverBrightness));
         }
+
         setSelectedSkills(works[centeredCard]?.keyWords);
         setRealoadTags(0);
 
     },[centeredCard]);
 
     useEffect(()=>{        
-        setPreviousSkills([...previousSkills, ...selectedSkills])
+        setPreviousSkills([...previousSkills, ...selectedSkills]);
         setRealoadTags(1);
     },[selectedSkills]);
 
@@ -64,11 +64,9 @@ const Portfolio = ()=>{
             {
             reloadTags
             ?
-            <div>
                 <PortfolioTags words={words}
                 selectedSkills={selectedSkills} previousSkills={previousSkills}
                 ></PortfolioTags>
-            </div>
             :
             ""
             }   

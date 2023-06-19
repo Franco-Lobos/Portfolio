@@ -11,26 +11,38 @@ const School = () =>{
 
     const [backlogDropDown, setBacklogDropDown] = useState(0);
 
+    const [resizeAdded, setResizeAdded] = useState(0);
+
     useEffect(()=>{
         if(!UocConst) return;
         setSchool(UocConst);
     },[]);
 
+    const centerCalifications = ()=>{
+            const doneAsignaturesCards = document.querySelectorAll('#done .kanban-column-cards .card-item');
+            const doneAsignaturesCalifications = document.querySelectorAll('#done .kanban-column-cards .card-item-calification');
+
+            if(!doneAsignaturesCards) return;
+
+            doneAsignaturesCards.forEach((asignature, indx)=>{
+                let thisCardCalification = doneAsignaturesCalifications[indx];
+                let hudreed = asignature.offsetWidth - thisCardCalification.offsetWidth;
+
+                let percent = school.asignatures?.find(asign=>asign.name === asignature.id).calification*0.1;
+                thisCardCalification.style.left = hudreed*percent + "px";
+            }
+        )
+    }
+
     useEffect(()=>{
-        const doneAsignaturesCards = document.querySelectorAll('#done .kanban-column-cards .card-item');
-        const doneAsignaturesCalifications = document.querySelectorAll('#done .kanban-column-cards .card-item-calification');
-
-        if(!doneAsignaturesCards) return;
-        doneAsignaturesCards.forEach((asignature, indx)=>{
-            console.log(asignature.offsetWidth);
-            // asignature.style.borderBottom = '10px solid red';
-            let thisCardCalification = doneAsignaturesCalifications[indx];
-            let hudreed = asignature.offsetWidth - thisCardCalification.offsetWidth;
-
-            let percent = school.asignatures.find(asign=>asign.name === asignature.id).calification*0.1;
-            thisCardCalification.style.left = hudreed*percent + "px";
-        })
-       
+        centerCalifications(); 
+        if(!resizeAdded){
+            window.addEventListener("resize",()=>{
+                centerCalifications();
+            });
+            setResizeAdded(1);
+        }
+ 
     },[school]);
 
     return (<>
@@ -48,7 +60,7 @@ const School = () =>{
                 <div className="school-kanban">
                     {
                     school.kanbanStatus.map((status)=>
-                        <div className="kanban-column" id={status}>
+                        <div className="kanban-column" id={status} key={status}>
                             <div className="kanban-column-title">{status.split("-").join(" ")}</div>
                             <div className="kanban-column-cards">
                                 {
@@ -57,7 +69,7 @@ const School = () =>{
                                     school.asignatures.filter(course=>course.status-1 === UocConst.kanbanStatus.indexOf(status))
                                         .map((courseCard)=>
                                     
-                                        <a target={"blank"} href={courseCard.link} className="card-item" id={courseCard.name}>
+                                        <a target={"blank"} href={courseCard.link} className="card-item" id={courseCard.name} key={courseCard}>
                                             <div className="card-item-title">{courseCard.name}</div>
                                             {
                                                 courseCard.calification
@@ -71,7 +83,7 @@ const School = () =>{
                                     :
                                     school.semesters.filter((semester)=>semester >= UocConst.planification.backlog)
                                         .map((semester)=>
-                                        <div  className="card-item" id={`semester-${semester}`} onClick={()=>backlogDropDown ===semester ? setBacklogDropDown(0) :setBacklogDropDown(semester)}>
+                                        <div  className="card-item" id={`semester-${semester}`} onClick={()=>backlogDropDown ===semester ? setBacklogDropDown(0) :setBacklogDropDown(semester)} key={semester}>
                                             <div className="card-item-title"> {`Semseter ${semester}`}</div>
                                             {
                                                 backlogDropDown === semester 

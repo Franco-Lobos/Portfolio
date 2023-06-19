@@ -32,7 +32,6 @@ const PortfolioTagSingle = ({ word, indx, last, selectedSkills, previousSkills})
             if(last){
                 tag.addEventListener("animationend",()=>{
                     window.dispatchEvent(prepareNextReady);
-
                 })
             }
         })

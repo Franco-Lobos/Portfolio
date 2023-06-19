@@ -4,16 +4,16 @@ export const WorksConst = {
         `CSS`, `Boostrap`,
         `CodeLite`, `Vs Code`, `PhpStorm`,
         `WordPress`,
-        `React`, `NodeJs`, `AJAX`,`Apache Cordova`, `P5.JS`,
+        `React`, `Node.Js`, `AJAX`,`Apache Cordova`, `P5.JS`,
         `Symphony`,  `Git`, `Linux`, `Assambler`
     ],
 
     proyects:[
         {
-            name: `This portfolio`,
+            name: `This web-page`,
             description: `React web app - P5.JS`,
             link: `https://github.com/franco-lobos/portfolio`,
-            keyWords: [`Git`, `P5.JS`, `NodeJs`, `React`, `Vs Code`, `CSS`],
+            keyWords: [`Git`, `P5.JS`, `Node.Js`, `React`, `Vs Code`, `CSS`],
             date: `20/06/23`,
             country: 'Andorra'
         },
@@ -22,7 +22,7 @@ export const WorksConst = {
             name: `MyDRINKS`,
             description: `Android .aab - React`,
             link: `https://play.google.com/store/apps/details?id=my.drinks.ginWrold`,
-            keyWords: [`NodeJs`, `React`, `Vs Code`, `CSS`, `Apache Cordova`],
+            keyWords: [`Node.Js`, `React`, `Vs Code`, `CSS`, `Apache Cordova`],
             date: `27/06/22`,
             country: 'Andorra'
         },
@@ -31,7 +31,7 @@ export const WorksConst = {
             name: `Barbershop`,
             description: `React web app`,
             link: `https://www.youtube.com/watch?v=1uv1puzJBnc`,
-            keyWords: [`NodeJs`, `React`, `Vs Code`, `CSS`, `Boostrap`],
+            keyWords: [`Node.Js`, `React`, `Vs Code`, `CSS`, `Boostrap`],
             date: `10/02/22`,
             country: 'República Dominicana'
         },

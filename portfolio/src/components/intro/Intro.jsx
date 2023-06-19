@@ -66,7 +66,6 @@ const Intro = ()=>{
     }
     
     useEffect(()=>{
-        console.log('writed:',writed)
         if (writed  === ProfileConst.intro.length +1 ){
             setDisappeear(1);
         }

@@ -32,19 +32,30 @@ const Sommelier = () =>{
 
     let colitions =[];
 
-    let scale = w*0.000115;
-    let totalMolecules = w*0.075;
+    const calculateRem=()=>{
+        return parseFloat(window.getComputedStyle(document.getElementById("foo")).fontSize)
+    }
+
+    const [rem, setRem] = useState(calculateRem());
+
+    let scale = 0.14 + (rem*rem/5000); //rem*rem  goes from 49 to 196 (until 1400px, then goes to 256)
+
+    let totalMolecules = rem*rem*0.6;
 
     let environment = {
         focused:0,
         focusedFinished:0,
-        maxVelocity: Math.sqrt(2),
-        minVelocity: 0.3,
+        // maxVelocity: Math.sqrt(2),
+        // minVelocity: 0.3,
+
+        maxVelocity: scale*10,
+        minVelocity: scale,
+
         defaultMaxVelocity: 1,
         defaultMinVelocity: 0.6,
         centerDot: {
             x: w * 0.5,
-            y: h * 0.4,
+            y: h * 0.35,
         },
         centerCoord:0,
         centerFraction: 0.08,
@@ -397,6 +408,7 @@ const Sommelier = () =>{
         window.onresize=()=>{
             adjustScreen(p5);
             p5.createCanvas(w, h).parent(canvasParentRef);
+            setRem(calculateRem());
         }        
 	};
 
