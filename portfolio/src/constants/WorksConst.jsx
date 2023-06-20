@@ -11,7 +11,7 @@ export const WorksConst = {
     proyects:[
         {
             name: `This web-page`,
-            description: `React web app - P5.JS`,
+            description: `This web page was built in React, using the P5.JS library to get the molecules interface done`,
             link: `https://github.com/franco-lobos/portfolio`,
             keyWords: [`Git`, `P5.JS`, `Node.Js`, `React`, `Vs Code`, `CSS`],
             date: `20/06/23`,
@@ -20,7 +20,7 @@ export const WorksConst = {
         
         {
             name: `MyDRINKS`,
-            description: `Android .aab - React`,
+            description: `An Android .aab built in React and compiled using Apache Cordova`,
             link: `https://play.google.com/store/apps/details?id=my.drinks.ginWrold`,
             keyWords: [`Node.Js`, `React`, `Vs Code`, `CSS`, `Apache Cordova`],
             date: `27/06/22`,
@@ -29,7 +29,7 @@ export const WorksConst = {
 
         {
             name: `Barbershop`,
-            description: `React web app`,
+            description: `A React web app with shopping cart and a backoffice panel`,
             link: `https://www.youtube.com/watch?v=1uv1puzJBnc`,
             keyWords: [`Node.Js`, `React`, `Vs Code`, `CSS`, `Boostrap`],
             date: `10/02/22`,
@@ -38,7 +38,7 @@ export const WorksConst = {
 
          {
             name: `Brooklyn Quick Pay Money`,
-            description: `Web page`,
+            description: `Responsive Web site`,
             link: `https://www.youtube.com/watch?v=ZhgVjkhELEA`,
             keyWords: [`Vs Code`, `HTML`, `CSS`, `Boostrap`],
             date: `20/04/22`,
@@ -47,7 +47,7 @@ export const WorksConst = {
 
         {
             name: `Qcero aberturas`,
-            description: `Custom plugin - video slider`,
+            description: `WordPres page in wich implemented a client-customizable video slider plugin built from scratch.`,
             link: `https://qcero.com.ar/#carrousel-video-title-slide-container-gll`,
             keyWords: [`WordPress`,`PHP`, `Vanilla JS`, `HTML`, `CSS`],
             date: `12/07/21`,
@@ -56,7 +56,7 @@ export const WorksConst = {
 
         {
             name: `Maño Manitas`,
-            description: `Personalized shortcodes - colaborator `,
+            description: `WordPress page in wich, as a colaborator,  I added some Personalized shortcodes. `,
             link: `https://goodhandsmanitas.com/`,
             keyWords: [`WordPress`,`PHP`, `HTML`, `CSS`],
             date: `08/09/22`,
@@ -65,7 +65,7 @@ export const WorksConst = {
 
         {
             name: `University traning`,
-            description: `Operating Systems - Computer Structure`,
+            description: `Relevant tecnologies studied in courses such as Operating Systems and Computer Structure`,
             link: `https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.623&idioma=ANG&pagina=PD_PREV_PORTAL`,
             keyWords: [`C`,`Linux`, `CodeLite`, `Assambler`],
             date: `08/09/22`,

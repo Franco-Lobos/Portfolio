@@ -18,7 +18,7 @@ export const ProfileConst = {
     job:{
         openToWork :1,
         openToRelocate :1,
-        salary : ["€30.000 - €36.000 "]
+        salary : ["€36.000"]
     },
 
     hobbies: ["Chess", "Guitar", "RPG games", "Wine tasting", "Cooking", "Snowboard"],
@@ -33,14 +33,14 @@ export const ProfileConst = {
         `In 2021 I learned about the information technology world.
         I took my first steps learning Python self-taught and working as a WordPress plugin developer
         for a local company.`,
-        ` Nowadays, I am studding an online <aid="link-0"/> at UOC,
-        meanhwile collaborating on different projects as a freelancer.`,
+        `During 2022, I immersed myself in learning React to improve my skills. I then had the opportunity to collaborate on various projects using this technology.`,
+        `Additionally, I decided to enroll in an online bachelor's degree program at UOC on June 2022. Meanwhile, I continued to work as a freelancer on different projects.`,
         `My goal is to make coding a full-time job in a consolidated company.`
     ],
 
     specialWords:[
         `creative`, `adaptation`, `python`, `wordpress`, `Bachelor's degree`, `consolidated`,
-        `bachelor's degree`, `Univesity`
+        `bachelor's degree`, `Univesity`, `React`
     ],
 
 

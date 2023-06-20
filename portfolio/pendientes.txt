@@ -3,15 +3,6 @@ PENDIENTE
 PORFOLIO:
 Mejorar desripciones
 
-RENDIMIENTO:
--Limppiar los time outs, set intervals (clearTimeout() y  clearInterval())
--Implementar libreria de matrices para optimizar el calculo y rendimiento
-- Trabajar con 1, 2 o ningun decimal
-- Evitar el uso de divisiones
-
-Moleculas:
-->Agregar un call to action para el texto, que no salga por defecto
-
 ------------------------------------------------------------------
 
 NEXT-VERSION:
@@ -24,6 +15,18 @@ NEXT-VERSION:
 
 SCHOOL:
 Kanban title => hover -> descripción breve 
+
+
+RENDIMIENTO:
+-Limppiar los time outs, set intervals (clearTimeout() y  clearInterval())
+
+-Implementar libreria de matrices para optimizar el calculo y rendimiento
+- Trabajar con 1, 2 o ningun decimal
+- Evitar el uso de divisiones
+
+Moleculas:
+->Agregar un call to action para el texto, que no salga por defecto
+
 
 ------------------------------------------------------------------
 
