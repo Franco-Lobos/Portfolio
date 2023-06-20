@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 
-// import WriteWithForSpan from "../../../../library/WriteWithForSpan";
+import WriteWithForSpan from "../../WriteWithForSpan";
 
 import { convertToCamelCase, capitalize} from "../../../../library/library";
 
@@ -112,7 +112,7 @@ const Description = ({useHook, MoleculeConst})=>{
                     }
                 <div className="description-body">
 
-                    {/* {
+                    {
                         moleculeChangeFlag 
                             ?
                             typeDescription.map((fr,indx)=>
@@ -124,7 +124,7 @@ const Description = ({useHook, MoleculeConst})=>{
                                 ></WriteWithForSpan>
                             )
                             :""
-                    } */}
+                    }
                 </div>
             </div>
     

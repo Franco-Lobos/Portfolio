@@ -1,5 +1,5 @@
 import { useEffect, useState} from "react";
-import { ProfileConst } from "../constants/ProfileConst";
+import { ProfileConst } from "../../constants/ProfileConst";
 
 const WriteWithForSpan = ({inptString="", specialWords=[], indx=0, writed , setWrited, delay = 100, veloc = 30})=>{
 
