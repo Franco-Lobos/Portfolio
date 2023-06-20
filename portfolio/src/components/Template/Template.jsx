@@ -8,8 +8,6 @@ import DinamicBody from "./DinamicBody";
 
 const Template = ()=>{
 
-    const [firts, setFirst] = useState(0);
-
     const [loaded, setLoad] = useState(0);
     const [path, setPath] = useState(0);
 
@@ -34,7 +32,7 @@ const Template = ()=>{
     useEffect(()=>{
         if(!localStorage.getItem("loaded")){
             localStorage.setItem("loaded", 1);
-            window.location.href = "/intro";
+            setPath("/intro");
         }
     },[])
 
