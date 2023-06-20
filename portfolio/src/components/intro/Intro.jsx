@@ -75,7 +75,6 @@ const Intro = ()=>{
         <div id='main-intro'>
             <div className='intro-text'>
                 <div className='intro-title'>
-                    {"title"}
                     {/* <WriteWithForSpan 
                         inptString="Hi, I am Franco Lobos" indx={0}
                         writed = {writed} setWrited={setWrited} delay={10} veloc={100}
@@ -86,13 +85,14 @@ const Intro = ()=>{
                     {
                     ProfileConst
                         ?
-                        ProfileConst.intro.map((fr,indx)=>
+                        "testing"
+                        // ProfileConst.intro.map((fr,indx)=>
                         // <WriteWithForSpan 
                         //     key={indx}
                         //     inptString={fr} specialWords={ProfileConst.specialWords} indx={indx+1}
                         //     writed = {writed} setWrited={setWrited} delay={10}
                         // ></WriteWithForSpan>
-                           )
+                        //    )
                         :""
                     }
                 </div>
