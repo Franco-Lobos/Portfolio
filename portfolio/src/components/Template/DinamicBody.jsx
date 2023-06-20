@@ -5,6 +5,7 @@ import Portfolio from "./body/Portfolio";
 import Sommelier from "./body/Sommelier";
 import HomeBody from "./body/HomeBody";
 import School from "./body/School";
+import Intro from "../intro/Intro";
 
 const DinamicBody = ({componentPath}) =>{
 
@@ -27,6 +28,10 @@ const DinamicBody = ({componentPath}) =>{
         case "/school":
             style='school-main';
             Routed = School;
+            break;
+
+        case "/intro":
+            Routed = Intro;
             break;
             
         default:
