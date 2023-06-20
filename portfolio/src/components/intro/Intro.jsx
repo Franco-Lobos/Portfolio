@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { ProfileConst } from "../../constants/ProfileConst";
 
-import WriteWithForSpan from '../../library/WriteWithForSpan';
+// import WriteWithForSpan from '../../library/WriteWithForSpan';
 
 
 const Intro = ()=>{
@@ -75,22 +75,23 @@ const Intro = ()=>{
         <div id='main-intro'>
             <div className='intro-text'>
                 <div className='intro-title'>
-                    <WriteWithForSpan 
+                    {"title"}
+                    {/* <WriteWithForSpan 
                         inptString="Hi, I am Franco Lobos" indx={0}
                         writed = {writed} setWrited={setWrited} delay={10} veloc={100}
                         style={{fontSize:"2rem"}}
-                    ></WriteWithForSpan>
+                    ></WriteWithForSpan> */}
                 </div>
                 <div className='intro-text-description'>
                     {
                     ProfileConst
                         ?
                         ProfileConst.intro.map((fr,indx)=>
-                        <WriteWithForSpan 
-                            key={indx}
-                            inptString={fr} specialWords={ProfileConst.specialWords} indx={indx+1}
-                            writed = {writed} setWrited={setWrited} delay={10}
-                        ></WriteWithForSpan>
+                        // <WriteWithForSpan 
+                        //     key={indx}
+                        //     inptString={fr} specialWords={ProfileConst.specialWords} indx={indx+1}
+                        //     writed = {writed} setWrited={setWrited} delay={10}
+                        // ></WriteWithForSpan>
                            )
                         :""
                     }
