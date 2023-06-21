@@ -7,7 +7,7 @@ import { ProfileConst } from "../../constants/ProfileConst";
 import WriteWithForSpan from '../Template/WriteWithForSpan';
 
 
-const Intro = ()=>{
+const Intro = ({setInitialized})=>{
 
     const[writed, setWrited] = useState(0);
     const[pageReady, setPageReady] = useState(0);
@@ -40,6 +40,7 @@ const Intro = ()=>{
                     setTimeout(() => {
                         // setPageReady(1);
                         window.location.href= "/"
+                        setInitialized(1);
                 }, 300);
                 }
             })

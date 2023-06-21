@@ -11,12 +11,12 @@ const Router = createBrowserRouter([
     path: "/*",
     element: <Template></Template>,
   }
+
   // ,
   // {
   //   path: "/intro",
   //   element: <Intro></Intro>,
   // }
-
 ]);
 
 export default Router

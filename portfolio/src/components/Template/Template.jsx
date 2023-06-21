@@ -8,6 +8,7 @@ import DinamicBody from "./DinamicBody";
 
 const Template = ()=>{
 
+    const [initialized, setInitialized] = useState(0);
     const [loaded, setLoad] = useState(0);
     const [path, setPath] = useState(0);
 
@@ -34,16 +35,23 @@ const Template = ()=>{
             localStorage.setItem("loaded", 1);
             setPath("/intro");
         }
+        else{
+            setInitialized(1);
+        }
     },[])
 
     return(
         <div id='home-main'>
-            <HeaderMain setLoad={setLoad} routes={routes} setPath={setPath}></HeaderMain>
+            {initialized
+            ?
+            <HeaderMain setLoad={setLoad} routes={routes}setPath={setPath}></HeaderMain>
+            :""
+            }
 
             {
-                loaded  === routes.length-1
+                loaded  === routes.length-1 || path == "/intro"
                 ?
-                <DinamicBody componentPath={path}></DinamicBody>
+                <DinamicBody componentPath={path} setInitialized={setInitialized}></DinamicBody>
                 :
                 ""
             }

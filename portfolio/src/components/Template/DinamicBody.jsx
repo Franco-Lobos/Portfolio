@@ -7,7 +7,7 @@ import HomeBody from "./body/HomeBody";
 import School from "./body/School";
 import Intro from "../intro/Intro";
 
-const DinamicBody = ({componentPath}) =>{
+const DinamicBody = ({componentPath, setInitialized}) =>{
 
     let Routed = HomeBody; //default
 
@@ -50,7 +50,7 @@ const DinamicBody = ({componentPath}) =>{
 
     return (
         <div id='home-body' className={style}>
-            <Routed>
+            <Routed setInitialized={setInitialized}>
             </Routed>
         </div>
     );
