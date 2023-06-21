@@ -8,6 +8,7 @@ const HomeBody = ()=>{
     const languages = ProfileConst.languages;
     const hobbies = ProfileConst.hobbies;
     const job = ProfileConst.job;
+    const contact = ProfileConst.contact;
 
     const [age, setAge] = useState(0);
 
@@ -64,7 +65,9 @@ const HomeBody = ()=>{
         
                     <span className="color-light-blue"> openToWork : </span> <span className="color-blue">{`${job.openToWork ? "true" :" false"}`}</span>, <br/>
                     <span className="color-light-blue"> openReloacate : </span> <span className="color-blue">{`${job.openToRelocate ? "true" :" false"}`}  </span>, <br/>
-                    <span className="color-light-blue"> salaryExpectation : </span> <span className="color-orange"> "{job.salary[0]}" </span>
+                    <span className="color-light-blue"> salaryExpectation : </span> <span className="color-orange"> "{job.salary[0]}" </span>, <br/>
+                    <span className="color-light-blue"> contact : </span> <a className="color-orange" href={`mailto:${contact.mail}`} target="_blank"> "{contact.mail}" </a>
+
                 </p>
                 <span className="color-purple">{`}`}</span>;
 

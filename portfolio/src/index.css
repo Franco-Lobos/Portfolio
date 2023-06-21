@@ -162,6 +162,19 @@ span.color-grey{ color: var(--grey)}
   .modal-card-main{
     top: 15%;
   }
+
+
+  #home-body-main{
+    left:0;
+    right: 0;
+    width: 80vw !important;
+    margin:0 auto;
+  }
+
+  #header-main{
+    width: 100vw !important;
+  }
+  
 }
 
 
@@ -175,6 +188,17 @@ span.color-grey{ color: var(--grey)}
   }
   .modal-card-main{
     top: 15%;
+  }
+
+  #home-body-main{
+    left:0;
+    right: 0;
+    width: 80vw !important;
+    margin:0 auto;
+  }
+
+  #header-main{
+    width: 100vw !important;
   }
 }
 
@@ -193,7 +217,7 @@ span.color-grey{ color: var(--grey)}
   #home-body-main{
     font-weight: 600 !important;
     line-height: 2rem !important;
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important;
   }
 
 }
@@ -215,8 +239,8 @@ span.color-grey{ color: var(--grey)}
   }
 
   #home-body-main{
-    line-height: 2.1rem !important;
-    font-size: 1.2rem !important;
+    line-height: 1.8rem !important;
+    font-size: 1rem !important;
   }
 }
 

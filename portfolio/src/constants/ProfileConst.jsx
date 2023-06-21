@@ -15,6 +15,11 @@ export const ProfileConst = {
 
     ],
 
+    contact:{
+        mail: "francolobos3@gmail.com",
+        pohone: "376649899",
+    },
+
     job:{
         openToWork :1,
         openToRelocate :1,
