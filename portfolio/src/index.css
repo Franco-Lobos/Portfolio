@@ -159,7 +159,9 @@ span.color-grey{ color: var(--grey)}
     min-width: 100vw ;
     padding: 1rem;
   }
-
+  .modal-card-main{
+    top: 15%;
+  }
 }
 
 
@@ -170,6 +172,9 @@ span.color-grey{ color: var(--grey)}
 
   .school-body{
     min-width: 95vw ;
+  }
+  .modal-card-main{
+    top: 15%;
   }
 }
 

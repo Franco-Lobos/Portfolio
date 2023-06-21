@@ -78,5 +78,6 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent ;
-    align-self: flex-end;
+    align-self: center;
+    text-align: center;
 }

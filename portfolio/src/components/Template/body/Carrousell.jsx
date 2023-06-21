@@ -120,6 +120,50 @@ const Carrousell = ({works, center, setTitle})=>{
                 calcCenter(telescope);
             });
 
+            let init ={x:0, y:0};
+            let dif ={x:0, y:0};
+
+            let translated = 0;
+
+            telescope.addEventListener('touchstart',(e)=>{
+                dif.x = 0;
+
+                init.x= e.touches[0].clientX;
+                init.y= e.touches[0].clientY;
+                
+                translated = window.getComputedStyle(telescope).transform;
+                translated = new WebKitCSSMatrix(translated).m41;
+            });
+
+            telescope.addEventListener('touchmove',(e)=>{
+                if(!init.x) return;
+
+                dif.x = init.x -e.touches[0].clientX;
+
+                if(Math.abs(dif.x)>5){
+                    telescope.style.transform = `translateX(${translated - dif.x}px)`;
+                }
+            })
+
+            telescope.addEventListener('touchend',(e)=>{
+                init.x =0;
+                init.y =0;
+                console.log(dif.x)
+                 if(dif.x > 50){
+                    console.log("add")
+                    document.getElementById("next").click();
+                    return;
+                }
+                if(dif.x < 50) {
+                    document.getElementById("prev").click();
+                    return;
+                }
+                else{
+                    telescope.style.transform = `translateX(${translated}px)`;
+                    translated=0;
+                    return;
+                }
+            })
             setEventsAdded(1);
         }
     },[]);

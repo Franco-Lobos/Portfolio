@@ -34,13 +34,13 @@ export const ProfileConst = {
         I took my first steps learning Python self-taught and working as a WordPress plugin developer
         for a local company.`,
         `During 2022, I immersed myself in learning React to improve my skills. I then had the opportunity to collaborate on various projects using this technology.`,
-        `Additionally, I decided to enroll in an online bachelor's degree program at UOC on June 2022. Meanwhile, I continued to work as a freelancer on different projects.`,
+        `Additionally, I decided to enroll in an online <aid="link-0"/> at UOC on June 2022. Meanwhile, I continued to work as a freelancer on different projects.`,
         `My goal is to make coding a full-time job in a consolidated company.`
     ],
 
     specialWords:[
         `creative`, `adaptation`, `python`, `wordpress`, `Bachelor's degree`, `consolidated`,
-        `bachelor's degree`, `Univesity`, `React`
+        `bachelor's degree`, `univesity`, `react`
     ],
 
 
