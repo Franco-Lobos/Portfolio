@@ -21,6 +21,7 @@
     height: 40vh;
     background-color: var(--dark-bg);
     border: solid 0.1rem var(--blue);
+    color: var(--grey);
     padding: 2rem;
     border-radius: 1rem;
     position: absolute;
@@ -136,6 +137,7 @@
     padding: 1rem;
     height: 70%;
     overflow-y:scroll;
+    color: var(--grey);
 }
 
 
@@ -148,6 +150,8 @@
     padding: 1rem;
     font-size: 1.5rem;
     width: 40%;
+    background-color: var(--dark-grey-10);
+    color: var(--grey);
 }
 
 
