@@ -27,7 +27,7 @@ export const UocConst = {
     asignatures:[
         {
             name:"Algebra",
-            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.600&idioma=ANG&pagina=PD_PREV_PORTAL",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.600&idioma=ANG&pagina=PD_PREV_PORTAL",
             status: 4,
             calification: 7.2,
             credits: 6,
@@ -35,7 +35,7 @@ export const UocConst = {
         },
         {
             name:"Web-based Teamwork",
-            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.604&idioma=ANG&pagina=PD_PREV_PORTAL",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.604&idioma=ANG&pagina=PD_PREV_PORTAL",
             status: 4,
             calification: 8.9,
             credits: 6,
@@ -44,7 +44,7 @@ export const UocConst = {
         },
         {
             name:"Computer Structure",
-            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.630&idioma=ANG&pagina=PD_PREV_PORTAL",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.630&idioma=ANG&pagina=PD_PREV_PORTAL",
             status: 4,
             calification: 8.7,
             credits: 6,
@@ -53,7 +53,7 @@ export const UocConst = {
         },
         {
             name:"Web Programming",
-            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.612&idioma=ANG&pagina=PD_PREV_PORTAL",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.612&idioma=ANG&pagina=PD_PREV_PORTAL",
             status: 4,
             calification: 7.9,
             credits: 6,
@@ -62,40 +62,40 @@ export const UocConst = {
         },
         {
             name:"Logic",
-            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.602&idioma=ANG&pagina=PD_PREV_PORTAL",
-            status: 3,
-            calification: 0,
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.602&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 4,
+            calification: 8.8,
             credits: 6,
             semseter:2,
         },
         {
             name:"Operating Systems",
             link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.623&idioma=ANG&pagina=PD_PREV_PORTAL",
-            status: 3,
-            calification: 0,
+            status: 4,
+            calification: 7,
             credits: 6,
             semseter:2,
         },
         {
             name:"Software Engineering",
-            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.615&idioma=ANG&pagina=PD_PREV_PORTAL",
-            status: 3,
-            calification: 0,
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.615&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 4,
+            calification: 7.3,
             credits: 6,
             semseter:2,
         },
         {
             name:"Fundamentals of Programming",
-            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.607&idioma=ANG&pagina=PD_PREV_PORTAL",
-            status: 3,
-            calification: 0,
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.607&idioma=ANG&pagina=PD_PREV_PORTAL",
+            status: 4,
+            calification: 8.4,
             credits: 6,
             semseter:2,
         },
 
         {
             name:"Object-Oriented Programming",
-            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.609&idioma=ANG&pagina=PD_PREV_PORTAL",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.609&idioma=ANG&pagina=PD_PREV_PORTAL",
             status: 2,
             calification: 0,
             credits: 6,
@@ -111,7 +111,7 @@ export const UocConst = {
         },
         {
             name:"Programming in practice",
-            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.608&idioma=ANG&pagina=PD_PREV_PORTAL",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.608&idioma=ANG&pagina=PD_PREV_PORTAL",
             status: 2,
             calification: 0,
             credits: 6,
@@ -119,7 +119,7 @@ export const UocConst = {
         },
         {
             name:"Web Standards and Languages",
-            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.611&idioma=ANG&pagina=PD_PREV_PORTAL",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.611&idioma=ANG&pagina=PD_PREV_PORTAL",
             status: 2,
             calification: 0,
             credits: 6,
@@ -128,7 +128,7 @@ export const UocConst = {
 
         {
             name:"Introduction to databases",
-            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.621&idioma=ANG&pagina=PD_PREV_PORTAL",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.621&idioma=ANG&pagina=PD_PREV_PORTAL",
             status: 1,
             calification: 0,
             credits: 6,
@@ -211,7 +211,7 @@ export const UocConst = {
         },
         {
             name:"Human-Computer Interaction",
-            link: "http://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.620&idioma=ANG&pagina=PD_PREV_PORTAL",
+            link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.620&idioma=ANG&pagina=PD_PREV_PORTAL",
             status: 1,
             calification: 0,
             credits: 6,
