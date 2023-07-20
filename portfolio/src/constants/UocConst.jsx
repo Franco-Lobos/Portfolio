@@ -94,6 +94,15 @@ export const UocConst = {
         },
 
         {
+            name:"Meta Front end Certifications",
+            link: "https://www.coursera.org/professional-certificates/meta-front-end-developer",
+            status: 3,
+            calification: 0,
+            credits: 0,
+            semseter: 2,
+        },
+
+        {
             name:"Object-Oriented Programming",
             link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.609&idioma=ANG&pagina=PD_PREV_PORTAL",
             status: 2,
