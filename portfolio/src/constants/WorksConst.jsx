@@ -47,7 +47,7 @@ export const WorksConst = {
 
         {
             name: `Qcero aberturas`,
-            description: `WordPres page in wich implemented a client-customizable video slider plugin built from scratch.`,
+            description: `s page in wich implemented a client-customizable video slider plugin built from scratch.`,
             link: `https://qcero.com.ar/#carrousel-video-title-slide-container-gll`,
             keyWords: [`WordPress`,`PHP`, `Vanilla JS`, `HTML`, `CSS`],
             date: `12/07/21`,
