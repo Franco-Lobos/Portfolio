@@ -94,10 +94,10 @@ export const UocConst = {
         },
 
         {
-            name:"Meta Front-End Developer Professional Certificate",
-            link: "https://www.coursera.org/professional-certificates/meta-front-end-developer",
+            name:"Meta Certificated Front-End Developer",
+            link: "https://www.coursera.org/account/accomplishments/professional-cert/475FRDAP7ECE",
             status: 4,
-            calification: 0,
+            calification: 9.7,
             credits: 0,
             semseter: 2,
         },

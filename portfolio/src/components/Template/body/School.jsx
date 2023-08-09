@@ -34,6 +34,22 @@ const School = () =>{
         )
     }
 
+    const sortByCalification = (arr, propertyName ='calification', order = 'descending') => {
+        const sortedArr = arr.sort((a, b) => {
+          if (a[propertyName] < b[propertyName]) {
+            return -1;
+          }
+          if (a[propertyName] > b[propertyName]) {
+            return 1;
+          }
+          return 0;
+        });
+        if (order === 'descending') {
+          return sortedArr.reverse();
+        }
+        return sortedArr;
+      };
+
     useEffect(()=>{
         centerCalifications(); 
         if(!resizeAdded){
@@ -66,9 +82,9 @@ const School = () =>{
                                 {
                                     status !== "backlog"
                                     ?
-                                    school.asignatures.filter(course=>course.status-1 === UocConst.kanbanStatus.indexOf(status))
+                                    sortByCalification(school.asignatures.filter(course=>course.status-1 === UocConst.kanbanStatus.indexOf(status)))
                                         .map((courseCard)=>
-                                    
+
                                         <a target={"blank"} href={courseCard.link} className="card-item" id={courseCard.name} key={courseCard}>
                                             <div className="card-item-title">{courseCard.name}</div>
                                             {
@@ -78,7 +94,7 @@ const School = () =>{
                                                 :""
                                             }
                                         </a>
-                                        
+
                                     )
                                     :
                                     school.semesters.filter((semester)=>semester >= UocConst.planification.backlog)
