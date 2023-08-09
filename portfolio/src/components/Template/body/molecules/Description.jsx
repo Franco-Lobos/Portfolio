@@ -72,10 +72,6 @@ const Description = ({useHook, MoleculeConst})=>{
     },[moleculeTypeActive, moleculeType]);
 
     useEffect(()=>{
-        // setMoleculeChangeFlag(0);
-        // setTimeout(()=>{
-        //     setMoleculeChangeFlag(1);
-        // }, 10)
         setMoleculeChangeFlag(0);
 
     },[typeDescription, skip]);
