@@ -96,7 +96,7 @@ export const UocConst = {
         {
             name:"Meta Front-End Developer Professional Certificate",
             link: "https://www.coursera.org/professional-certificates/meta-front-end-developer",
-            status: 3,
+            status: 4,
             calification: 0,
             credits: 0,
             semseter: 2,
@@ -129,10 +129,10 @@ export const UocConst = {
         {
             name:"Web Standards and Languages",
             link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.611&idioma=ANG&pagina=PD_PREV_PORTAL",
-            status: 2,
+            status: 1,
             calification: 0,
             credits: 6,
-            semseter:3,
+            semseter:4,
         },
 
         {
