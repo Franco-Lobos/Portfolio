@@ -82,14 +82,22 @@
 
     color: var(--dark-bg);
     cursor: pointer;
+    height: 100%;
+    width: 15vw;
+    display: flex;
+    align-items: center;
 }
 
 .carrousell-arrows#next{
-    right: 6vw;
+    right: 0;
+    justify-content: flex-start;
+    padding-left: 2vw;
 }
 
 .carrousell-arrows#prev{
-    left: 6vw;
+    left: 0;
+    justify-content: flex-end;
+    padding-right: 2vw;
 }
 
 .card-meta{
