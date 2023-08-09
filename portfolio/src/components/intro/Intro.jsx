@@ -10,9 +10,12 @@ import WriteWithForSpan from '../Template/WriteWithForSpan';
 const Intro = ({setInitialized})=>{
 
     const[writed, setWrited] = useState(0);
-    const[pageReady, setPageReady] = useState(0);
 
     const[disappear, setDisappeear] = useState(0);
+
+    const [skip, setSkip] = useState(30);
+    const [flag, setFlag] = useState(0);
+
 
     const disappearRandom=(element, last = 1)=>{
         let randTime = (Math.floor(Math.random()*10)*100*last + 300 );
@@ -25,9 +28,10 @@ const Intro = ({setInitialized})=>{
     }
 
     const disappearText=()=>{
-        if(pageReady) return;
+        console.log(ProfileConst.intro.length)
+        console.log(writed)
 
-        if( ProfileConst.intro.length+1 ===writed){
+        if( ProfileConst.intro.length <= writed){
             const parragraphs = document.querySelectorAll('.intro-text-description p');
             const title = document.querySelector('.intro-title p');
 
@@ -36,7 +40,7 @@ const Intro = ({setInitialized})=>{
             })
 
             title.addEventListener('transitionend', e=>{
-                if(e.target===title && !pageReady){
+                if(e.target===title ){
                     setTimeout(() => {
                         // setPageReady(1);
                         window.location.href= "/"
@@ -65,32 +69,54 @@ const Intro = ({setInitialized})=>{
 
         }
     }
-    
+
+    useEffect(()=>{
+        setFlag(0);
+    },[skip]);
+
+    useEffect(()=>{
+        if(!flag){
+            setFlag(1);
+
+        }
+    },[flag]);
+
     useEffect(()=>{
         if (writed  === ProfileConst.intro.length +1 ){
             setDisappeear(1);
         }
-    },[writed]);
+    },[writed, skip]);
+
+    useEffect(()=>{
+        const skipButton = document.getElementById('skiping-button');
+        if(!skipButton) return
+        skipButton.addEventListener('animationstart', ()=>{
+            skipButton.style.opacity = '1';
+        })
+    },[])
 
     return(
         <div id='main-intro'>
             <div className='intro-text'>
                 <div className='intro-title'>
+                {flag?
                     <WriteWithForSpan 
                         inptString="Hi, I am Franco Lobos" indx={0}
-                        writed = {writed} setWrited={setWrited} delay={10} veloc={100}
+                        writed = {writed} setWrited={setWrited} delay={10} veloc={skip}
                         style={{fontSize:"2rem"}}
                     ></WriteWithForSpan>
+                :""
+                }
                 </div>
                 <div className='intro-text-description'>
                     {
-                    ProfileConst
+                    flag
                         ?
                         ProfileConst.intro.map((fr,indx)=>
                         <WriteWithForSpan 
                             key={indx}
                             inptString={fr} specialWords={ProfileConst.specialWords} indx={indx+1}
-                            writed = {writed} setWrited={setWrited} delay={10}
+                            writed = {writed} setWrited={setWrited} delay={10} veloc={skip}
                         ></WriteWithForSpan>
                            )
                         :""
@@ -100,7 +126,8 @@ const Intro = ({setInitialized})=>{
                     disappear
                     ?
                     <button id="main-go-button" onClick={()=>disappearText()}> Go!</button>
-                    :""
+                    :
+                    <div id="skiping-button" onClick={()=>setSkip(0)}> Skip</div>
                 }
             </div>
         </div>

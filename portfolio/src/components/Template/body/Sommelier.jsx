@@ -21,7 +21,7 @@ const Sommelier = () =>{
     let w = window.innerWidth;
     let h = window.innerHeight;
 
-    let colors = {};    
+    let colors = {};
     let colorsRoot = ['purpule', 'orange', 'blue', 'light-blue', 'green', 'dark-bg', 'dark-grey','dark-bg', 'grey'];
     colorsRoot.forEach(color=>{
         let colorObjBuf = getRGB(color);
@@ -158,14 +158,14 @@ const Sommelier = () =>{
             thisMolecule.position.sub(correctionVector);
         // }
 
-        
+
         // get angle of distanceVect
         let theta = distanceVect.heading();
         // precalculate trig values
         let sine = Math.sin(theta);
         let cosine = Math.cos(theta);
 
-        /* bTemp will hold rotated ball this.positions. You 
+        /* bTemp will hold rotated ball this.positions. You
          just need to worry about bTemp[1] this.position*/
         let bTemp = [new p5.Vector(), new p5.Vector()];
 
@@ -204,13 +204,13 @@ const Sommelier = () =>{
           (thisMolecule.m + otherMolecule.m);
         vFinal[1].y = vTemp[1].y;
 
- 
+
         // hack to avoid clumping
         bTemp[0].x += vFinal[0].x;
         bTemp[1].x += vFinal[1].x;
 
         /* Rotate ball this.positions and velocities back
-         Reverse signs in trig expressions to rotate 
+         Reverse signs in trig expressions to rotate
          in the opposite direction */
         // rotate balls
         let bFinal = [new p5.Vector(), new p5.Vector()];
@@ -354,7 +354,7 @@ const Sommelier = () =>{
                 moleculeGroup.moleculeData.map((thisMolecule)=>{
                     thisMolecule.focused=0;
                     thisMolecule.focusedFinished = 0;
-                    thisMolecule.focusedPercent = 0;   
+                    thisMolecule.focusedPercent = 0;
                     thisMolecule.focusedModule = 0;
                 })
             })

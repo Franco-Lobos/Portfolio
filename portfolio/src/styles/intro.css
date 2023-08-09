@@ -18,6 +18,18 @@
     transition: all ease-in-out 1s;
 }
 
+#main-intro #skiping-button{
+    /* position: relative; */
+    right: 5vw;
+    bottom: 5vh;
+    font-size: 2rem;
+    text-align: right;
+    width: fit-content;
+    animation: spawn 1s;
+    animation-delay: 2s;
+    opacity: 0;
+}
+
 #main-intro button{
     font-size: 1.5rem;
     font-weight: 800;
@@ -25,7 +37,6 @@
     width: 100%;
     margin: 1rem 0;
 }
-
 
 .intro-text{
     width: 70%;
