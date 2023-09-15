@@ -12,7 +12,7 @@ export const WorksConst = {
         {
             name: `My company web site`,
             description: `Built in React, this website serves as my company's landing page.`,
-            link: `https://klugerbyte.app/`,
+            link: `https://klugerbyte.com/`,
             keyWords: [`Git`, `React`,`Node.Js`,  `HTML`, `CSS`],
             date: `03/08/23`,
             country: 'Andorra'
