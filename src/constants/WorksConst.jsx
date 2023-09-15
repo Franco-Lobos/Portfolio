@@ -45,6 +45,16 @@ export const WorksConst = {
             country: 'Andorra'
         },
 
+
+        {
+            name: `Maño Manitas`,
+            description: `WordPress page in wich, as a colaborator,  I added some Personalized shortcodes. `,
+            link: `https://goodhandsmanitas.com/`,
+            keyWords: [`WordPress`,`PHP`, `HTML`, `CSS`],
+            date: `08/09/22`,
+            country: 'España'
+        },
+
         {
             name: `Barbershop`,
             description: `A React web app with shopping cart and a backoffice panel`,
@@ -70,15 +80,6 @@ export const WorksConst = {
             keyWords: [`WordPress`,`PHP`, `Vanilla JS`, `HTML`, `CSS`],
             date: `12/07/21`,
             country: 'Argentina'
-        },
-
-        {
-            name: `Maño Manitas`,
-            description: `WordPress page in wich, as a colaborator,  I added some Personalized shortcodes. `,
-            link: `https://goodhandsmanitas.com/`,
-            keyWords: [`WordPress`,`PHP`, `HTML`, `CSS`],
-            date: `08/09/22`,
-            country: 'España'
         },
 
         {
