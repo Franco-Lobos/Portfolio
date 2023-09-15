@@ -46,7 +46,7 @@ export const ProfileConst = {
         `As a highly skilled Front-End developer certified by Meta, I possess a strong knowledge of React.js, Node.js, JavaScript, HTML, and CSS. I am confident that I meet the requirements for a wide range of front-end projects, from completely interactive web applications to fully customizable websites.`,
         `My experience also extends to server-side technologies, PHP included. I have demonstrated my proficiency through contributions to various WordPress projects, including personalized plugin development, shortcode creation, and collaboration on simple websites.`,
         `In order to formalize my career as a software developer, I am pursing a <aid="link-0"/> at UOC. Currently, I am in the process of starting my third semester at this university, having completed 8 out of 29 courses.`,
-        `Carrying that experience in my toolkit, I'm presently in the process of establishing an Estonian company. My focus is on building enduring relationships with professional IT ` ,`I'd appreciate it if you could take a moment to visit this portfolio website to learn more about my background.`
+        `Carrying that experience in my toolkit, I'm presently in the process of establishing my own company based in Estonia. My focus is on building enduring relationships with professional IT organizations.` ,`I'd appreciate it if you could take a moment to visit this portfolio website to learn more about my background.`
     ],
 
     specialWords:[
