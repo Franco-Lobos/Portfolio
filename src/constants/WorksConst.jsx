@@ -11,10 +11,10 @@ export const WorksConst = {
     proyects:[
         {
             name: `My company web site`,
-            description: `Built in React, this website serves as my company's landing page. Although the domain hasn't been purchased yet, the page is almost ready for production`,
-            link: `https://gorgeous-fenglisu-4e647e.netlify.app/`,
+            description: `Built in React, this website serves as my company's landing page.`,
+            link: `https://klugerbyte.app/`,
             keyWords: [`Git`, `React`,`Node.Js`,  `HTML`, `CSS`],
-            date: `20/06/23`,
+            date: `03/08/23`,
             country: 'Andorra'
         },        
         
@@ -32,7 +32,7 @@ export const WorksConst = {
             description: `This design was created as a proposal for a design contest, and currently, only a few features have been implemented and are functional`,
             link: `https://main--poetic-daffodil-5c8119.netlify.app/`,
             keyWords: [`Git`, `React`,`Node.Js`,  `HTML`, `CSS`],
-            date: `20/06/23`,
+            date: `08/09/23`,
             country: 'Andorra'
         },
         
