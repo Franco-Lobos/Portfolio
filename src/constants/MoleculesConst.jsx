@@ -36,7 +36,7 @@ export const MoleculeConst = {
 
     ethanol:{
         description:[
-            `Ethanol is a simple alcohol responsible for ethanol intoxication (it gets people drunk). Contrary to their "neighbors"  alcohols ingestion, (Methanol and Propanol ), humans' evolution provide us with an ethanol tolerance which allowed our ancestors to eat fruits even when they were "rotten.`,
+            `Ethanol is a simple alcohol responsible for ethanol intoxication (it gets people drunk). Contrary to their "neighbors"  alcohols ingestion, (Methanol and Propanol ), humans' evolution provide us with an ethanol tolerance which allowed our ancestors to eat fruits even when they were "rotten".`,
         
             `Ethanol appears in these fruits through the fermentation of the natural sugars contained in them, which get metabolized by yeast. Yeast is a fungus that has a presence in almost every natural environment and gets attached to the grape by the same structure that grape peels cells provide.`,
             
@@ -44,7 +44,7 @@ export const MoleculeConst = {
             
             `So, the most relevant fermentation products are:`,
             
-            `Ethanol: all the ethanol managed in wine comes from yeast fermentation, which is why the ethanol concentration in wine will get limited by the sugar contained in the grape. In addition, factors such as temperature ( directly proportional to ethanol production.) or pH during this fermentation will affect yeast performance and, in consequence, the ethanol concentration.`,
+            `Ethanol: all the ethanol managed in wine comes from yeast fermentation, which is why the ethanol concentration in wine will get limited by the sugar contained in the grape. In addition, factors such as temperature ( directly proportional to ethanol production) or pH during this fermentation will affect yeast performance and, in consequence, the ethanol concentration.`,
             
             `Carbon dioxide: it will be conservated only in sparklings. Otherwise, we are talking about still wine, which elaborating process should liberate Carbon dioxide from the wine.`,
             `We will discuss Glicerol in its respective molecule.`,
