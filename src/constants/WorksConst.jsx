@@ -10,10 +10,28 @@ export const WorksConst = {
 
     proyects:[
         {
+            name: `My company web site`,
+            description: `Built in React, this website serves as my company's landing page. Although the domain hasn't been purchased yet, the page is almost ready for production`,
+            link: `https://gorgeous-fenglisu-4e647e.netlify.app/`,
+            keyWords: [`Git`, `React`,`Node.Js`,  `HTML`, `CSS`],
+            date: `20/06/23`,
+            country: 'Andorra'
+        },        
+        
+        {
             name: `This web-page`,
             description: `This web page was built in React, using the P5.JS library to get the molecules interface done`,
             link: `https://github.com/franco-lobos/portfolio`,
             keyWords: [`Git`, `P5.JS`, `Node.Js`, `React`, `Vs Code`, `CSS`],
+            date: `20/06/23`,
+            country: 'Andorra'
+        },
+
+        {
+            name: `Pooling web demo`,
+            description: `This design was created as a proposal for a design contest, and currently, only a few features have been implemented and are functional`,
+            link: `https://main--poetic-daffodil-5c8119.netlify.app/`,
+            keyWords: [`Git`, `React`,`Node.Js`,  `HTML`, `CSS`],
             date: `20/06/23`,
             country: 'Andorra'
         },
