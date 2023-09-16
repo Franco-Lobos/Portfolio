@@ -82,7 +82,7 @@ const School = () =>{
                                 {
                                     status !== "backlog"
                                     ?
-                                    sortByCalification(school.asignatures.filter(course=>course.status-1 === UocConst.kanbanStatus.indexOf(status)))
+                                    sortByCalification(school.asignatures.filter(course=>course.status-1 === UocConst.kanbanStatus.indexOf(status)),'calification' ,status== 'done' ? 'descending' : '' )
                                         .map((courseCard)=>
 
                                         <a target={"blank"} href={courseCard.link} className="card-item" id={courseCard.name} key={courseCard}>

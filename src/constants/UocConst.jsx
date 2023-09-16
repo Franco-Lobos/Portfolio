@@ -11,9 +11,9 @@ export const UocConst = {
     planification:{
         semesters: 8,
         done: 1,
-        doing: 2,
-        todo:3,
-        backlog:4,
+        doing: 3,
+        todo: 4,
+        backlog:5,
     },
 
     kanbanStatus:[
@@ -105,7 +105,7 @@ export const UocConst = {
         {
             name:"Object-Oriented Programming",
             link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.609&idioma=ANG&pagina=PD_PREV_PORTAL",
-            status: 2,
+            status: 3,
             calification: 0,
             credits: 6,
             semseter:3,
@@ -113,7 +113,7 @@ export const UocConst = {
         {
             name:"Software Design Patterns",
             link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.617&idioma=ANG&pagina=PD_PREV_PORTAL",
-            status: 2,
+            status: 3,
             calification: 0,
             credits: 6,
             semseter:3,
@@ -121,7 +121,7 @@ export const UocConst = {
         {
             name:"Programming in practice",
             link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.608&idioma=ANG&pagina=PD_PREV_PORTAL",
-            status: 2,
+            status: 3,
             calification: 0,
             credits: 6,
             semseter:3,
@@ -129,7 +129,7 @@ export const UocConst = {
         {
             name:"Web Standards and Languages",
             link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.611&idioma=ANG&pagina=PD_PREV_PORTAL",
-            status: 1,
+            status: 2,
             calification: 0,
             credits: 6,
             semseter:4,
@@ -138,7 +138,7 @@ export const UocConst = {
         {
             name:"Introduction to databases",
             link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.621&idioma=ANG&pagina=PD_PREV_PORTAL",
-            status: 1,
+            status: 2,
             calification: 0,
             credits: 6,
             semseter:4,
@@ -146,7 +146,7 @@ export const UocConst = {
         {
             name:"Networks and Internet Applications",
             link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.625&idioma=ANG&pagina=PD_PREV_PORTAL",
-            status: 1,
+            status: 2,
             calification: 0,
             credits: 6,
             semseter:4,
@@ -154,7 +154,7 @@ export const UocConst = {
         {
             name:"Entrepreneurship",
             link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.606&idioma=ANG&pagina=PD_PREV_PORTAL",
-            status: 1,
+            status: 2,
             calification: 0,
             credits: 6,
             semseter:4,
@@ -162,7 +162,7 @@ export const UocConst = {
         {
             name:"Business and IT Management",
             link: "https://cv.uoc.edu/tren/trenacc/web/GAT_EXP.PLANDOCENTE?any_academico=20222&cod_asignatura=22.616&idioma=ANG&pagina=PD_PREV_PORTAL",
-            status: 1,
+            status: 2,
             calification: 0,
             credits: 6,
             semseter:4,
