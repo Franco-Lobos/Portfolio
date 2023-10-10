@@ -64,10 +64,10 @@ const HomeBody = ()=>{
                     <span className="color-purple">{`]`}</span>,<br/>
         
                     <span className="color-light-blue"> openToWork : </span> <span className="color-blue">{`${job.openToWork ? "true" :" false"}`}</span>, <br/>
-                    <span className="color-light-blue"> openReloacate : </span> <span className="color-blue">{`${job.openToRelocate ? "true" :" false"}`}</span>, <br/>
+                    {/* <span className="color-light-blue"> openReloacate : </span> <span className="color-blue">{`${job.openToRelocate ? "true" :" false"}`}</span>, <br/> */}
                     <span className="color-light-blue"> contact : </span> <a className="color-orange" href={`mailto:${contact.mail}`} target="_blank"> "{contact.mail}"</a>, <br/>
                     <span className="color-light-blue"> linkedIn : </span> <a className="color-orange" href={`${contact.linkedIn}`} target="_blank"> "{contact.linkedIn}"</a>, <br/>
-                    <span className="color-light-blue"> gitHub : </span> <a className="color-orange" href={`${contact.gitHub}`} target="_blank"> "{contact.gitHub}"</a>, <br/>
+                    <span className="color-light-blue"> gitHub : </span> <a className="color-orange" href={`${contact.gitHub}`} target="_blank"> "{contact.gitHub}"</a> <br/>
 
                 </p>
                 <span className="color-purple">{`}`}</span>;

@@ -5,7 +5,7 @@ export const WorksConst = {
         `CodeLite`, `Vs Code`, `PhpStorm`,
         `WordPress`,
         `React`, `Node.Js`, `AJAX`,`Apache Cordova`, `P5.JS`,
-        `Symphony`,  `Git`, `Linux`, `Assambler`
+        `Symphony`,  `Git`, `Linux`, `Assambler`,  `Figma`,  `UX/UI`
     ],
 
     proyects:[
@@ -13,7 +13,7 @@ export const WorksConst = {
             name: `My company web site`,
             description: `Built in React, this website serves as my company's landing page.`,
             link: `https://klugerbyte.com/`,
-            keyWords: [`Git`, `React`,`Node.Js`,  `HTML`, `CSS`],
+            keyWords: [`Git`, `React`,`Node.Js`,  `HTML`, `CSS`,  `Figma`, `UX/UI`],
             date: `03/08/23`,
             country: 'Andorra'
         },        
@@ -22,7 +22,7 @@ export const WorksConst = {
             name: `This web-page`,
             description: `This web page was built in React, using the P5.JS library to get the molecules interface done`,
             link: `https://github.com/franco-lobos/portfolio`,
-            keyWords: [`Git`, `P5.JS`, `Node.Js`, `React`, `Vs Code`, `CSS`],
+            keyWords: [`Git`, `P5.JS`, `Node.Js`, `React`, `Vs Code`, `CSS`, `Vanilla JS`],
             date: `20/06/23`,
             country: 'Andorra'
         },
