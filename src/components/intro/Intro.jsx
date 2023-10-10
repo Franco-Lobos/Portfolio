@@ -127,7 +127,7 @@ const Intro = ({setInitialized})=>{
                     ?
                     <button id="main-go-button" onClick={()=>disappearText()}> Go!</button>
                     :
-                    <div id="skiping-button" onClick={()=>setSkip(0)}> Skip</div>
+                    <div id="skiping-button" onClick={()=>setSkip(1)}> Skip</div>
                 }
             </div>
         </div>
