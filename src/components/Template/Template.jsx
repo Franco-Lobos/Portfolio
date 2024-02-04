@@ -56,7 +56,11 @@ const Template = ()=>{
                 :
                 ""
             }
+            {initialized
+            ?
             <FooterMain></FooterMain>
+            :""
+            }
         </div>
     )
 };
