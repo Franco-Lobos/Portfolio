@@ -17,7 +17,7 @@
 
     display: grid;
     grid-template-rows: 1fr 6fr;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .school-title,

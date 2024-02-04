@@ -5,6 +5,7 @@ import '../../styles/template.css'
 import HeaderMain from "./header/HeaderMain";
 
 import DinamicBody from "./DinamicBody";
+import FooterMain from "./header/Footer";
 
 const Template = ()=>{
 
@@ -55,6 +56,7 @@ const Template = ()=>{
                 :
                 ""
             }
+            <FooterMain></FooterMain>
         </div>
     )
 };

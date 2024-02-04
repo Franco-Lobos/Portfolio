@@ -45,7 +45,6 @@ export const WorksConst = {
             country: 'Andorra'
         },
 
-
         {
             name: `Maño Manitas`,
             description: `WordPress page in wich, as a colaborator,  I added some Personalized shortcodes. `,
@@ -53,6 +52,15 @@ export const WorksConst = {
             keyWords: [`WordPress`,`PHP`, `HTML`, `CSS`],
             date: `08/09/22`,
             country: 'España'
+        },
+
+        {
+            name: `Baestic`,
+            description: `WordPress web site for an IT company`,
+            link: `https://baestic.com/`,
+            keyWords: [`WordPress`,`CSS`],
+            date: `08/09/22`,
+            country: 'Andorra'
         },
 
         {
