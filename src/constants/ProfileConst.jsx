@@ -1,37 +1,38 @@
 export const ProfileConst = {
-    personals:{
-        name:"Franco",
+    personals: {
+        name: "Franco",
         lastName: "Lobos",
         nationality: "Argentino",
         livesIn: "Andorra",
         birth: "1996-01-19T09:05:00.000Z"
     },
 
-    languages:[
-        {name: "Español", level: "Native"},
-        {name: "English", level: "B2"},
-        {name: "Català", level: "A1"},
-        {name: "Deutsch", level: "Ich lerne..."}
+    languages: [
+        { name: "Español", level: "Native" },
+        { name: "English", level: "B2" },
+        { name: "Català", level: "A1" },
+        { name: "Deutsch", level: "Ich lerne..." }
 
     ],
 
-    contact:{
+    contact: {
         mail: "francolobos3@gmail.com",
         pohone: "376649899",
         linkedIn: 'https://www.linkedin.com/in/franco-lobos-7142269a/',
         gitHub: 'https://github.com/Franco-Lobos',
     },
 
-    job:{
-        openToWork :1,
-        openToRelocate :1,
+    job: {
+        openToWork: 1,
+        openToCollaborate: 1,
+        openToRelocate: 1,
     },
 
-    hobbies: ["Chess", "Guitar", "RPG games", "Wine tasting", "Cooking", "Snowboard"],
+    hobbies: ["Chess", "Coins collection", "Snowboard", "Guitar", "RPG games", "Wine tasting", "Cooking"],
 
 
-    intro:[`
-        About me?`, 
+    intro: [`
+        About me?`,
         // 'Generic example creative example lorem ispun consolidated',
         // `I have always driven my gastronomic projects.
         // I also had my own restaurant, wine brand, and drinks brand. 
@@ -46,19 +47,19 @@ export const ProfileConst = {
         `As a highly skilled Front-End developer certified by Meta, I possess a strong knowledge of React.js, Node.js, JavaScript, HTML, and CSS. I am confident that I meet the requirements for a wide range of front-end projects, from completely interactive web applications to fully customizable websites.`,
         `My experience also extends to server-side technologies, PHP included. I have demonstrated my proficiency through contributions to various WordPress projects, including personalized plugin development, shortcode creation, and collaboration on simple websites.`,
         `In order to formalize my career as a software developer, I am pursing a <aid="link-0"/> at UOC. Currently, I am in the process of starting my third semester at this university, having completed 8 out of 29 courses.`,
-        `Carrying that experience in my toolkit, I'm presently in the process of establishing my own company based in Estonia. My focus is on building enduring relationships with professional IT organizations.` ,`I'd appreciate it if you could take a moment to visit this portfolio website to learn more about my background.`
+        `Carrying that experience in my toolkit, I'm presently in the process of establishing my own company based in Estonia. My focus is on building enduring relationships with professional IT organizations.`, `I'd appreciate it if you could take a moment to visit this portfolio website to learn more about my background.`
     ],
 
-    specialWords:[
+    specialWords: [
         `skilled`, `certified by meta`, `strong`, `interactive`, `php`, `university`, `react`, `personalized`, `javascript`, `software`, `developer`, `company`, `enduring`, `professional`
     ],
 
 
-    links:[
+    links: [
         {
             id: 0,
             text: "Bachelor's degree in Software Development",
-            href:"https://studies.uoc.edu/en/bachelors-degrees/software-development/study-plan"
+            href: "https://studies.uoc.edu/en/bachelors-degrees/software-development/study-plan"
         }
     ]
 }
