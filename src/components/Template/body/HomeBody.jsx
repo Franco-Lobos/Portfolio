@@ -31,17 +31,17 @@ const HomeBody = () => {
             <div id={"home-body-main"}>
                 <br />
                 <span className="color-blue">const</span> <span className="color-light-blue">Personals</span> = <span className="color-purple">{`{`}</span>
-                <p style={{ paddingLeft: "4rem", margin: "1rem" }}>
+                <div style={{ paddingLeft: "4rem", margin: "1rem" }}>
                     <span className="color-light-blue"> fullName : </span> <span className="color-orange">{`"${profile.name} ${profile.lastName}"`}</span>, <br />
                     <span className="color-light-blue"> nationality : </span> <span className="color-orange">{`"${profile.nationality}"`}</span>, <br />
                     <span className="color-light-blue"> livesIn : </span> <span className="color-orange">{`"${profile.livesIn}"`}</span>, <br />
                     <span className="color-light-blue"> age : </span> <span className="color-green">{`${age}`}</span>, <br />
 
                     <span className="color-light-blue"> languages : </span> <span className="color-purple">{`[`}</span>
-                    <p style={{ paddingLeft: "4rem" }}>
+                    <div style={{ paddingLeft: "4rem", display: "inline-flex" }}>
                         {
                             languages.map((lan, indx) =>
-                                <span key={indx} >
+                                <span key={lan.name} >
                                     <span className="color-blue">{`{`}</span>
                                     <span className="color-light-blue"> name: </span> <span className="color-orange"> "{lan.name}"</span>,
                                     <span className="color-light-blue"> &emsp; level:</span> <span className="color-orange"> "{lan.level}" </span>
@@ -51,16 +51,16 @@ const HomeBody = () => {
                                 </span>
                             )
                         }
-                    </p>
+                    </div>
                     <span className="color-purple">{`]`}</span>, <br />
                     <span className="color-light-blue"> hobbies : </span> <span className="color-purple">{`[`}</span>
-                    <p style={{ paddingLeft: "4rem" }}>
+                    <div style={{ paddingLeft: "2rem", display: "inline-flex", flexWrap: "wrap" }}>
                         {hobbies.map((hob, indx) =>
-                            <>
-                                <span className="color-orange" key={indx}> "{hob}"</span>{indx === hobbies.length - 1 ? "" : ","}
-                            </>
+                            <div style={{ display: "flex" }} key={hob}>
+                                &emsp; <div className="color-orange" style={{ width: "max-content" }}>{`"${hob}"`}</div>{indx === hobbies.length - 1 ? "" : ", "}
+                            </div>
                         )}
-                    </p>
+                    </div>
                     <span className="color-purple">{`]`}</span>,<br />
 
                     <span className="color-light-blue"> openToWork : </span> <span className="color-blue">{`${job.openToWork ? "true" : " false"}`}</span>, <br />
@@ -70,7 +70,7 @@ const HomeBody = () => {
                     <span className="color-light-blue"> linkedIn : </span> <a className="color-orange" href={`${contact.linkedIn}`} target="_blank"> "{contact.linkedIn}"</a>, <br />
                     <span className="color-light-blue"> gitHub : </span> <a className="color-orange" href={`${contact.gitHub}`} target="_blank"> "{contact.gitHub}"</a> <br />
 
-                </p>
+                </div>
                 <span className="color-purple">{`}`}</span>;
 
             </div>

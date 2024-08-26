@@ -19,16 +19,26 @@
 // },
 
 
+// {
+//     name: `Brooklyn Quick Pay Money`,
+//     description: `Responsive Web site`,
+//     link: `https://www.youtube.com/watch?v=ZhgVjkhELEA`,
+//     keyWords: [`Vs Code`, `HTML`, `CSS`, `Boostrap`],
+//     date: `20/04/22`,
+//     country: 'República Dominicana'
+// },
+
+
 export const WorksConst = {
     specialWords: [
         `PHP`, `Vanilla JS`, `Python`, `HTML`, `C`,
-        `CSS`, `Boostrap`, `Tailwind`
-            `CodeLite`, `Vs Code`, `PhpStorm`,
+        `CSS`, `Boostrap`, `Tailwind`,
+        `CodeLite`, `Vs Code`, `PhpStorm`,
         `WordPress`,
-        `React`, `Node.Js`, `AJAX`, `Apache Cordova`, `P5.JS`,
+        `React`, `Node.Js`, `AJAX`, `P5 JS`,
         `Symphony`, `Git`, `Linux`, `Assambler`, `Figma`, `UX/UI`, `Elementor`, `IA Prompting`,
         `Java`, `MySQL`
-    ],
+    ], // `Apache Cordova`
 
     proyects: [
         {
@@ -44,7 +54,7 @@ export const WorksConst = {
             name: `This web-page repository`,
             description: `This web page was built in React, using the P5.JS library to get the molecules interface done`,
             link: `https://github.com/franco-lobos/portfolio`,
-            keyWords: [`Git`, `P5.JS`, `Node.Js`, `React`, `Vs Code`, `CSS`, `Vanilla JS`],
+            keyWords: [`Git`, `P5 JS`, `Node.Js`, `React`, `Vs Code`, `CSS`, `Vanilla JS`],
             date: `20/06/23`,
             country: 'Andorra'
         },
@@ -83,15 +93,6 @@ export const WorksConst = {
             link: `https://www.youtube.com/watch?v=1uv1puzJBnc`,
             keyWords: [`Node.Js`, `React`, `Vs Code`, `CSS`, `Tailwind`],
             date: `10/02/22`,
-            country: 'República Dominicana'
-        },
-
-        {
-            name: `Brooklyn Quick Pay Money`,
-            description: `Responsive Web site`,
-            link: `https://www.youtube.com/watch?v=ZhgVjkhELEA`,
-            keyWords: [`Vs Code`, `HTML`, `CSS`, `Boostrap`],
-            date: `20/04/22`,
             country: 'República Dominicana'
         },
 

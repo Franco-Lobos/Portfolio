@@ -92,7 +92,7 @@ const School = () => {
                                                     sortByCalification(school.asignatures.filter(course => course.status - 1 === UocConst.kanbanStatus.indexOf(status)), 'calification', status == 'done' ? 'descending' : '')
                                                         .map((courseCard) =>
 
-                                                            <a target={"blank"} href={courseCard.link} className="card-item" id={courseCard.name} key={courseCard}>
+                                                            <a target={"blank"} href={courseCard.link} className="card-item" id={courseCard.name} key={courseCard.name}>
                                                                 <div className="card-item-title">{courseCard.name}</div>
                                                                 {
                                                                     courseCard.calification
@@ -116,9 +116,9 @@ const School = () => {
                                                                                 .map((courseCard) =>
                                                                                     courseCard.link !== ""
                                                                                         ?
-                                                                                        <a target={"blank"} href={courseCard.link} className="card-item-dropdown-item"> <span>•</span> {courseCard.name}</a>
+                                                                                        <a target={"blank"} href={courseCard.link} className="card-item-dropdown-item" key={courseCard.name}> <span>•</span> {courseCard.name}</a>
                                                                                         :
-                                                                                        <a className="card-item-dropdown-item no-hover"> <span>•</span> {courseCard.name}</a>
+                                                                                        <a className="card-item-dropdown-item no-hover" key={courseCard.name}> <span>•</span> {courseCard.name}</a>
 
                                                                                 )
                                                                             }

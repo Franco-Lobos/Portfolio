@@ -6,20 +6,20 @@ import '../../../styles/carrousell.css'
 
 import Carrousell from "./Carrousell";
 import PortfolioTags from "./PortfolioTags";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useDeepEffect from "../../../library/sdk";
 
-
-const Portfolio = ()=>{
+const Portfolio = () => {
 
     const words = WorksConst.specialWords;
     const works = WorksConst.proyects;
 
-    const [centeredCard, updateCenterCard]=  useState(0);
+    const [centeredCard, updateCenterCard] = useState(0);
 
 
     const [selectedSkills, setSelectedSkills] = useState(works[centeredCard].keyWords);
     const [previousSkills, setPreviousSkills] = useState([]);
-    const [reloadTags, setRealoadTags]= useState(1);
+    const [reloadTags, setRealoadTags] = useState(1);
 
     const [title, setTitle] = useState(0);
     const [breathing, setBreathing] = useState(0);
@@ -28,15 +28,16 @@ const Portfolio = ()=>{
     let time = 4000 // miliseconds
     let hoverBrightness = 1 // scale 
 
-    useEffect(()=>{
-        window.addEventListener("updateCenter", (e)=>{
+    useDeepEffect(() => {
+        window.addEventListener("updateCenter", (e) => {
             updateCenterCard(e.detail.centered);
         })
-    },[]);
-    useEffect(()=>{
+    }, []);
+
+    useDeepEffect(() => {
         const titleEl = document.getElementById(`portfolio-title`);
 
-        if(titleEl && !breathing){
+        if (titleEl && !breathing) {
             clearInterval(brathInterval);
             setBreathInterval(breath(titleEl, 1, setBreathing, time, hoverBrightness));
         }
@@ -44,32 +45,32 @@ const Portfolio = ()=>{
         setSelectedSkills(works[centeredCard]?.keyWords);
         setRealoadTags(0);
 
-    },[centeredCard]);
+    }, [centeredCard]);
 
-    useEffect(()=>{        
+    useDeepEffect(() => {
         setPreviousSkills([...previousSkills, ...selectedSkills]);
         setRealoadTags(1);
-    },[selectedSkills]);
+    }, [selectedSkills]);
 
-    useEffect(()=>{
-        if(!reloadTags) setRealoadTags(1);  
-    },[reloadTags]);
+    useDeepEffect(() => {
+        if (!reloadTags) setRealoadTags(1);
+    }, [reloadTags]);
 
-    return(
+    return (
         <>
             {
                 <div className="portfolio-title" id={`portfolio-title`}> {title}</div>
             }
             <Carrousell works={works} center={centeredCard} setTitle={setTitle}></Carrousell>
             {
-            reloadTags
-            ?
-                <PortfolioTags words={words}
-                selectedSkills={selectedSkills} previousSkills={previousSkills}
-                ></PortfolioTags>
-            :
-            ""
-            }   
+                reloadTags
+                    ?
+                    <PortfolioTags words={words}
+                        selectedSkills={selectedSkills} previousSkills={previousSkills}
+                    ></PortfolioTags>
+                    :
+                    ""
+            }
         </>
     )
 }
