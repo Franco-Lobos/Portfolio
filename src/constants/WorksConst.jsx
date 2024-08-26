@@ -55,7 +55,7 @@ export const WorksConst = {
             description: `This web page was built in React, using the P5.JS library to get the molecules interface done`,
             link: `https://github.com/franco-lobos/portfolio`,
             keyWords: [`Git`, `P5 JS`, `Node.Js`, `React`, `Vs Code`, `CSS`, `Vanilla JS`],
-            date: `20/06/23`,
+            date: `26/08/24`,
             country: 'Andorra'
         },
 

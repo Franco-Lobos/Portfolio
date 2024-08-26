@@ -38,7 +38,7 @@ const HomeBody = () => {
                     <span className="color-light-blue"> age : </span> <span className="color-green">{`${age}`}</span>, <br />
 
                     <span className="color-light-blue"> languages : </span> <span className="color-purple">{`[`}</span>
-                    <div style={{ paddingLeft: "4rem", display: "inline-flex" }}>
+                    <div style={{ paddingLeft: "4rem" }}>
                         {
                             languages.map((lan, indx) =>
                                 <span key={lan.name} >
@@ -53,7 +53,9 @@ const HomeBody = () => {
                         }
                     </div>
                     <span className="color-purple">{`]`}</span>, <br />
+
                     <span className="color-light-blue"> hobbies : </span> <span className="color-purple">{`[`}</span>
+                    <br />
                     <div style={{ paddingLeft: "2rem", display: "inline-flex", flexWrap: "wrap" }}>
                         {hobbies.map((hob, indx) =>
                             <div style={{ display: "flex" }} key={hob}>
@@ -61,14 +63,20 @@ const HomeBody = () => {
                             </div>
                         )}
                     </div>
+                    <br />
                     <span className="color-purple">{`]`}</span>,<br />
 
                     <span className="color-light-blue"> openToWork : </span> <span className="color-blue">{`${job.openToWork ? "true" : " false"}`}</span>, <br />
                     <span className="color-light-blue"> openToCollaborate : </span> <span className="color-blue">{`${job.openToCollaborate ? "true" : " false"}`}</span>, <br />
                     {/* <span className="color-light-blue"> openReloacate : </span> <span className="color-blue">{`${job.openToRelocate ? "true" :" false"}`}</span>, <br/> */}
-                    <span className="color-light-blue"> contact : </span> <a className="color-orange" href={`mailto:${contact.mail}`} target="_blank"> "{contact.mail}"</a>, <br />
-                    <span className="color-light-blue"> linkedIn : </span> <a className="color-orange" href={`${contact.linkedIn}`} target="_blank"> "{contact.linkedIn}"</a>, <br />
-                    <span className="color-light-blue"> gitHub : </span> <a className="color-orange" href={`${contact.gitHub}`} target="_blank"> "{contact.gitHub}"</a> <br />
+
+                    <span className="color-light-blue"> hrefLinks : </span> <span className="color-purple">{`{`}</span>
+                    <div style={{ paddingLeft: "4rem" }}>
+                        <span className="color-light-blue"> email : </span> <a className="color-blue" href={`mailto:${contact.mail}`} target="_blank"> "mailto:{contact.mail}"</a>, <br />
+                        <span className="color-light-blue"> linkedIn : </span> <a className="color-blue" href={`${contact.linkedIn}`} target="_blank"> "{contact.linkedIn}"</a>, <br />
+                        <span className="color-light-blue"> gitHub : </span> <a className="color-blue" href={`${contact.gitHub}`} target="_blank"> "{contact.gitHub}"</a> <br />
+                    </div>
+                    <span className="color-purple">{`}`}</span>, <br />
 
                 </div>
                 <span className="color-purple">{`}`}</span>;

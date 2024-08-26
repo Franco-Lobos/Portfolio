@@ -4,7 +4,7 @@ import CarrousellCard from "./CarrousellCard";
 import { switchBool } from "../../../library/library";
 
 
-const Carrousell = ({works, center, setTitle})=>{
+const Carrousell = ({ works, center, setTitle }) => {
 
     const worksAmount = Object.keys(works).length;
 
@@ -12,16 +12,16 @@ const Carrousell = ({works, center, setTitle})=>{
     const [transition, setTransition] = useState(0);
     const [loaded, setLoaded] = useState(0);
 
-    const [centeredCard, updateCenterCard]=  useState(center);
+    const [centeredCard, updateCenterCard] = useState(center);
 
-    const [carrousellData, updateCarrousellData]=  useState(
+    const [carrousellData, updateCarrousellData] = useState(
         {
-            cardWidth : 0,
-            bodyCenterPoint : 0,
-            centerPoint :0,
-    
-            translated:0,
-    
+            cardWidth: 0,
+            bodyCenterPoint: 0,
+            centerPoint: 0,
+
+            translated: 0,
+
             gap: 0,
             cardStep: 0,
         }
@@ -30,163 +30,163 @@ const Carrousell = ({works, center, setTitle})=>{
     const prepareNextSlide = new CustomEvent("prepareNextSlide");
 
 
-    const advanceCarrousell = ()=>{
-        if(centeredCard >= worksAmount -1){
+    const advanceCarrousell = () => {
+        if (centeredCard >= worksAmount - 1) {
             updateCenterCard(0);
         }
-        else{
-            updateCenterCard(centeredCard+1);
+        else {
+            updateCenterCard(centeredCard + 1);
         }
     }
 
-    const forwardCarrousell = ()=>{
-        if(centeredCard <= 0){
-            updateCenterCard(worksAmount-1);
+    const forwardCarrousell = () => {
+        if (centeredCard <= 0) {
+            updateCenterCard(worksAmount - 1);
         }
-        else{
-            updateCenterCard(centeredCard-1);
+        else {
+            updateCenterCard(centeredCard - 1);
         }
     }
 
-    const updateCenter = new CustomEvent("updateCenter",{
-        detail: { centered: centeredCard},
+    const updateCenter = new CustomEvent("updateCenter", {
+        detail: { centered: centeredCard },
     });
 
 
-    const centerCard = ()=>{
+    const centerCard = () => {
         const telescope = document.getElementById('telescope');
-        
+
         carrousellData.translated = carrousellData.centerPoint - (centeredCard * carrousellData.cardStep);
 
         telescope.style.transition = transition;
 
-        telescope.style.transform = `translateX(${carrousellData.translated }px)`;
+        telescope.style.transform = `translateX(${carrousellData.translated}px)`;
 
         setTitle(works[centeredCard].name);
 
-        if(loaded){
+        if (loaded) {
             window.dispatchEvent(prepareNextSlide);
         }
         setLoaded(1);
-        
-        window.addEventListener("prepareNextReady", ()=>{
+
+        window.addEventListener("prepareNextReady", () => {
             window.dispatchEvent(updateCenter);
         });
     }
 
-    const calcCenter = (telescope)=>{
+    const calcCenter = (telescope) => {
         const carrouesell = document.getElementById('carrousell-body');
-        const cards =  telescope.querySelectorAll('.carrousell-card');
+        const cards = telescope.querySelectorAll('.carrousell-card');
 
-        let buf = {...carrousellData};
+        let buf = { ...carrousellData };
 
-        if(!cards[0]) return;
+        if (!cards[0]) return;
 
         buf.cardWidth = cards[0].offsetWidth;
-        buf.bodyCenterPoint = carrouesell.offsetWidth/2;
+        buf.bodyCenterPoint = carrouesell.offsetWidth / 2;
         buf.gap = parseInt(getComputedStyle(telescope).gap, 10);
         buf.cardStep = buf.cardWidth + buf.gap;
-        buf.centerPoint = buf.bodyCenterPoint - buf.cardWidth/2 - buf.cardWidth - buf.gap;
+        buf.centerPoint = buf.bodyCenterPoint - buf.cardWidth / 2 - buf.cardWidth - buf.gap;
 
         updateCarrousellData(buf);
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         centerCard();
     }, [centeredCard]);
 
 
-    useEffect(()=>{
+    useEffect(() => {
         centerCard();
     }, [carrousellData]);
 
-    useEffect(()=>{
+    useEffect(() => {
         setLoaded(0);
         const telescope = document.getElementById('telescope');
         const firstCard = document.getElementById('carrousell-card-0');
 
-        if(!firstCard || !telescope){
+        if (!firstCard || !telescope) {
             return;
         }
 
         calcCenter(telescope);
 
-        if(!eventsAdded){
+        if (!eventsAdded) {
             setTransition(getComputedStyle(telescope).transition);
 
-            window.addEventListener("resize",()=>{
+            window.addEventListener("resize", () => {
                 const telescope = document.getElementById('telescope');
                 telescope.style.transition = "none";
                 calcCenter(telescope);
             });
 
-            let init ={x:0, y:0};
-            let dif ={x:0, y:0};
+            let init = { x: 0, y: 0 };
+            let dif = { x: 0, y: 0 };
 
             let translated = 0;
 
-            telescope.addEventListener('touchstart',(e)=>{
+            telescope.addEventListener('touchstart', (e) => {
                 dif.x = 0;
 
-                init.x= e.touches[0].clientX;
-                init.y= e.touches[0].clientY;
-                
+                init.x = e.touches[0].clientX;
+                init.y = e.touches[0].clientY;
+
                 translated = window.getComputedStyle(telescope).transform;
                 translated = new WebKitCSSMatrix(translated).m41;
             });
 
-            telescope.addEventListener('touchmove',(e)=>{
-                if(!init.x) return;
+            telescope.addEventListener('touchmove', (e) => {
+                if (!init.x) return;
 
-                dif.x = init.x -e.touches[0].clientX;
+                dif.x = init.x - e.touches[0].clientX;
 
-                if(Math.abs(dif.x)>5){
+                if (Math.abs(dif.x) > 5) {
                     telescope.style.transform = `translateX(${translated - dif.x}px)`;
                 }
             })
 
-            telescope.addEventListener('touchend',(e)=>{
-                init.x =0;
-                init.y =0;
+            telescope.addEventListener('touchend', (e) => {
+                init.x = 0;
+                init.y = 0;
                 console.log(dif.x)
-                 if(dif.x > 50){
+                if (dif.x > 50) {
                     console.log("add")
                     document.getElementById("next").click();
                     return;
                 }
-                if(dif.x < 50) {
+                if (dif.x < 50) {
                     document.getElementById("prev").click();
                     return;
                 }
-                else{
+                else {
                     telescope.style.transform = `translateX(${translated}px)`;
-                    translated=0;
+                    translated = 0;
                     return;
                 }
             })
             setEventsAdded(1);
         }
-    },[]);
-    
-    return(
+    }, []);
+
+    return (
         <div className="carrousell-main">
-        
+
             <div className="carrousell-header" >
                 {/* HEADER */}
             </div>
-                <div className="carrousell-arrows" id="prev" onClick={()=> forwardCarrousell()}>  {"<"}</div>
-                <div className="carrousell-arrows" id="next" onClick={()=> advanceCarrousell()}>  {">"}</div>
+            <div className="carrousell-arrows" id="prev" onClick={() => forwardCarrousell()}>  {"<"}</div>
+            <div className="carrousell-arrows" id="next" onClick={() => advanceCarrousell()}>  {">"}</div>
 
             <div className="carrousell-body" id="carrousell-body">
-                <div className="carrousell-telescope" id="telescope">
+                <div className="carrousell-telescope" id="telescope" style={{}}>
 
-                    <CarrousellCard card={works[0]} indx={worksAmount-1} key={worksAmount+1} centered={centeredCard} ></CarrousellCard>
+                    <CarrousellCard card={works[0]} indx={worksAmount - 1} key={worksAmount + 1} centered={centeredCard} ></CarrousellCard>
                     {
-                        works.map((card, i)=>
+                        works.map((card, i) =>
                             <CarrousellCard card={card} indx={i} key={i} centered={centeredCard} ></CarrousellCard>
                         )
                     }
-                    <CarrousellCard card={works[worksAmount-1]} indx={0} key={-1} centered={centeredCard} ></CarrousellCard>
+                    <CarrousellCard card={works[worksAmount - 1]} indx={0} key={-1} centered={centeredCard} ></CarrousellCard>
 
                 </div>
             </div>
