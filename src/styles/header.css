@@ -1,4 +1,4 @@
-#header-main{
+#header-main {
     position: relative;
     top: 0;
     left: 0;
@@ -13,7 +13,7 @@
     z-index: 2;
 }
 
-#footer-main{
+#footer-main {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -23,7 +23,7 @@
     text-align: center;
 }
 
-.header-link-card{
+.header-link-card {
     cursor: pointer;
 
     display: flex;
@@ -41,7 +41,7 @@
 
 
 
-.header-link{
+.header-link {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,13 +58,13 @@
 
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent ;
+    -webkit-text-fill-color: transparent;
 }
 
-.header-link i{
+.header-link svg {
     font-size: 5rem !important;
 }
 
-.header-link:hover i{
+.header-link:hover svg {
     font-size: 6rem !important;
 }

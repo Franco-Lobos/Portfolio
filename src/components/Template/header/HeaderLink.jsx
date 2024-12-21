@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-
 import { breath, spawnElement, addHover } from "../../../library/library";
 
-import MaterialIcon from '@mui/material/Icon';
 import HomeIcon from '@mui/icons-material/Home';
+import Icon from "@mui/material/Icon";
 
 const HeaderLink = ({ indx, route, setLoad, setPath }) => {
 
@@ -36,9 +35,13 @@ const HeaderLink = ({ indx, route, setLoad, setPath }) => {
         <div className="header-link-card" id={`header-card-${indx}`} >
             <div className="header-link" id={`header-link-${indx}`} onClick={() => setPath(route.path)}>
                 {/* <MaterialIcon icon={`${route.icon}`} size="large" color='#f0f0f0' /> */}
-                {route.icon}
+                <i
+                    class="material-icons"
+                    style={{ fontSize: "4rem" }}
+                >{route.icon}</i>
+
             </div>
-        </div>
+        </div >
     )
 }
 

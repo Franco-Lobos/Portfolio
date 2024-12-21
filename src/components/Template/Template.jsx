@@ -7,6 +7,7 @@ import HeaderMain from "./header/HeaderMain";
 import DinamicBody from "./DinamicBody";
 import FooterMain from "./header/Footer";
 
+import HomeIcon from '@mui/icons-material/Home';
 
 const Template = () => {
 
