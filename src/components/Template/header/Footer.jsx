@@ -8,11 +8,10 @@ const FooterMain = () => {
     return (
         <div id="footer-main">
             <p>
-                Powered by <a href="https://www.klugerbyte.com" target="_blank">Kluger Byte</a>
+                Powered by <a href="https://www.klugerbyte.com" target="_blank">Kluger Byte</a> <span> - V.{version}</span>
+
             </p>
-            <p>
-                V.{version}
-            </p>
+
         </div>
     )
 }
