@@ -140,7 +140,7 @@ const Carrousell = ({ works, center, setTitle }) => {
 
                 dif.x = init.x - e.touches[0].clientX;
 
-                if (Math.abs(dif.x) > 5) {
+                if (Math.abs(dif.x) > 50) {
                     telescope.style.transform = `translateX(${translated - dif.x}px)`;
                 }
             })
