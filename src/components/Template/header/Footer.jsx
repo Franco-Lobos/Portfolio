@@ -9,9 +9,7 @@ const FooterMain = () => {
         <div id="footer-main">
             <p>
                 Powered by <a href="https://www.klugerbyte.com" target="_blank">Kluger Byte</a> <span> - V.{version}</span>
-
             </p>
-
         </div>
     )
 }

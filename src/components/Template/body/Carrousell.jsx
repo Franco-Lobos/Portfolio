@@ -154,7 +154,7 @@ const Carrousell = ({ works, center, setTitle }) => {
                     document.getElementById("next").click();
                     return;
                 }
-                if (dif.x < 50) {
+                if (dif.x < -50) {
                     document.getElementById("prev").click();
                     return;
                 }
