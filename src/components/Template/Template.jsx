@@ -7,59 +7,60 @@ import HeaderMain from "./header/HeaderMain";
 import DinamicBody from "./DinamicBody";
 import FooterMain from "./header/Footer";
 
-const Template = ()=>{
+
+const Template = () => {
 
     const [initialized, setInitialized] = useState(0);
     const [loaded, setLoad] = useState(0);
     const [path, setPath] = useState(0);
 
     const routes = [
-        { path: '/', icon: 'home'},
-        { path: '/portfolio', icon: 'work'},
-        { path: '/sommelier', icon: 'science'},
-        { path: '/school', icon: 'school'},
+        { path: '/', icon: 'home' },
+        { path: '/portfolio', icon: 'work' },
+        { path: '/sommelier', icon: 'science' },
+        { path: '/school', icon: 'school' },
     ]
 
-    useEffect(()=>{
+    useEffect(() => {
         setLoad(0);
-    },[path])
+    }, [path])
 
-    useEffect(()=>{
-        if(!path) return
-        if(!loaded){
-            setLoad(routes.length-1);
+    useEffect(() => {
+        if (!path) return
+        if (!loaded) {
+            setLoad(routes.length - 1);
         }
-    },[loaded])
+    }, [loaded])
 
-    useEffect(()=>{
-        if(!localStorage.getItem("loaded")){
+    useEffect(() => {
+        if (!localStorage.getItem("loaded")) {
             localStorage.setItem("loaded", 1);
             setPath("/intro");
         }
-        else{
+        else {
             setInitialized(1);
         }
-    },[])
+    }, [])
 
-    return(
+    return (
         <div id='home-main'>
             {initialized
-            ?
-            <HeaderMain setLoad={setLoad} routes={routes}setPath={setPath}></HeaderMain>
-            :""
+                ?
+                <HeaderMain setLoad={setLoad} routes={routes} setPath={setPath}></HeaderMain>
+                : ""
             }
 
             {
-                loaded  === routes.length-1 || path == "/intro"
-                ?
-                <DinamicBody componentPath={path} setInitialized={setInitialized}></DinamicBody>
-                :
-                ""
+                loaded === routes.length - 1 || path == "/intro"
+                    ?
+                    <DinamicBody componentPath={path} setInitialized={setInitialized}></DinamicBody>
+                    :
+                    ""
             }
             {initialized
-            ?
-            <FooterMain></FooterMain>
-            :""
+                ?
+                <FooterMain></FooterMain>
+                : ""
             }
         </div>
     )
