@@ -1,15 +1,18 @@
 import "../../../styles/header.css"
 
-import HeaderLink from "./HeaderLink"
 
 
-const FooterMain = ()=>{
+const FooterMain = () => {
+    const version = "5.2.1";
 
-    return(
+    return (
         <div id="footer-main">
-           <p>
-            Powered by <a href="https://www.klugerbyte.com" target="_blank">Kluger Byte</a>
-           </p>
+            <p>
+                Powered by <a href="https://www.klugerbyte.com" target="_blank">Kluger Byte</a>
+            </p>
+            <p>
+                V.{version}
+            </p>
         </div>
     )
 }
