@@ -164,7 +164,10 @@ const Intro = ({ setInitialized }) => {
                 {
                     disappear
                         ?
-                        <button id="main-go-button" onClick={() => disappearText()}> Go!</button>
+                        <button id="main-go-button"
+                            onClick={() => disappearText()}
+                            onTouchStart={() => disappearText()}
+                        > Go!</button>
                         :
                         <div id="skiping-button" onClick={() => setSkip(1)}> Skip</div>
                 }
