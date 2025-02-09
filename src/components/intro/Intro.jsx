@@ -55,7 +55,6 @@ const Intro = ({ setInitialized }) => {
     const totalCourses = UocConst.asignatures.length;
 
     const intro = ProfileConst.intro(completedCourses, totalCourses, doingSemester);
-    console.log("intro", intro)
     const disappearRandom = (element, last = 1) => {
         let randTime = (Math.floor(Math.random() * 10) * 100 * last + 300);
         setTimeout(() => {
@@ -67,46 +66,44 @@ const Intro = ({ setInitialized }) => {
     }
 
     const disappearText = () => {
-        console.log(intro.length)
-        console.log(writed)
 
-        if (intro.length <= writed) {
-            const parragraphs = document.querySelectorAll('.intro-text-description p');
-            const title = document.querySelector('.intro-title p');
+        //if (intro.length <= writed) {
+        const parragraphs = document.querySelectorAll('.intro-text-description p');
+        const title = document.querySelector('.intro-title p');
 
-            parragraphs.forEach((ph, indx) => {
-                disappearRandom(ph, indx === 0 ? 1 : 0);
-            })
+        parragraphs.forEach((ph, indx) => {
+            disappearRandom(ph, indx === 0 ? 1 : 0);
+        })
 
-            title.addEventListener('transitionend', e => {
-                if (e.target === title) {
-                    setTimeout(() => {
-                        // setPageReady(1);
-                        window.location.href = "/"
-                        setInitialized(1);
-                    }, 300);
-                }
-            })
+        title.addEventListener('transitionend', e => {
+            if (e.target === title) {
+                setTimeout(() => {
+                    // setPageReady(1);
+                    window.location.href = "/"
+                    setInitialized(1);
+                }, 300);
+            }
+        })
 
-            disappearRandom(title, 3);
+        disappearRandom(title, 3);
 
-            parragraphs.forEach(ph => {
-                let sWord = ph.querySelectorAll('span');
-                let aWord = ph.querySelectorAll('a');
-                let button = document.getElementById('main-go-button');
+        parragraphs.forEach(ph => {
+            let sWord = ph.querySelectorAll('span');
+            let aWord = ph.querySelectorAll('a');
+            let button = document.getElementById('main-go-button');
 
-                sWord.forEach(word => {
-                    disappearRandom(word, 2)
-                });
+            sWord.forEach(word => {
+                disappearRandom(word, 2)
+            });
 
-                aWord.forEach(anchor => {
-                    disappearRandom(anchor, 2.5)
-                });
+            aWord.forEach(anchor => {
+                disappearRandom(anchor, 2.5)
+            });
 
-                disappearRandom(button, 0)
-            })
+            disappearRandom(button, 0)
+        })
 
-        }
+        //}
     }
 
     useEffect(() => {
@@ -169,7 +166,11 @@ const Intro = ({ setInitialized }) => {
                             onTouchStart={() => disappearText()}
                         > Go!</button>
                         :
-                        <div id="skiping-button" onClick={() => setSkip(1)}> Skip</div>
+                        <div id="skiping-button"
+                            onTouchStart={() => setSkip(1)}
+                            onClick={() => setSkip(1)}>
+                            Skip
+                        </div>
                 }
             </div>
         </div>

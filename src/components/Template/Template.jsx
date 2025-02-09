@@ -7,7 +7,6 @@ import HeaderMain from "./header/HeaderMain";
 import DinamicBody from "./DinamicBody";
 import FooterMain from "./header/Footer";
 
-import HomeIcon from '@mui/icons-material/Home';
 
 const Template = () => {
 
@@ -52,17 +51,18 @@ const Template = () => {
             }
 
             {
-                loaded === routes.length - 1 || path == "/intro"
+                (loaded === routes.length - 1 || path == "/intro")
                     ?
-                    <DinamicBody componentPath={path} setInitialized={setInitialized}></DinamicBody>
+                    <>
+                        <DinamicBody componentPath={path} setInitialized={setInitialized}></DinamicBody>
+                        {path !== '/sommelier' && path !== '/intro' &&
+                            <FooterMain></FooterMain>
+                        }
+                    </>
                     :
                     ""
             }
-            {initialized
-                ?
-                <FooterMain></FooterMain>
-                : ""
-            }
+
         </div>
     )
 };

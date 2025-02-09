@@ -1,17 +1,17 @@
 import PortfolioTagSingle from "./PortfolioTagSingle";
 
-const PortfolioTags = ({words, selectedSkills, previousSkills})=>{
+const PortfolioTags = ({ words, selectedSkills, previousSkills }) => {
 
-    let amount = Object.keys(words).length-1;
+    let amount = Object.keys(words).length - 1;
 
-    return(
-        <div className={`porfolio-word-container `}>
+    return (
+        <div className={`porfolio-word-container`}>
             {
-                    words.map((word,indx)=>
-                     <PortfolioTagSingle word={word} indx={indx} last={indx==amount} key={indx}
-                     selectedSkills={selectedSkills} previousSkills={previousSkills}
-                     ></PortfolioTagSingle>
-                    )
+                words.map((word, indx) =>
+                    <PortfolioTagSingle word={word} indx={indx} last={indx == amount} key={indx}
+                        selectedSkills={selectedSkills} previousSkills={previousSkills}
+                    ></PortfolioTagSingle>
+                )
             }
         </div>
     )

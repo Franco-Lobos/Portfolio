@@ -3,7 +3,7 @@ import "../../../styles/header.css"
 
 
 const FooterMain = () => {
-    const version = "5.2.1";
+    const version = "5.3";
 
     return (
         <div id="footer-main">

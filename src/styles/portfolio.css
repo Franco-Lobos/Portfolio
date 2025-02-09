@@ -1,4 +1,4 @@
-.porfolio-main{
+.porfolio-main {
     position: relative;
 
     height: 80vh;
@@ -20,7 +20,7 @@
 
 }
 
-.porfolio-word-container{
+.porfolio-word-container {
     width: 100vw;
     /* position: absolute; */
     bottom: 0;
@@ -28,56 +28,56 @@
     line-height: default;
     padding: 2rem;
 
-    gap: 1rem; 
+    gap: 1rem;
 
     display: flex;
     flex-wrap: wrap;
     align-content: center;
     justify-content: space-around;
     align-items: center;
-    
+
 }
 
 
-.portfolio-word{
+.portfolio-word {
     color: var(--grey-10);
-    color:var(--dark-grey);
+    color: var(--dark-grey);
 
     background-color: var(--dark-grey-10);
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     opacity: 0.5;
     text-align: center;
     border: 1rem black;
-    border-radius: 1rem;
-    padding: 0.8rem 1.2rem;
-    
+    border-radius: 0.5rem;
+    padding: 0.6rem 1rem;
+
     opacity: 0.5;
     transition: all ease-in-out 0.6s;
 }
 
-.portfolio-word.selected{
+.portfolio-word.selected {
     color: var(--dark-bg);
     background-color: var(--purpule);
 }
 
-.portfolio-word.prev-selected{
+.portfolio-word.prev-selected {
     color: var(--purpule);
     opacity: 0.5 !important;
 }
 
 
-.porfolio-word-container.selected{
+.porfolio-word-container.selected {
     justify-content: center;
 }
 
 
-#portfolio-title{
+#portfolio-title {
     /* color: var(--orange); */
     text-transform: uppercase;
-    font-size: 3rem;
+    font-size: 2rem;
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent ;
+    -webkit-text-fill-color: transparent;
     align-self: center;
     text-align: center;
 }

@@ -77,10 +77,17 @@ const School = () => {
                         {
                             school.kanbanStatus.map((status) => {
 
-                                const thisSectionLengt = school.asignatures.filter(course => course.status - 1 === UocConst.kanbanStatus.indexOf(status)).length;
-                                const totalCourses = school.asignatures.length;
+                                const thisSectionCourses = school.asignatures.filter(
+                                    course => course.status - 1 === UocConst.kanbanStatus.indexOf(status)
+                                )
 
-                                const percentage = Math.round((thisSectionLengt / totalCourses) * 100);
+                                const creditWeight = thisSectionCourses.reduce((acc, course) => acc + course.credits, 0);
+
+                                const totalCourses = school.asignatures;
+
+                                const totalCoursesWeight = totalCourses.reduce((acc, course) => acc + course.credits, 0);
+
+                                const percentage = Math.round((creditWeight / totalCoursesWeight) * 100);
 
                                 return (
                                     <div className="kanban-column" id={status} key={status}>

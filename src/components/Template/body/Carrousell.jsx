@@ -148,9 +148,7 @@ const Carrousell = ({ works, center, setTitle }) => {
             telescope.addEventListener('touchend', (e) => {
                 init.x = 0;
                 init.y = 0;
-                console.log(dif.x)
                 if (dif.x > 50) {
-                    console.log("add")
                     document.getElementById("next").click();
                     return;
                 }
