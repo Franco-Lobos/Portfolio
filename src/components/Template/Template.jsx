@@ -63,7 +63,7 @@ const Template = () => {
                 }
 
             </div>
-            {path !== '/sommelier' && path !== '/intro' &&
+            {initialized && loaded === routes.length - 1 && path !== '/sommelier' && path !== '/intro' &&
                 <FooterMain></FooterMain>
             }
         </>
