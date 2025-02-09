@@ -43,27 +43,31 @@ const Template = () => {
     }, [])
 
     return (
-        <div id='home-main'>
-            {initialized
-                ?
-                <HeaderMain setLoad={setLoad} routes={routes} setPath={setPath}></HeaderMain>
-                : ""
-            }
-
-            {
-                (loaded === routes.length - 1 || path == "/intro")
+        <>
+            <div id='home-main'>
+                {initialized
                     ?
-                    <>
-                        <DinamicBody componentPath={path} setInitialized={setInitialized}></DinamicBody>
-                        {path !== '/sommelier' && path !== '/intro' &&
-                            <FooterMain></FooterMain>
-                        }
-                    </>
-                    :
-                    ""
-            }
+                    <HeaderMain setLoad={setLoad} routes={routes} setPath={setPath}></HeaderMain>
+                    : ""
+                }
 
-        </div>
+                {
+                    (loaded === routes.length - 1 || path == "/intro")
+                        ?
+                        <>
+                            <DinamicBody componentPath={path} setInitialized={setInitialized}></DinamicBody>
+
+                        </>
+                        :
+                        ""
+                }
+
+            </div>
+            {path !== '/sommelier' && path !== '/intro' &&
+                <FooterMain></FooterMain>
+            }
+        </>
+
     )
 };
 
