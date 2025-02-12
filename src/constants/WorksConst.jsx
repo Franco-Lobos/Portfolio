@@ -41,14 +41,14 @@ export const WorksConst = {
     ], // `Apache Cordova`
 
     proyects: [
-        {
-            name: `My company web site`,
-            description: `Built in React, this website serves as my company's landing page.`,
-            link: `https://klugerbyte.com/`,
-            keyWords: [`Git`, `React`, `Node.Js`, `HTML`, `CSS`, `Figma`, `UX/UI`],
-            date: `03/08/23`,
-            country: 'Andorra'
-        },
+        // {
+        //     name: `My company web site`,
+        //     description: `Built in React, this website serves as my company's landing page.`,
+        //     link: `https://klugerbyte.com/`,
+        //     keyWords: [`Git`, `React`, `Node.Js`, `HTML`, `CSS`, `Figma`, `UX/UI`],
+        //     date: `03/08/23`,
+        //     country: 'Andorra'
+        // },
 
         {
             name: `This web-page repository`,
@@ -63,7 +63,7 @@ export const WorksConst = {
             name: `Pooling web demo`,
             description: `This design was created as a proposal for a design contest, and currently, only a few features have been implemented and are functional`,
             link: `https://main--poetic-daffodil-5c8119.netlify.app/`,
-            keyWords: [`Git`, `React`, `Node.Js`, `HTML`, `CSS`, `Boostrap`],
+            keyWords: [`Git`, `React`, `Node.Js`, `HTML`, `CSS`, `Boostrap`, `Figma`],
             date: `08/09/23`,
             country: 'Andorra'
         },
